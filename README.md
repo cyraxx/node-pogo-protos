@@ -6,7 +6,7 @@ Uses [protobuf.js](https://github.com/dcodeIO/protobuf.js) to compile the Protob
 ![dependencies](https://david-dm.org/cyraxx/node-pogo-protos.svg)
 
 ## How to use
-```
+```javascript
 const POGOProtos = require('node-pogo-protos');
 
 var myMessage = new POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage({
@@ -17,7 +17,7 @@ var myMessage = new POGOProtos.Networking.Requests.Messages.RecycleInventoryItem
 var encoded = myMessage.encode();
 
 var decodedAgain = POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.decode(myMessage);
-consoe.log decodedAgain.count); // will print 50
+console.log(decodedAgain.count); // will print 50
 ```
 
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
