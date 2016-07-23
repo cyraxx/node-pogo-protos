@@ -1,0 +1,30 @@
+{
+  "name": "node-pogo-protos",
+  "version": "1.0.0",
+  "description": "Pokémon Go Protobuf files from POGOProtos, wrapped up in a Node module using protobuf.js",
+  "main": "pogo-protos.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyraxx/node-pogo-protos.git"
+  },
+  "keywords": [
+    "pokemon",
+    "pokemongo",
+    "pogo",
+    "api",
+    "protobuf",
+    "niantic"
+  ],
+  "author": "Andreas Reich (https://github.com/cyraxx)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cyraxx/node-pogo-protos/issues"
+  },
+  "homepage": "https://github.com/cyraxx/node-pogo-protos#readme",
+  "dependencies": {
+    "protobufjs": "^5.0.1"
+  }
+}

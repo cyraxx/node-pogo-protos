@@ -1,0 +1,15 @@
+syntax = "proto3";
+package POGOProtos.Data.Gym;
+
+import public "POGOProtos.Data.proto";
+import public "POGOProtos.Data.Player.proto";
+import public "POGOProtos.Map.Fort.proto";
+
+message GymMembership {
+	.POGOProtos.Data.PokemonData pokemon_data = 1;
+	.POGOProtos.Data.Player.PlayerPublicProfile trainer_public_profile = 2;
+}
+message GymState {
+	.POGOProtos.Map.Fort.FortData fort_data = 1;
+	repeated .POGOProtos.Data.Gym.GymMembership memberships = 2;
+}
