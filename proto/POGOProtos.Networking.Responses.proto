@@ -305,7 +305,7 @@ message GetGymDetailsResponse {
 }
 message GetHatchedEggsResponse {
 	bool success = 1;
-	repeated uint64 pokemon_id = 2 [packed=true];
+	repeated fixed64 pokemon_id = 2 [packed=true];
 	repeated int32 experience_awarded = 3;
 	repeated int32 candy_awarded = 4;
 	repeated int32 stardust_awarded = 5;
@@ -316,7 +316,7 @@ message GetIncensePokemonResponse {
 	double latitude = 3;
 	double longitude = 4;
 	string encounter_location = 5;
-	uint64 encounter_id = 6;
+	fixed64 encounter_id = 6;
 	int64 disappear_timestamp_ms = 7;
 
 	enum Result {

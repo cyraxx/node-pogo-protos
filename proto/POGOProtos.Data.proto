@@ -29,7 +29,7 @@ message PlayerBadge {
 message PlayerData {
 	int64 creation_timestamp_ms  = 1;
 	string username = 2;
-	int32 team = 5;
+	.POGOProtos.Enums.TeamColor team = 5;
 	repeated .POGOProtos.Enums.TutorialState tutorial_state = 7 [packed=true];
 	.POGOProtos.Data.Player.PlayerAvatar avatar = 8;
 	int32 max_pokemon_storage = 9;
@@ -54,7 +54,7 @@ message PokemonData {
 	int32 stamina_max = 5;
 	.POGOProtos.Enums.PokemonMove move_1 = 6;
 	.POGOProtos.Enums.PokemonMove move_2 = 7;
-	int32 deployed_fort_id = 8;
+	string deployed_fort_id = 8;
 	string owner_name = 9;
 	bool is_egg = 10;
 	double egg_km_walked_target = 11;
