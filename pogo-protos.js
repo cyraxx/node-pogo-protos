@@ -4,7 +4,7 @@ const path = require('path'),
 const builder = protobuf.newBuilder();
 protobuf.loadProtoFile(path.join(__dirname, 'proto', 'POGOProtos.proto'), builder);
 
-// Recursively add the packed=true to all packable repeated fields.
+// Recursively add the packed=true option to all packable repeated fields.
 // Repeated fields are packed by default in proto3 but protobuf.js incorrectly does not set the option.
 // See also: https://github.com/dcodeIO/protobuf.js/issues/432
 function addPackedOption(ns) {
