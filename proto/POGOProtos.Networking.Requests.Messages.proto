@@ -83,7 +83,7 @@ message EvolvePokemonMessage {
 }
 message FortDeployPokemonMessage {
 	string fort_id = 1;
-	uint64 pokemon_id = 2;
+	fixed64 pokemon_id = 2;
 	double player_latitude = 3;
 	double player_longitude = 4;
 }
@@ -94,7 +94,7 @@ message FortDetailsMessage {
 }
 message FortRecallPokemonMessage {
 	string fort_id = 1;
-	uint64 pokemon_id = 2;
+	fixed64 pokemon_id = 2;
 	double player_latitude = 3;
 	double player_longitude = 4;
 }
@@ -182,7 +182,7 @@ message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
 }
 message SetFavoritePokemonMessage {
-	uint64 pokemon_id = 1;
+	fixed64 pokemon_id = 1;
 	bool is_favorite = 2;
 }
 message SetPlayerTeamMessage {
@@ -199,7 +199,7 @@ message StartGymBattleMessage {
 	double player_longitude = 5;
 }
 message UpgradePokemonMessage {
-	uint64 pokemon_id = 1;
+	fixed64 pokemon_id = 1;
 }
 message UseIncenseMessage {
 	.POGOProtos.Inventory.Item.ItemId incense_type = 1;
@@ -207,7 +207,7 @@ message UseIncenseMessage {
 message UseItemCaptureMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
 	fixed64 encounter_id = 2;
-	string spawn_point_guid = 3;
+	string spawn_point_id = 3;
 }
 message UseItemEggIncubatorMessage {
 	string item_id = 1;
@@ -221,11 +221,11 @@ message UseItemGymMessage {
 }
 message UseItemPotionMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
-	uint64 pokemon_id = 2;
+	fixed64 pokemon_id = 2;
 }
 message UseItemReviveMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
-	uint64 pokemon_id = 2;
+	fixed64 pokemon_id = 2;
 }
 message UseItemXpBoostMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;

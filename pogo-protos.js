@@ -1,12 +1,8 @@
-const fs = require('fs'),
+const path = require('path'),
     protobuf = require('protobufjs');
 
-const builder = protobuf.newBuilder(),
-    protoDir = __dirname + '/proto';
-
-fs.readdirSync(protoDir)
-    .filter(filename => filename.match(/\.proto$/))
-    .forEach(filename => protobuf.loadProtoFile(protoDir + '/' + filename, builder));
+const builder = protobuf.newBuilder();
+protobuf.loadProtoFile(path.join(__dirname, 'proto', 'POGOProtos.proto'), builder);
 
 // Recursively add the packed=true to all packable repeated fields.
 // Repeated fields are packed by default in proto3 but protobuf.js incorrectly does not set the option.
