@@ -3,7 +3,9 @@ Uses [protobuf.js](https://github.com/dcodeIO/protobuf.js) to compile the Protob
 [POGOProtos](https://github.com/AeonLucid/POGOProtos) into an easy to use Node module.
 
 [![npm version](https://badge.fury.io/js/node-pogo-protos.svg)](https://badge.fury.io/js/node-pogo-protos)
+![npm downloads](https://img.shields.io/npm/dt/node-pogo-protos.svg)
 ![dependencies](https://david-dm.org/cyraxx/node-pogo-protos.svg)
+![license](https://img.shields.io/npm/l/node-pogo-protos.svg)
 
 ## How to use
 ```javascript
