@@ -103,7 +103,7 @@ message MoveSequenceSettings {
 	repeated string sequence = 1;
 }
 message MoveSettings {
-	.POGOProtos.Enums.PokemonMovementType movement_id = 1;
+	.POGOProtos.Enums.PokemonMove movement_id = 1;
 	int32 animation_id = 2;
 	.POGOProtos.Enums.PokemonType pokemon_type = 3;
 	float power = 4;
