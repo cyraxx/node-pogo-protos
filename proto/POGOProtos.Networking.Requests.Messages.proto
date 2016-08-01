@@ -182,7 +182,7 @@ message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
 }
 message SetFavoritePokemonMessage {
-	fixed64 pokemon_id = 1;
+	uint64 pokemon_id = 1;
 	bool is_favorite = 2;
 }
 message SetPlayerTeamMessage {
