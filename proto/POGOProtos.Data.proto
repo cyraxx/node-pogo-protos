@@ -17,7 +17,7 @@ message DownloadUrlEntry {
 	string asset_id = 1;
 	string url = 2;
 	int32 size = 3;
-	uint32 checksum = 4;
+	fixed32 checksum = 4;
 }
 message PlayerBadge {
 	.POGOProtos.Enums.BadgeType badge_type = 1;

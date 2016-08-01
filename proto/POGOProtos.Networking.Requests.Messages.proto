@@ -182,7 +182,7 @@ message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
 }
 message SetFavoritePokemonMessage {
-	fixed64 pokemon_id = 1;
+	uint64 pokemon_id = 1; // needs to be uint64, tested by Grover
 	bool is_favorite = 2;
 }
 message SetPlayerTeamMessage {
@@ -194,7 +194,7 @@ message SfidaActionLogMessage {
 message StartGymBattleMessage {
 	string gym_id = 1;
 	repeated fixed64 attacking_pokemon_ids = 2;
-	uint64 defending_pokemon_id = 3;
+	fixed64 defending_pokemon_id = 3; // needs to be fixed64, tested by Grover
 	double player_latitude = 4;
 	double player_longitude = 5;
 }
