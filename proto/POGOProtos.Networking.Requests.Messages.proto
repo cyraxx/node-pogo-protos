@@ -140,7 +140,8 @@ message GetMapObjectsMessage {
 	double longitude = 4;
 }
 message GetPlayerMessage {
-	// No message needed.
+	// Human readable app version, e.g. "0.31.1"
+	string app_version = 1;
 }
 message GetPlayerProfileMessage {
 	string player_name = 1;
@@ -149,7 +150,7 @@ message GetSuggestedCodenamesMessage {
 	// No message needed.
 }
 message IncenseEncounterMessage {
-	int64 encounter_id = 1;
+	uint64 encounter_id = 1;
 	string encounter_location = 2;
 }
 message LevelUpRewardsMessage {
@@ -182,7 +183,7 @@ message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
 }
 message SetFavoritePokemonMessage {
-	uint64 pokemon_id = 1; // needs to be uint64, tested by Grover
+	int64 pokemon_id = 1; // Do not change https://github.com/AeonLucid/POGOProtos/pull/126
 	bool is_favorite = 2;
 }
 message SetPlayerTeamMessage {
