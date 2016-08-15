@@ -17,7 +17,7 @@ message ExperienceBoostAttributes {
 	int32 boost_duration_ms = 2;
 }
 message FoodAttributes {
-	repeated POGOProtos.Enums.ItemEffect item_effect = 1;
+	repeated .POGOProtos.Enums.ItemEffect item_effect = 1;
 	repeated float item_effect_percent = 2;
 	float growth_percent = 3;
 }

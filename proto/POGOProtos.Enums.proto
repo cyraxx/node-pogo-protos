@@ -568,9 +568,9 @@ enum PokemonMovementType {
 	MOVEMENT_HOVERING = 6;
 }
 enum PokemonRarity {
-	NORMAL = 0;
-	LEGENDARY = 1;
-	MYTHIC = 2;
+	POKEMON_RARITY_NORMAL = 0;
+	POKEMON_RARITY_LEGENDARY = 1;
+	POKEMON_RARITY_MYTHIC = 2;
 }
 enum PokemonType {
 	POKEMON_TYPE_NONE = 0;
