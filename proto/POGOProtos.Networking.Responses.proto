@@ -17,7 +17,16 @@ import public "POGOProtos.Map.proto";
 import public "POGOProtos.Data.Logs.proto";
 
 message AddFortModifierResponse {
-	// Initialized by assist.py
+	.POGOProtos.Networking.Responses.AddFortModifierResponse.Result result = 1;
+	.POGOProtos.Networking.Responses.FortDetailsResponse fort_details = 2;
+
+	enum Result {
+		NO_RESULT_SET = 0;
+		SUCCESS = 1;
+		FORT_ALREADY_HAS_MODIFIER = 2;
+		TOO_FAR_AWAY = 3;
+		NO_ITEM_IN_INVENTORY = 4;
+	}
 }
 message AttackGymResponse {
 	.POGOProtos.Networking.Responses.AttackGymResponse.Result result = 1;
@@ -72,6 +81,7 @@ message ClaimCodenameResponse {
 	string user_message = 2;
 	bool is_assignable = 3;
 	.POGOProtos.Networking.Responses.ClaimCodenameResponse.Status status = 4;
+	.POGOProtos.Data.PlayerData updated_player = 5;
 
 	enum Status {
 		UNSET = 0;

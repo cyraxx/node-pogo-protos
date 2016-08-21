@@ -56,6 +56,7 @@ message GymBattleSettings {
 	int32 dodge_duration_ms = 12;
 	int32 minimum_player_level = 13;
 	int32 swap_duration_ms = 14;
+	float dodge_damage_reduction_percent = 15;
 }
 message GymLevelSettings {
 	repeated int32 required_experience = 1;

@@ -121,6 +121,7 @@ message GetGymDetailsMessage {
 	double player_longitude = 3;
 	double gym_latitude = 4;
 	double gym_longitude = 5;
+	string client_version = 6;
 }
 message GetHatchedEggsMessage {
 	// No message needed.
@@ -140,8 +141,6 @@ message GetMapObjectsMessage {
 	double longitude = 4;
 }
 message GetPlayerMessage {
-	// Human readable app version, e.g. "0.31.1"
-	string app_version = 1;
 }
 message GetPlayerProfileMessage {
 	string player_name = 1;

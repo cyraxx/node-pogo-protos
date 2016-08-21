@@ -38,6 +38,7 @@ message PlayerData {
 	.POGOProtos.Data.Player.EquippedBadge equipped_badge = 12;
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 13;
 	repeated .POGOProtos.Data.Player.Currency currencies = 14;
+	int32 remaining_codename_claims = 15;
 }
 message PokedexEntry {
 	.POGOProtos.Enums.PokemonId pokemon_id = 1;

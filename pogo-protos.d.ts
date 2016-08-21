@@ -708,6 +708,7 @@ declare module POGOProtos.Data {
         equipped_badge: Player.EquippedBadge;
         contact_settings: Player.ContactSettings;
         currencies: Player.Currency[];
+        remaining_codename_claims: number;
     }
 }
 declare module POGOProtos.Data {
@@ -986,6 +987,7 @@ declare module POGOProtos.Data.Logs.CatchPokemonLogEntry {
         UNSET = 0,
         POKEMON_CAPTURED = 1,
         POKEMON_FLED = 2,
+        POKEMON_HATCHED = 3,
     }
 }
 declare module POGOProtos.Data.Logs {
@@ -1209,11 +1211,11 @@ declare module POGOProtos.Map.Fort {
         guard_pokemon_cp: number;
         gym_points: Long;
         is_in_battle: boolean;
+        active_fort_modifier: Inventory.Item.ItemId[];
+        lure_info: FortLureInfo;
         cooldown_complete_timestamp_ms: Long;
         sponsor: FortSponsor;
         rendering_type: FortRenderingType;
-        active_fort_modifier: ByteBuffer;
-        lure_info: FortLureInfo;
     }
 }
 declare module POGOProtos.Map.Fort {
@@ -1474,6 +1476,7 @@ declare module POGOProtos.Networking.Requests.Messages {
         player_longitude: number;
         gym_latitude: number;
         gym_longitude: number;
+        client_version: string;
     }
 }
 declare module POGOProtos.Networking.Requests.Messages {
@@ -1502,7 +1505,6 @@ declare module POGOProtos.Networking.Requests.Messages {
 }
 declare module POGOProtos.Networking.Requests.Messages {
     export interface GetPlayerMessage {
-        app_version: string;
     }
 }
 declare module POGOProtos.Networking.Requests.Messages {
@@ -1901,6 +1903,17 @@ declare module POGOProtos.Networking {
 }
 declare module POGOProtos.Networking.Responses {
     export interface AddFortModifierResponse {
+        result: AddFortModifierResponse.Result;
+        fort_details: FortDetailsResponse;
+    }
+}
+declare module POGOProtos.Networking.Responses.AddFortModifierResponse {
+    export const enum Result {
+        NO_RESULT_SET = 0,
+        SUCCESS = 1,
+        FORT_ALREADY_HAS_MODIFIER = 2,
+        TOO_FAR_AWAY = 3,
+        NO_ITEM_IN_INVENTORY = 4,
     }
 }
 declare module POGOProtos.Networking.Responses {
@@ -1968,6 +1981,7 @@ declare module POGOProtos.Networking.Responses {
         user_message: string;
         is_assignable: boolean;
         status: ClaimCodenameResponse.Status;
+        updated_player: Data.PlayerData;
     }
 }
 declare module POGOProtos.Networking.Responses.ClaimCodenameResponse {
@@ -2640,6 +2654,15 @@ declare module POGOProtos.Settings {
         level_settings: LevelSettings;
         inventory_settings: InventorySettings;
         minimum_client_version: string;
+        gps_settings: GpsSettings;
+    }
+}
+declare module POGOProtos.Settings {
+    export interface GpsSettings {
+        driving_warning_speed_meters_per_second: number;
+        driving_warning_cooldown_minutes: number;
+        driving_speed_sample_interval_seconds: number;
+        driving_speed_sample_count: number;
     }
 }
 declare module POGOProtos.Settings {
@@ -2731,6 +2754,7 @@ declare module POGOProtos.Settings.Master {
         dodge_duration_ms: number;
         minimum_player_level: number;
         swap_duration_ms: number;
+        dodge_damage_reduction_percent: number;
     }
 }
 declare module POGOProtos.Settings.Master {
