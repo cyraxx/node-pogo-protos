@@ -26,5 +26,10 @@
   "homepage": "https://github.com/cyraxx/node-pogo-protos#readme",
   "dependencies": {
     "protobufjs": "^5.0.1"
+  },
+  "devDependencies": {
+    "proto2ts": "git://github.com/cyraxx/Proto2TypeScript",
+    "typescript": "^1.8.10",
+    "typescript-formatter": "^2.3.0"
   }
 }
