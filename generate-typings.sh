@@ -12,7 +12,7 @@ echo "/// <reference path=\"bytebuffer.d.ts\" />" > pogo-protos.d.ts
 echo "/// <reference path=\"long.d.ts\" />" >> pogo-protos.d.ts
 
 # Create definition file from intermediate JSON
-`npm bin`/npp2ts -f tmp/POGOProtos.json -o pogo-protos.d.ts
+`npm bin`/npp2ts -f tmp/POGOProtos.json >> pogo-protos.d.ts
 
 # Format definition file
 `npm bin`/tsfmt -r pogo-protos.d.ts
