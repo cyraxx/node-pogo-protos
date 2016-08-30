@@ -27,8 +27,9 @@
   "dependencies": {
     "protobufjs": "^5.0.1"
   },
+  "typings": "./pogo-protos.d.ts",
   "devDependencies": {
-    "proto2ts": "git://github.com/cyraxx/Proto2TypeScript",
+    "npp2ts": "^0.1.6",
     "typescript": "^1.8.10",
     "typescript-formatter": "^2.3.0"
   }
