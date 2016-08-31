@@ -26,3 +26,37 @@ console.log(decodedAgain.count); // will print 50
 ```
 
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
+
+## Usage with TypeScript < 2.0
+
+Make sure that:
+
+* Typings is installed (if installed locally make sure to make alias for `typings`):
+`npm install -g typings`
+
+* External type declarations are added:
+`typings install dt~long dt~bytebuffer env~node --global --save`
+
+Add declarations alongside with other files in `.tsconfig.json`:
+
+```json
+{
+  ...
+  "files": [
+    "typings/index.d.ts",
+    ...
+  ],
+  ...
+}
+```
+
+And just change `require` to `import`:
+
+```javascript
+// const POGOProtos = require('node-pogo-protos');
+import * as POGOProtos from 'node-pogo-protos';
+
+// ...
+```
+
+Currently it doesn't support TypeScript 2.0 module resolution via `@types`.
