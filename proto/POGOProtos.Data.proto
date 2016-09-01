@@ -13,6 +13,11 @@ message AssetDigestEntry {
 	int32 size = 5;
 	bytes key = 6;
 }
+message BuddyPokemon {
+	fixed64 id = 1;
+	double start_km_walked = 2;
+	double last_km_awarded = 3;
+}
 message DownloadUrlEntry {
 	string asset_id = 1;
 	string url = 2;
@@ -39,6 +44,7 @@ message PlayerData {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 13;
 	repeated .POGOProtos.Data.Player.Currency currencies = 14;
 	int32 remaining_codename_claims = 15;
+	.POGOProtos.Data.BuddyPokemon buddy_pokemon = 16;
 }
 message PokedexEntry {
 	.POGOProtos.Enums.PokemonId pokemon_id = 1;
@@ -78,4 +84,5 @@ message PokemonData {
 	int32 favorite = 29;
 	string nickname = 30;
 	int32 from_fort = 31;
+	int32 buddy_candy_awarded = 32;
 }
