@@ -68,6 +68,27 @@ export namespace Data {
     }
 
 
+    export class BuddyPokemon extends ProtoBufMessage {
+        constructor(data: BuddyPokemonData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuddyPokemon;
+        id: Long;
+        getId(): Long;
+        setId(value: any, noAssert?: boolean);
+        start_km_walked: number;
+        getStartKmWalked(): number;
+        setStartKmWalked(value: any, noAssert?: boolean);
+        last_km_awarded: number;
+        getLastKmAwarded(): number;
+        setLastKmAwarded(value: any, noAssert?: boolean);
+    }
+
+    interface BuddyPokemonData {
+        id?: Long;
+        start_km_walked?: number;
+        last_km_awarded?: number;
+    }
+
+
     export class DownloadUrlEntry extends ProtoBufMessage {
         constructor(data: DownloadUrlEntryData);
         static decode(buffer?: any, length?: number | string, enc?: string): DownloadUrlEntry;
@@ -161,6 +182,9 @@ export namespace Data {
         remaining_codename_claims: number;
         getRemainingCodenameClaims(): number;
         setRemainingCodenameClaims(value: any, noAssert?: boolean);
+        buddy_pokemon: Data.BuddyPokemon;
+        getBuddyPokemon(): Data.BuddyPokemon;
+        setBuddyPokemon(value: any, noAssert?: boolean);
     }
 
     interface PlayerDataData {
@@ -176,6 +200,7 @@ export namespace Data {
         contact_settings?: Player.ContactSettings;
         currencies: Player.Currency[];
         remaining_codename_claims?: number;
+        buddy_pokemon?: Data.BuddyPokemon;
     }
 
 
@@ -301,6 +326,9 @@ export namespace Data {
         from_fort: number;
         getFromFort(): number;
         setFromFort(value: any, noAssert?: boolean);
+        buddy_candy_awarded: number;
+        getBuddyCandyAwarded(): number;
+        setBuddyCandyAwarded(value: any, noAssert?: boolean);
     }
 
     interface PokemonDataData {
@@ -334,6 +362,7 @@ export namespace Data {
         favorite?: number;
         nickname?: string;
         from_fort?: number;
+        buddy_candy_awarded?: number;
     }
 
 }
@@ -571,8 +600,8 @@ export namespace Data.Player {
         pokemon_deployed: number;
         getPokemonDeployed(): number;
         setPokemonDeployed(value: any, noAssert?: boolean);
-        pokemon_caught_by_type: ByteBuffer;
-        getPokemonCaughtByType(): ByteBuffer;
+        pokemon_caught_by_type: number[];
+        getPokemonCaughtByType(): number[];
         setPokemonCaughtByType(value: any, noAssert?: boolean);
         small_rattata_caught: number;
         getSmallRattataCaught(): number;
@@ -601,7 +630,7 @@ export namespace Data.Player {
         prestige_raised_total?: number;
         prestige_dropped_total?: number;
         pokemon_deployed?: number;
-        pokemon_caught_by_type?: ByteBuffer;
+        pokemon_caught_by_type: number[];
         small_rattata_caught?: number;
     }
 
@@ -917,6 +946,9 @@ export namespace Data.Logs {
         fort_search: Logs.FortSearchLogEntry;
         getFortSearch(): Logs.FortSearchLogEntry;
         setFortSearch(value: any, noAssert?: boolean);
+        buddy_pokemon: Logs.BuddyPokemonLogEntry;
+        getBuddyPokemon(): Logs.BuddyPokemonLogEntry;
+        setBuddyPokemon(value: any, noAssert?: boolean);
     }
 
     interface ActionLogEntryData {
@@ -924,6 +956,28 @@ export namespace Data.Logs {
         sfida?: boolean;
         catch_pokemon?: Logs.CatchPokemonLogEntry;
         fort_search?: Logs.FortSearchLogEntry;
+        buddy_pokemon?: Logs.BuddyPokemonLogEntry;
+    }
+
+
+    export class BuddyPokemonLogEntry extends ProtoBufMessage {
+        constructor(data: BuddyPokemonLogEntryData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuddyPokemonLogEntry;
+        result: BuddyPokemonLogEntry.Result;
+        getResult(): BuddyPokemonLogEntry.Result;
+        setResult(value: any, noAssert?: boolean);
+        pokemon_id: Enums.PokemonId;
+        getPokemonId(): Enums.PokemonId;
+        setPokemonId(value: any, noAssert?: boolean);
+        amount: number;
+        getAmount(): number;
+        setAmount(value: any, noAssert?: boolean);
+    }
+
+    interface BuddyPokemonLogEntryData {
+        result?: BuddyPokemonLogEntry.Result;
+        pokemon_id?: Enums.PokemonId;
+        amount?: number;
     }
 
 
@@ -1759,6 +1813,8 @@ export namespace Networking.Requests {
         NICKNAME_POKEMON = 149,
         EQUIP_BADGE = 150,
         SET_CONTACT_SETTINGS = 151,
+        SET_BUDDY_POKEMON = 152,
+        GET_BUDDY_WALKED = 153,
         GET_ASSET_DIGEST = 300,
         GET_DOWNLOAD_URLS = 301,
         GET_SUGGESTED_CODENAMES = 401,
@@ -1768,6 +1824,8 @@ export namespace Networking.Requests {
         SET_PLAYER_TEAM = 405,
         MARK_TUTORIAL_COMPLETE = 406,
         LOAD_SPAWN_POINTS = 500,
+        CHECK_CHALLENGE = 600,
+        VERIFY_CHALLENGE = 601,
         ECHO = 666,
         DEBUG_UPDATE_INVENTORY = 700,
         DEBUG_DELETE_PLAYER = 701,
@@ -1877,6 +1935,19 @@ export namespace Networking.Requests.Messages {
         hit_pokemon?: boolean;
         spin_modifier?: number;
         normalized_hit_position?: number;
+    }
+
+
+    export class CheckChallengeMessage extends ProtoBufMessage {
+        constructor(data: CheckChallengeMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CheckChallengeMessage;
+        debug_request: boolean;
+        getDebugRequest(): boolean;
+        setDebugRequest(value: any, noAssert?: boolean);
+    }
+
+    interface CheckChallengeMessageData {
+        debug_request?: boolean;
     }
 
 
@@ -2271,6 +2342,19 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class GetPlayerMessage extends ProtoBufMessage {
+        constructor(data: GetPlayerMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetPlayerMessage;
+        player_locale: GetPlayerMessage.PlayerLocale;
+        getPlayerLocale(): GetPlayerMessage.PlayerLocale;
+        setPlayerLocale(value: any, noAssert?: boolean);
+    }
+
+    interface GetPlayerMessageData {
+        player_locale?: GetPlayerMessage.PlayerLocale;
+    }
+
+
     export class GetPlayerProfileMessage extends ProtoBufMessage {
         constructor(data: GetPlayerProfileMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): GetPlayerProfileMessage;
@@ -2409,6 +2493,19 @@ export namespace Networking.Requests.Messages {
 
     interface SetAvatarMessageData {
         player_avatar?: Data.Player.PlayerAvatar;
+    }
+
+
+    export class SetBuddyPokemonMessage extends ProtoBufMessage {
+        constructor(data: SetBuddyPokemonMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SetBuddyPokemonMessage;
+        pokemon_id: Long;
+        getPokemonId(): Long;
+        setPokemonId(value: any, noAssert?: boolean);
+    }
+
+    interface SetBuddyPokemonMessageData {
+        pokemon_id?: Long;
     }
 
 
@@ -2619,6 +2716,202 @@ export namespace Networking.Requests.Messages {
         item_id?: Inventory.Item.ItemId;
     }
 
+
+    export class VerifyChallengeMessage extends ProtoBufMessage {
+        constructor(data: VerifyChallengeMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): VerifyChallengeMessage;
+        token: string;
+        getToken(): string;
+        setToken(value: any, noAssert?: boolean);
+    }
+
+    interface VerifyChallengeMessageData {
+        token?: string;
+    }
+
+}
+
+
+export namespace Networking.Requests.Messages.GetPlayerMessage {
+
+    export class PlayerLocale extends ProtoBufMessage {
+        constructor(data: PlayerLocaleData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PlayerLocale;
+        country: string;
+        getCountry(): string;
+        setCountry(value: any, noAssert?: boolean);
+        language: string;
+        getLanguage(): string;
+        setLanguage(value: any, noAssert?: boolean);
+    }
+
+    interface PlayerLocaleData {
+        country?: string;
+        language?: string;
+    }
+
+}
+
+
+export namespace Networking.Platform.Requests {
+
+    export class BuyItemAndroidRequest extends ProtoBufMessage {
+        constructor(data: BuyItemAndroidRequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuyItemAndroidRequest;
+        buy_item_intent: string;
+        getBuyItemIntent(): string;
+        setBuyItemIntent(value: any, noAssert?: boolean);
+    }
+
+    interface BuyItemAndroidRequestData {
+        buy_item_intent?: string;
+    }
+
+
+    export class BuyItemPokeCoinsRequest extends ProtoBufMessage {
+        constructor(data: BuyItemPokeCoinsRequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuyItemPokeCoinsRequest;
+        item_id: string;
+        getItemId(): string;
+        setItemId(value: any, noAssert?: boolean);
+    }
+
+    interface BuyItemPokeCoinsRequestData {
+        item_id?: string;
+    }
+
+
+    export class SendEncryptedSignatureRequest extends ProtoBufMessage {
+        constructor(data: SendEncryptedSignatureRequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SendEncryptedSignatureRequest;
+        encrypted_signature: ByteBuffer;
+        getEncryptedSignature(): ByteBuffer;
+        setEncryptedSignature(value: any, noAssert?: boolean);
+    }
+
+    interface SendEncryptedSignatureRequestData {
+        encrypted_signature?: ByteBuffer;
+    }
+
+}
+
+
+export namespace Networking.Platform.Responses {
+
+    export class BuyItemAndroidResponse extends ProtoBufMessage {
+        constructor(data: BuyItemAndroidResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuyItemAndroidResponse;
+        result: BuyItemAndroidResponse.Status;
+        getResult(): BuyItemAndroidResponse.Status;
+        setResult(value: any, noAssert?: boolean);
+        purchase_token: string;
+        getPurchaseToken(): string;
+        setPurchaseToken(value: any, noAssert?: boolean);
+    }
+
+    interface BuyItemAndroidResponseData {
+        result?: BuyItemAndroidResponse.Status;
+        purchase_token?: string;
+    }
+
+
+    export class BuyItemPokeCoinsResponse extends ProtoBufMessage {
+        constructor(data: BuyItemPokeCoinsResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BuyItemPokeCoinsResponse;
+        result: BuyItemPokeCoinsResponse.Status;
+        getResult(): BuyItemPokeCoinsResponse.Status;
+        setResult(value: any, noAssert?: boolean);
+    }
+
+    interface BuyItemPokeCoinsResponseData {
+        result?: BuyItemPokeCoinsResponse.Status;
+    }
+
+
+    export class GetStoreItemsResponse extends ProtoBufMessage {
+        constructor(data: GetStoreItemsResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetStoreItemsResponse;
+        status: GetStoreItemsResponse.Status;
+        getStatus(): GetStoreItemsResponse.Status;
+        setStatus(value: any, noAssert?: boolean);
+        items: GetStoreItemsResponse.StoreItem[];
+        getItems(): GetStoreItemsResponse.StoreItem[];
+        setItems(value: any, noAssert?: boolean);
+        player_currencies: Data.Player.Currency[];
+        getPlayerCurrencies(): Data.Player.Currency[];
+        setPlayerCurrencies(value: any, noAssert?: boolean);
+        unknown4: string;
+        getUnknown4(): string;
+        setUnknown4(value: any, noAssert?: boolean);
+    }
+
+    interface GetStoreItemsResponseData {
+        status?: GetStoreItemsResponse.Status;
+        items: GetStoreItemsResponse.StoreItem[];
+        player_currencies: Data.Player.Currency[];
+        unknown4?: string;
+    }
+
+
+    export class SendEncryptedSignatureResponse extends ProtoBufMessage {
+        constructor(data: SendEncryptedSignatureResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SendEncryptedSignatureResponse;
+        received: boolean;
+        getReceived(): boolean;
+        setReceived(value: any, noAssert?: boolean);
+    }
+
+    interface SendEncryptedSignatureResponseData {
+        received?: boolean;
+    }
+
+}
+
+
+export namespace Networking.Platform.Responses.GetStoreItemsResponse {
+
+    export class StoreItem extends ProtoBufMessage {
+        constructor(data: StoreItemData);
+        static decode(buffer?: any, length?: number | string, enc?: string): StoreItem;
+        item_id: string;
+        getItemId(): string;
+        setItemId(value: any, noAssert?: boolean);
+        is_iap: boolean;
+        getIsIap(): boolean;
+        setIsIap(value: any, noAssert?: boolean);
+        currency_to_buy: Data.Player.Currency;
+        getCurrencyToBuy(): Data.Player.Currency;
+        setCurrencyToBuy(value: any, noAssert?: boolean);
+        yields_currency: Data.Player.Currency;
+        getYieldsCurrency(): Data.Player.Currency;
+        setYieldsCurrency(value: any, noAssert?: boolean);
+        yields_item: Inventory.Item.ItemData;
+        getYieldsItem(): Inventory.Item.ItemData;
+        setYieldsItem(value: any, noAssert?: boolean);
+        tags: string;
+        getTags(): string;
+        setTags(value: any, noAssert?: boolean);
+        unknown7: number;
+        getUnknown7(): number;
+        setUnknown7(value: any, noAssert?: boolean);
+    }
+
+    interface StoreItemData {
+        item_id?: string;
+        is_iap?: boolean;
+        currency_to_buy?: Data.Player.Currency;
+        yields_currency?: Data.Player.Currency;
+        yields_item?: Inventory.Item.ItemData;
+        tags: string;
+        unknown7?: number;
+    }
+
+
+    export const enum Status {
+        UNDEFINED = 0,
+        OKAY = 1,
+    }
+
 }
 
 
@@ -2657,48 +2950,48 @@ export namespace Networking.Envelopes {
         requests: Requests.Request[];
         getRequests(): Requests.Request[];
         setRequests(value: any, noAssert?: boolean);
-        unknown6: Envelopes.Unknown6;
-        getUnknown6(): Envelopes.Unknown6;
-        setUnknown6(value: any, noAssert?: boolean);
+        platform_requests: RequestEnvelope.PlatformRequest[];
+        getPlatformRequests(): RequestEnvelope.PlatformRequest[];
+        setPlatformRequests(value: any, noAssert?: boolean);
         latitude: number;
         getLatitude(): number;
         setLatitude(value: any, noAssert?: boolean);
         longitude: number;
         getLongitude(): number;
         setLongitude(value: any, noAssert?: boolean);
-        altitude: number;
-        getAltitude(): number;
-        setAltitude(value: any, noAssert?: boolean);
+        accuracy: number;
+        getAccuracy(): number;
+        setAccuracy(value: any, noAssert?: boolean);
         auth_info: RequestEnvelope.AuthInfo;
         getAuthInfo(): RequestEnvelope.AuthInfo;
         setAuthInfo(value: any, noAssert?: boolean);
         auth_ticket: Envelopes.AuthTicket;
         getAuthTicket(): Envelopes.AuthTicket;
         setAuthTicket(value: any, noAssert?: boolean);
-        unknown12: Long;
-        getUnknown12(): Long;
-        setUnknown12(value: any, noAssert?: boolean);
+        ms_since_last_locationfix: Long;
+        getMsSinceLastLocationfix(): Long;
+        setMsSinceLastLocationfix(value: any, noAssert?: boolean);
     }
 
     interface RequestEnvelopeData {
         status_code?: number;
         request_id?: Long;
         requests: Requests.Request[];
-        unknown6?: Envelopes.Unknown6;
+        platform_requests: RequestEnvelope.PlatformRequest[];
         latitude?: number;
         longitude?: number;
-        altitude?: number;
+        accuracy?: number;
         auth_info?: RequestEnvelope.AuthInfo;
         auth_ticket?: Envelopes.AuthTicket;
-        unknown12?: Long;
+        ms_since_last_locationfix?: Long;
     }
 
 
     export class ResponseEnvelope extends ProtoBufMessage {
         constructor(data: ResponseEnvelopeData);
         static decode(buffer?: any, length?: number | string, enc?: string): ResponseEnvelope;
-        status_code: number;
-        getStatusCode(): number;
+        status_code: ResponseEnvelope.StatusCode;
+        getStatusCode(): ResponseEnvelope.StatusCode;
         setStatusCode(value: any, noAssert?: boolean);
         request_id: Long;
         getRequestId(): Long;
@@ -2706,9 +2999,9 @@ export namespace Networking.Envelopes {
         api_url: string;
         getApiUrl(): string;
         setApiUrl(value: any, noAssert?: boolean);
-        unknown6: Envelopes.Unknown6Response[];
-        getUnknown6(): Envelopes.Unknown6Response[];
-        setUnknown6(value: any, noAssert?: boolean);
+        platform_returns: ResponseEnvelope.PlatformResponse[];
+        getPlatformReturns(): ResponseEnvelope.PlatformResponse[];
+        setPlatformReturns(value: any, noAssert?: boolean);
         auth_ticket: Envelopes.AuthTicket;
         getAuthTicket(): Envelopes.AuthTicket;
         setAuthTicket(value: any, noAssert?: boolean);
@@ -2721,10 +3014,10 @@ export namespace Networking.Envelopes {
     }
 
     interface ResponseEnvelopeData {
-        status_code?: number;
+        status_code?: ResponseEnvelope.StatusCode;
         request_id?: Long;
         api_url?: string;
-        unknown6: Envelopes.Unknown6Response[];
+        platform_returns: ResponseEnvelope.PlatformResponse[];
         auth_ticket?: Envelopes.AuthTicket;
         returns: ByteBuffer[];
         error?: string;
@@ -2752,11 +3045,11 @@ export namespace Networking.Envelopes {
         activity_status: Signature.ActivityStatus;
         getActivityStatus(): Signature.ActivityStatus;
         setActivityStatus(value: any, noAssert?: boolean);
-        location_hash1: Long;
-        getLocationHash1(): Long;
+        location_hash1: number;
+        getLocationHash1(): number;
         setLocationHash1(value: any, noAssert?: boolean);
-        location_hash2: Long;
-        getLocationHash2(): Long;
+        location_hash2: number;
+        getLocationHash2(): number;
         setLocationHash2(value: any, noAssert?: boolean);
         session_hash: ByteBuffer;
         getSessionHash(): ByteBuffer;
@@ -2779,46 +3072,12 @@ export namespace Networking.Envelopes {
         sensor_info?: Signature.SensorInfo;
         device_info?: Signature.DeviceInfo;
         activity_status?: Signature.ActivityStatus;
-        location_hash1?: Long;
-        location_hash2?: Long;
+        location_hash1?: number;
+        location_hash2?: number;
         session_hash?: ByteBuffer;
         timestamp?: Long;
         request_hash: Long[];
         unknown25?: Long;
-    }
-
-
-    export class Unknown6 extends ProtoBufMessage {
-        constructor(data: Unknown6Data);
-        static decode(buffer?: any, length?: number | string, enc?: string): Unknown6;
-        request_type: number;
-        getRequestType(): number;
-        setRequestType(value: any, noAssert?: boolean);
-        unknown2: Unknown6.Unknown2;
-        getUnknown2(): Unknown6.Unknown2;
-        setUnknown2(value: any, noAssert?: boolean);
-    }
-
-    interface Unknown6Data {
-        request_type?: number;
-        unknown2?: Unknown6.Unknown2;
-    }
-
-
-    export class Unknown6Response extends ProtoBufMessage {
-        constructor(data: Unknown6ResponseData);
-        static decode(buffer?: any, length?: number | string, enc?: string): Unknown6Response;
-        response_type: number;
-        getResponseType(): number;
-        setResponseType(value: any, noAssert?: boolean);
-        unknown2: Unknown6Response.Unknown2;
-        getUnknown2(): Unknown6Response.Unknown2;
-        setUnknown2(value: any, noAssert?: boolean);
-    }
-
-    interface Unknown6ResponseData {
-        response_type?: number;
-        unknown2?: Unknown6Response.Unknown2;
     }
 
 }
@@ -2840,6 +3099,23 @@ export namespace Networking.Envelopes.RequestEnvelope {
     interface AuthInfoData {
         provider?: string;
         token?: AuthInfo.JWT;
+    }
+
+
+    export class PlatformRequest extends ProtoBufMessage {
+        constructor(data: PlatformRequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PlatformRequest;
+        type: Platform.PlatformRequestType;
+        getType(): Platform.PlatformRequestType;
+        setType(value: any, noAssert?: boolean);
+        request_message: ByteBuffer;
+        getRequestMessage(): ByteBuffer;
+        setRequestMessage(value: any, noAssert?: boolean);
+    }
+
+    interface PlatformRequestData {
+        type?: Platform.PlatformRequestType;
+        request_message?: ByteBuffer;
     }
 
 }
@@ -2866,6 +3142,40 @@ export namespace Networking.Envelopes.RequestEnvelope.AuthInfo {
 }
 
 
+export namespace Networking.Envelopes.ResponseEnvelope {
+
+    export class PlatformResponse extends ProtoBufMessage {
+        constructor(data: PlatformResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PlatformResponse;
+        type: Platform.PlatformRequestType;
+        getType(): Platform.PlatformRequestType;
+        setType(value: any, noAssert?: boolean);
+        response: ByteBuffer;
+        getResponse(): ByteBuffer;
+        setResponse(value: any, noAssert?: boolean);
+    }
+
+    interface PlatformResponseData {
+        type?: Platform.PlatformRequestType;
+        response?: ByteBuffer;
+    }
+
+
+    export const enum StatusCode {
+        UNKNOWN = 0,
+        OK = 1,
+        OK_RPC_URL_IN_RESPONSE = 2,
+        BAD_REQUEST = 3,
+        INVALID_REQUEST = 51,
+        INVALID_PLATFORM_REQUEST = 52,
+        REDIRECT = 53,
+        SESSION_INVALIDATED = 100,
+        INVALID_AUTH_TOKEN = 102,
+    }
+
+}
+
+
 export namespace Networking.Envelopes.Signature {
 
     export class LocationFix extends ProtoBufMessage {
@@ -2877,18 +3187,24 @@ export namespace Networking.Envelopes.Signature {
         timestamp_snapshot: Long;
         getTimestampSnapshot(): Long;
         setTimestampSnapshot(value: any, noAssert?: boolean);
+        altitude: number;
+        getAltitude(): number;
+        setAltitude(value: any, noAssert?: boolean);
         latitude: number;
         getLatitude(): number;
         setLatitude(value: any, noAssert?: boolean);
         longitude: number;
         getLongitude(): number;
         setLongitude(value: any, noAssert?: boolean);
+        speed: number;
+        getSpeed(): number;
+        setSpeed(value: any, noAssert?: boolean);
+        course: number;
+        getCourse(): number;
+        setCourse(value: any, noAssert?: boolean);
         horizontal_accuracy: number;
         getHorizontalAccuracy(): number;
         setHorizontalAccuracy(value: any, noAssert?: boolean);
-        altitude: number;
-        getAltitude(): number;
-        setAltitude(value: any, noAssert?: boolean);
         vertical_accuracy: number;
         getVerticalAccuracy(): number;
         setVerticalAccuracy(value: any, noAssert?: boolean);
@@ -2906,10 +3222,12 @@ export namespace Networking.Envelopes.Signature {
     interface LocationFixData {
         provider?: string;
         timestamp_snapshot?: Long;
+        altitude?: number;
         latitude?: number;
         longitude?: number;
+        speed?: number;
+        course?: number;
         horizontal_accuracy?: number;
-        altitude?: number;
         vertical_accuracy?: number;
         provider_status?: Long;
         floor?: number;
@@ -2926,15 +3244,15 @@ export namespace Networking.Envelopes.Signature {
         satellites_prn: number[];
         getSatellitesPrn(): number[];
         setSatellitesPrn(value: any, noAssert?: boolean);
-        snr: number[];
-        getSnr(): number[];
-        setSnr(value: any, noAssert?: boolean);
         azimuth: number[];
         getAzimuth(): number[];
         setAzimuth(value: any, noAssert?: boolean);
         elevation: number[];
         getElevation(): number[];
         setElevation(value: any, noAssert?: boolean);
+        snr: number[];
+        getSnr(): number[];
+        setSnr(value: any, noAssert?: boolean);
         has_almanac: boolean[];
         getHasAlmanac(): boolean[];
         setHasAlmanac(value: any, noAssert?: boolean);
@@ -2949,9 +3267,9 @@ export namespace Networking.Envelopes.Signature {
     interface AndroidGpsInfoData {
         time_to_fix?: Long;
         satellites_prn: number[];
-        snr: number[];
         azimuth: number[];
         elevation: number[];
+        snr: number[];
         has_almanac: boolean[];
         has_ephemeris: boolean[];
         used_in_fix: boolean[];
@@ -2964,33 +3282,33 @@ export namespace Networking.Envelopes.Signature {
         timestamp_snapshot: Long;
         getTimestampSnapshot(): Long;
         setTimestampSnapshot(value: any, noAssert?: boolean);
-        magnetometer_x: number;
-        getMagnetometerX(): number;
-        setMagnetometerX(value: any, noAssert?: boolean);
-        magnetometer_y: number;
-        getMagnetometerY(): number;
-        setMagnetometerY(value: any, noAssert?: boolean);
-        magnetometer_z: number;
-        getMagnetometerZ(): number;
-        setMagnetometerZ(value: any, noAssert?: boolean);
-        angle_normalized_x: number;
-        getAngleNormalizedX(): number;
-        setAngleNormalizedX(value: any, noAssert?: boolean);
-        angle_normalized_y: number;
-        getAngleNormalizedY(): number;
-        setAngleNormalizedY(value: any, noAssert?: boolean);
-        angle_normalized_z: number;
-        getAngleNormalizedZ(): number;
-        setAngleNormalizedZ(value: any, noAssert?: boolean);
-        accel_raw_x: number;
-        getAccelRawX(): number;
-        setAccelRawX(value: any, noAssert?: boolean);
-        accel_raw_y: number;
-        getAccelRawY(): number;
-        setAccelRawY(value: any, noAssert?: boolean);
-        accel_raw_z: number;
-        getAccelRawZ(): number;
-        setAccelRawZ(value: any, noAssert?: boolean);
+        linear_acceleration_x: number;
+        getLinearAccelerationX(): number;
+        setLinearAccelerationX(value: any, noAssert?: boolean);
+        linear_acceleration_y: number;
+        getLinearAccelerationY(): number;
+        setLinearAccelerationY(value: any, noAssert?: boolean);
+        linear_acceleration_z: number;
+        getLinearAccelerationZ(): number;
+        setLinearAccelerationZ(value: any, noAssert?: boolean);
+        magnetic_field_x: number;
+        getMagneticFieldX(): number;
+        setMagneticFieldX(value: any, noAssert?: boolean);
+        magnetic_field_y: number;
+        getMagneticFieldY(): number;
+        setMagneticFieldY(value: any, noAssert?: boolean);
+        magnetic_field_z: number;
+        getMagneticFieldZ(): number;
+        setMagneticFieldZ(value: any, noAssert?: boolean);
+        rotation_vector_x: number;
+        getRotationVectorX(): number;
+        setRotationVectorX(value: any, noAssert?: boolean);
+        rotation_vector_y: number;
+        getRotationVectorY(): number;
+        setRotationVectorY(value: any, noAssert?: boolean);
+        rotation_vector_z: number;
+        getRotationVectorZ(): number;
+        setRotationVectorZ(value: any, noAssert?: boolean);
         gyroscope_raw_x: number;
         getGyroscopeRawX(): number;
         setGyroscopeRawX(value: any, noAssert?: boolean);
@@ -3000,15 +3318,15 @@ export namespace Networking.Envelopes.Signature {
         gyroscope_raw_z: number;
         getGyroscopeRawZ(): number;
         setGyroscopeRawZ(value: any, noAssert?: boolean);
-        accel_normalized_x: number;
-        getAccelNormalizedX(): number;
-        setAccelNormalizedX(value: any, noAssert?: boolean);
-        accel_normalized_y: number;
-        getAccelNormalizedY(): number;
-        setAccelNormalizedY(value: any, noAssert?: boolean);
-        accel_normalized_z: number;
-        getAccelNormalizedZ(): number;
-        setAccelNormalizedZ(value: any, noAssert?: boolean);
+        gravity_x: number;
+        getGravityX(): number;
+        setGravityX(value: any, noAssert?: boolean);
+        gravity_y: number;
+        getGravityY(): number;
+        setGravityY(value: any, noAssert?: boolean);
+        gravity_z: number;
+        getGravityZ(): number;
+        setGravityZ(value: any, noAssert?: boolean);
         accelerometer_axes: Long;
         getAccelerometerAxes(): Long;
         setAccelerometerAxes(value: any, noAssert?: boolean);
@@ -3016,21 +3334,21 @@ export namespace Networking.Envelopes.Signature {
 
     interface SensorInfoData {
         timestamp_snapshot?: Long;
-        magnetometer_x?: number;
-        magnetometer_y?: number;
-        magnetometer_z?: number;
-        angle_normalized_x?: number;
-        angle_normalized_y?: number;
-        angle_normalized_z?: number;
-        accel_raw_x?: number;
-        accel_raw_y?: number;
-        accel_raw_z?: number;
+        linear_acceleration_x?: number;
+        linear_acceleration_y?: number;
+        linear_acceleration_z?: number;
+        magnetic_field_x?: number;
+        magnetic_field_y?: number;
+        magnetic_field_z?: number;
+        rotation_vector_x?: number;
+        rotation_vector_y?: number;
+        rotation_vector_z?: number;
         gyroscope_raw_x?: number;
         gyroscope_raw_y?: number;
         gyroscope_raw_z?: number;
-        accel_normalized_x?: number;
-        accel_normalized_y?: number;
-        accel_normalized_z?: number;
+        gravity_x?: number;
+        gravity_y?: number;
+        gravity_z?: number;
         accelerometer_axes?: Long;
     }
 
@@ -3143,114 +3461,6 @@ export namespace Networking.Envelopes.Signature {
 }
 
 
-export namespace Networking.Envelopes.Unknown6 {
-
-    export class Unknown2 extends ProtoBufMessage {
-        constructor(data: Unknown2Data);
-        static decode(buffer?: any, length?: number | string, enc?: string): Unknown2;
-        encrypted_signature: ByteBuffer;
-        getEncryptedSignature(): ByteBuffer;
-        setEncryptedSignature(value: any, noAssert?: boolean);
-    }
-
-    interface Unknown2Data {
-        encrypted_signature?: ByteBuffer;
-    }
-
-}
-
-
-export namespace Networking.Envelopes.Unknown6Response {
-
-    export class Unknown2 extends ProtoBufMessage {
-        constructor(data: Unknown2Data);
-        static decode(buffer?: any, length?: number | string, enc?: string): Unknown2;
-        unknown1: Long;
-        getUnknown1(): Long;
-        setUnknown1(value: any, noAssert?: boolean);
-        items: Unknown2.StoreItem[];
-        getItems(): Unknown2.StoreItem[];
-        setItems(value: any, noAssert?: boolean);
-        player_currencies: Data.Player.Currency[];
-        getPlayerCurrencies(): Data.Player.Currency[];
-        setPlayerCurrencies(value: any, noAssert?: boolean);
-        unknown4: string;
-        getUnknown4(): string;
-        setUnknown4(value: any, noAssert?: boolean);
-    }
-
-    interface Unknown2Data {
-        unknown1?: Long;
-        items: Unknown2.StoreItem[];
-        player_currencies: Data.Player.Currency[];
-        unknown4?: string;
-    }
-
-}
-
-
-export namespace Networking.Envelopes.Unknown6Response.Unknown2 {
-
-    export class StoreItem extends ProtoBufMessage {
-        constructor(data: StoreItemData);
-        static decode(buffer?: any, length?: number | string, enc?: string): StoreItem;
-        item_id: string;
-        getItemId(): string;
-        setItemId(value: any, noAssert?: boolean);
-        is_iap: boolean;
-        getIsIap(): boolean;
-        setIsIap(value: any, noAssert?: boolean);
-        currency_to_buy: Data.Player.Currency;
-        getCurrencyToBuy(): Data.Player.Currency;
-        setCurrencyToBuy(value: any, noAssert?: boolean);
-        yields_currency: Data.Player.Currency;
-        getYieldsCurrency(): Data.Player.Currency;
-        setYieldsCurrency(value: any, noAssert?: boolean);
-        yields_item: Inventory.Item.ItemData;
-        getYieldsItem(): Inventory.Item.ItemData;
-        setYieldsItem(value: any, noAssert?: boolean);
-        tags: StoreItem.Tag[];
-        getTags(): StoreItem.Tag[];
-        setTags(value: any, noAssert?: boolean);
-        unknown7: number;
-        getUnknown7(): number;
-        setUnknown7(value: any, noAssert?: boolean);
-    }
-
-    interface StoreItemData {
-        item_id?: string;
-        is_iap?: boolean;
-        currency_to_buy?: Data.Player.Currency;
-        yields_currency?: Data.Player.Currency;
-        yields_item?: Inventory.Item.ItemData;
-        tags: StoreItem.Tag[];
-        unknown7?: number;
-    }
-
-}
-
-
-export namespace Networking.Envelopes.Unknown6Response.Unknown2.StoreItem {
-
-    export class Tag extends ProtoBufMessage {
-        constructor(data: TagData);
-        static decode(buffer?: any, length?: number | string, enc?: string): Tag;
-        key: string;
-        getKey(): string;
-        setKey(value: any, noAssert?: boolean);
-        value: string;
-        getValue(): string;
-        setValue(value: any, noAssert?: boolean);
-    }
-
-    interface TagData {
-        key?: string;
-        value?: string;
-    }
-
-}
-
-
 export namespace Networking.Responses {
 
     export class AddFortModifierResponse extends ProtoBufMessage {
@@ -3342,6 +3552,23 @@ export namespace Networking.Responses {
         success?: boolean;
         awarded_badges: Enums.BadgeType[];
         awarded_badge_levels: number[];
+    }
+
+
+    export class CheckChallengeResponse extends ProtoBufMessage {
+        constructor(data: CheckChallengeResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CheckChallengeResponse;
+        show_challenge: boolean;
+        getShowChallenge(): boolean;
+        setShowChallenge(value: any, noAssert?: boolean);
+        challenge_url: string;
+        getChallengeUrl(): string;
+        setChallengeUrl(value: any, noAssert?: boolean);
+    }
+
+    interface CheckChallengeResponseData {
+        show_challenge?: boolean;
+        challenge_url?: string;
     }
 
 
@@ -3779,6 +4006,27 @@ export namespace Networking.Responses {
     }
 
 
+    export class GetBuddyWalkedResponse extends ProtoBufMessage {
+        constructor(data: GetBuddyWalkedResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetBuddyWalkedResponse;
+        success: boolean;
+        getSuccess(): boolean;
+        setSuccess(value: any, noAssert?: boolean);
+        family_candy_id: Enums.PokemonFamilyId;
+        getFamilyCandyId(): Enums.PokemonFamilyId;
+        setFamilyCandyId(value: any, noAssert?: boolean);
+        candy_earned_count: number;
+        getCandyEarnedCount(): number;
+        setCandyEarnedCount(value: any, noAssert?: boolean);
+    }
+
+    interface GetBuddyWalkedResponseData {
+        success?: boolean;
+        family_candy_id?: Enums.PokemonFamilyId;
+        candy_earned_count?: number;
+    }
+
+
     export class GetDownloadUrlsResponse extends ProtoBufMessage {
         constructor(data: GetDownloadUrlsResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): GetDownloadUrlsResponse;
@@ -4120,6 +4368,23 @@ export namespace Networking.Responses {
     }
 
 
+    export class SetBuddyPokemonResponse extends ProtoBufMessage {
+        constructor(data: SetBuddyPokemonResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SetBuddyPokemonResponse;
+        result: SetBuddyPokemonResponse.Result;
+        getResult(): SetBuddyPokemonResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+        updated_buddy: Data.BuddyPokemon;
+        getUpdatedBuddy(): Data.BuddyPokemon;
+        setUpdatedBuddy(value: any, noAssert?: boolean);
+    }
+
+    interface SetBuddyPokemonResponseData {
+        result?: SetBuddyPokemonResponse.Result;
+        updated_buddy?: Data.BuddyPokemon;
+    }
+
+
     export class SetContactSettingsResponse extends ProtoBufMessage {
         constructor(data: SetContactSettingsResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): SetContactSettingsResponse;
@@ -4370,6 +4635,19 @@ export namespace Networking.Responses {
     interface UseItemXpBoostResponseData {
         result?: UseItemXpBoostResponse.Result;
         applied_items?: Inventory.AppliedItems;
+    }
+
+
+    export class VerifyChallengeResponse extends ProtoBufMessage {
+        constructor(data: VerifyChallengeResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): VerifyChallengeResponse;
+        success: boolean;
+        getSuccess(): boolean;
+        setSuccess(value: any, noAssert?: boolean);
+    }
+
+    interface VerifyChallengeResponseData {
+        success?: boolean;
     }
 
 }
@@ -5195,6 +5473,12 @@ export namespace Settings.Master {
         candy_to_evolve: number;
         getCandyToEvolve(): number;
         setCandyToEvolve(value: any, noAssert?: boolean);
+        km_buddy_distance: number;
+        getKmBuddyDistance(): number;
+        setKmBuddyDistance(value: any, noAssert?: boolean);
+        buddy_size: PokemonSettings.BuddySize;
+        getBuddySize(): PokemonSettings.BuddySize;
+        setBuddySize(value: any, noAssert?: boolean);
     }
 
     interface PokemonSettingsData {
@@ -5219,6 +5503,8 @@ export namespace Settings.Master {
         km_distance_to_hatch?: number;
         family_id?: Enums.PokemonFamilyId;
         candy_to_evolve?: number;
+        km_buddy_distance?: number;
+        buddy_size?: PokemonSettings.BuddySize;
     }
 
 
@@ -6219,6 +6505,16 @@ export namespace Enums {
 }
 
 
+export namespace Data.Logs.BuddyPokemonLogEntry {
+
+    export const enum Result {
+        UNSET = 0,
+        CANDY_FOUND = 1,
+    }
+
+}
+
+
 export namespace Data.Logs.CatchPokemonLogEntry {
 
     export const enum Result {
@@ -6236,6 +6532,41 @@ export namespace Data.Logs.FortSearchLogEntry {
     export const enum Result {
         UNSET = 0,
         SUCCESS = 1,
+    }
+
+}
+
+
+export namespace Networking.Platform {
+
+    export const enum PlatformRequestType {
+        METHOD_UNSET = 0,
+        BUY_ITEM_POKECOINS = 2,
+        BUY_ITEM_ANDROID = 3,
+        BUY_ITEM_IOS = 4,
+        GET_STORE_ITEMS = 5,
+        SEND_ENCRYPTED_SIGNATURE = 6,
+    }
+
+}
+
+
+export namespace Networking.Platform.Responses.BuyItemAndroidResponse {
+
+    export const enum Status {
+        UNKNOWN = 0,
+        SUCCESS = 1,
+    }
+
+}
+
+
+export namespace Networking.Platform.Responses.BuyItemPokeCoinsResponse {
+
+    export const enum Status {
+        UNKNOWN = 0,
+        SUCCESS = 1,
+        NOT_ENOUGH_POKECOINS = 3,
     }
 
 }
@@ -6427,6 +6758,7 @@ export namespace Networking.Responses.FortDeployPokemonResponse {
         ERROR_PLAYER_HAS_NO_TEAM = 6,
         ERROR_POKEMON_NOT_FULL_HP = 7,
         ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 8,
+        ERROR_POKEMON_IS_BUDDY = 9,
     }
 
 }
@@ -6453,6 +6785,7 @@ export namespace Networking.Responses.FortSearchResponse {
         OUT_OF_RANGE = 2,
         IN_COOLDOWN_PERIOD = 3,
         INVENTORY_FULL = 4,
+        EXCEEDED_DAILY_LIMIT = 5,
     }
 
 }
@@ -6546,6 +6879,7 @@ export namespace Networking.Responses.ReleasePokemonResponse {
         POKEMON_DEPLOYED = 2,
         FAILED = 3,
         ERROR_POKEMON_IS_EGG = 4,
+        ERROR_POKEMON_IS_BUDDY = 5,
     }
 
 }
@@ -6558,6 +6892,19 @@ export namespace Networking.Responses.SetAvatarResponse {
         SUCCESS = 1,
         AVATAR_ALREADY_SET = 2,
         FAILURE = 3,
+    }
+
+}
+
+
+export namespace Networking.Responses.SetBuddyPokemonResponse {
+
+    export const enum Result {
+        UNEST = 0,
+        SUCCESS = 1,
+        ERROR_POKEMON_DEPLOYED = 2,
+        ERROR_POKEMON_NOT_OWNED = 3,
+        ERROR_POKEMON_IS_EGG = 4,
     }
 
 }
@@ -6720,6 +7067,18 @@ export namespace Networking.Responses.UseItemXpBoostResponse {
         ERROR_XP_BOOST_ALREADY_ACTIVE = 3,
         ERROR_NO_ITEMS_REMAINING = 4,
         ERROR_LOCATION_UNSET = 5,
+    }
+
+}
+
+
+export namespace Settings.Master.PokemonSettings {
+
+    export const enum BuddySize {
+        BUDDY_MEDIUM = 0,
+        BUDDY_SHOULDER = 1,
+        BUDDY_BIG = 2,
+        BUDDY_FLYING = 3,
     }
 
 }

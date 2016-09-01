@@ -11,3 +11,27 @@ fixes the proto3 packed fields bug in protobuf.js for you.
 ![license](https://img.shields.io/npm/l/node-pogo-protos.svg)
 
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
+
+## Usage with TypeScript
+TypeScript definitions are included. To use them, make sure that:
+* Typings is installed: `npm install -g typings` (create an alias for `typings` if installed locally)
+* External type declarations have been added: `typings install dt~long dt~bytebuffer env~node --global --save`
+
+Add declarations to `.tsconfig.json`:
+```javascript
+{
+  /* ... */
+  "files": [
+    "typings/index.d.ts",
+    /* ... */
+  ],
+  /* ... */
+}
+```
+
+And use `import` instead of `require`:
+```javascript
+import * as POGOProtos from 'node-pogo-protos';
+```
+
+TypeScript 2.0 module resolution via `@types` is not currently supported, however the above will work for both TypeScript ^1.8 and ^2.0.
