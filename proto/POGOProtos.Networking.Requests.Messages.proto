@@ -32,6 +32,9 @@ message CatchPokemonMessage {
 message CheckAwardedBadgesMessage {
 	// No message needed.
 }
+message CheckChallengeMessage {
+	bool debug_request = 1;
+}
 message CheckCodenameAvailableMessage {
 	string codename = 1;
 }
@@ -112,6 +115,8 @@ message GetAssetDigestMessage {
 	string locale = 4;
 	uint32 app_version = 5;
 }
+message GetBuddyWalkedMessage {
+}
 message GetDownloadUrlsMessage {
 	repeated string asset_id = 1;
 }
@@ -141,6 +146,12 @@ message GetMapObjectsMessage {
 	double longitude = 4;
 }
 message GetPlayerMessage {
+	.POGOProtos.Networking.Requests.Messages.GetPlayerMessage.PlayerLocale player_locale = 1;
+
+	message PlayerLocale {
+		string country = 1;
+		string language = 2;
+	}
 }
 message GetPlayerProfileMessage {
 	string player_name = 1;
@@ -177,6 +188,9 @@ message ReleasePokemonMessage {
 }
 message SetAvatarMessage {
 	.POGOProtos.Data.Player.PlayerAvatar player_avatar = 2;
+}
+message SetBuddyPokemonMessage {
+	fixed64 pokemon_id = 1;
 }
 message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
@@ -229,4 +243,7 @@ message UseItemReviveMessage {
 }
 message UseItemXpBoostMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
+}
+message VerifyChallengeMessage {
+	string token = 1;
 }

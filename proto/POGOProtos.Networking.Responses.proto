@@ -61,6 +61,10 @@ message CheckAwardedBadgesResponse {
 	repeated .POGOProtos.Enums.BadgeType awarded_badges = 2;
 	repeated int32 awarded_badge_levels = 3;
 }
+message CheckChallengeResponse {
+	bool show_challenge = 1;
+	string challenge_url = 2;
+}
 message CheckCodenameAvailableResponse {
 	string codename = 1;
 	string user_message = 2;
@@ -247,6 +251,7 @@ message FortDeployPokemonResponse {
 		ERROR_PLAYER_HAS_NO_TEAM = 6;
 		ERROR_POKEMON_NOT_FULL_HP = 7;
 		ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 8;
+		ERROR_POKEMON_IS_BUDDY = 9;
 	}
 }
 message FortDetailsResponse {
@@ -291,11 +296,18 @@ message FortSearchResponse {
 		OUT_OF_RANGE = 2;
 		IN_COOLDOWN_PERIOD = 3;
 		INVENTORY_FULL = 4;
+		EXCEEDED_DAILY_LIMIT = 5;
 	}
 }
 message GetAssetDigestResponse {
 	repeated .POGOProtos.Data.AssetDigestEntry digest = 1;
 	uint64 timestamp_ms = 2;
+}
+message GetBuddyWalkedResponse
+{
+	bool success = 1;
+	.POGOProtos.Enums.PokemonFamilyId family_candy_id = 2;
+	int32 candy_earned_count = 3;
 }
 message GetDownloadUrlsResponse {
 	repeated .POGOProtos.Data.DownloadUrlEntry download_urls = 1;
@@ -425,6 +437,7 @@ message ReleasePokemonResponse {
 		POKEMON_DEPLOYED = 2;
 		FAILED = 3;
 		ERROR_POKEMON_IS_EGG = 4;
+		ERROR_POKEMON_IS_BUDDY = 5;
 	}
 }
 message SetAvatarResponse {
@@ -436,6 +449,19 @@ message SetAvatarResponse {
 		SUCCESS = 1;
 		AVATAR_ALREADY_SET = 2;
 		FAILURE = 3;
+	}
+}
+message SetBuddyPokemonResponse
+{
+	.POGOProtos.Networking.Responses.SetBuddyPokemonResponse.Result result = 1;
+	.POGOProtos.Data.BuddyPokemon updated_buddy = 2;
+
+	enum Result {
+		UNEST = 0;
+		SUCCESS = 1;
+		ERROR_POKEMON_DEPLOYED = 2;
+		ERROR_POKEMON_NOT_OWNED = 3;
+		ERROR_POKEMON_IS_EGG = 4;
 	}
 }
 message SetContactSettingsResponse {
@@ -599,4 +625,7 @@ message UseItemXpBoostResponse {
 		ERROR_NO_ITEMS_REMAINING = 4;
 		ERROR_LOCATION_UNSET = 5;
 	}
+}
+message VerifyChallengeResponse {
+	bool success = 1;
 }
