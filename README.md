@@ -27,7 +27,7 @@ console.log(decodedAgain.count); // will print 50
 
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
 
-## Usage with TypeScript < 2.0
+## Usage with TypeScript
 
 Make sure that:
 
@@ -59,4 +59,4 @@ import * as POGOProtos from 'node-pogo-protos';
 // ...
 ```
 
-Currently it doesn't support TypeScript 2.0 module resolution via `@types`.
+> Currently it doesn't support TypeScript 2.0 module resolution via `@types`. But the method above works well for both TypeScript ^1.8 and ^2.0
