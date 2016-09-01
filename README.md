@@ -33,7 +33,7 @@ TypeScript definitions are included. To use them, make sure that:
 * External type declarations have been added: `typings install dt~long dt~bytebuffer env~node --global --save`
 
 Add declarations to `.tsconfig.json`:
-```json
+```javascript
 {
   /* ... */
   "files": [
