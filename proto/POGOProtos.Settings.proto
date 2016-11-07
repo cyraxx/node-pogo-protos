@@ -5,6 +5,16 @@ package POGOProtos.Settings;
 message DownloadSettingsAction {
 	string hash = 1;
 }
+message FestivalSettings {
+	FestivalType festival_type = 1;
+	string key = 2;
+	string vector = 3;
+
+	enum FestivalType {
+		NONE = 0;
+		HALLOWEEN = 1;
+	}
+}
 message FortSettings {
 	double interaction_range_meters = 1;
 	int32 max_total_deployed_pokemon = 2;
@@ -20,6 +30,7 @@ message GlobalSettings {
 	.POGOProtos.Settings.InventorySettings inventory_settings = 5;
 	string minimum_client_version = 6;
 	.POGOProtos.Settings.GpsSettings gps_settings = 7;
+	.POGOProtos.Settings.FestivalSettings festival_settings = 8;
 }
 message GpsSettings {
 	float driving_warning_speed_meters_per_second = 1;

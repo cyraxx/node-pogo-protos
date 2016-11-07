@@ -8,8 +8,8 @@ message ContactSettings {
 	bool send_push_notifications = 2;
 }
 message Currency {
-    string name = 1;
-    int32 amount = 2;
+	string name = 1;
+	int32 amount = 2;
 }
 message DailyBonus {
 	int64 next_collected_timestamp_ms = 1;

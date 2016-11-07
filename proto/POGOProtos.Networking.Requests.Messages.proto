@@ -16,7 +16,7 @@ message AttackGymMessage {
 	string gym_id = 1;
 	string battle_id = 2;
 	repeated .POGOProtos.Data.Battle.BattleAction attack_actions = 3;
-	.POGOProtos.Data.Battle.BattleAction last_retrieved_actions = 4;
+	.POGOProtos.Data.Battle.BattleAction last_retrieved_action = 4;
 	double player_latitude = 5;
 	double player_longitude = 6;
 }
@@ -137,11 +137,11 @@ message GetIncensePokemonMessage {
 }
 message GetInventoryMessage {
 	int64 last_timestamp_ms = 1;
-	int32 item_been_seen = 2; // TODO: Find out what this is.
+	int32 item_been_seen = 2;  // TODO: Find out what this is.
 }
 message GetMapObjectsMessage {
-	repeated uint64 cell_id = 1 [packed=true];
-	repeated int64 since_timestamp_ms = 2 [packed=true];
+	repeated uint64 cell_id = 1 [packed = true];
+	repeated int64 since_timestamp_ms = 2 [packed = true];
 	double latitude = 3;
 	double longitude = 4;
 }
@@ -196,7 +196,7 @@ message SetContactSettingsMessage {
 	.POGOProtos.Data.Player.ContactSettings contact_settings = 1;
 }
 message SetFavoritePokemonMessage {
-	int64 pokemon_id = 1; // Do not change https://github.com/AeonLucid/POGOProtos/pull/126
+	int64 pokemon_id = 1;  // Do not change https://github.com/AeonLucid/POGOProtos/pull/126
 	bool is_favorite = 2;
 }
 message SetPlayerTeamMessage {
@@ -208,7 +208,7 @@ message SfidaActionLogMessage {
 message StartGymBattleMessage {
 	string gym_id = 1;
 	repeated fixed64 attacking_pokemon_ids = 2;
-	fixed64 defending_pokemon_id = 3; // needs to be fixed64, tested by Grover
+	fixed64 defending_pokemon_id = 3;  // needs to be fixed64, tested by Grover
 	double player_latitude = 4;
 	double player_longitude = 5;
 }

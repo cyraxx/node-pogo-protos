@@ -35,12 +35,12 @@ message AttackGymResponse {
 	.POGOProtos.Data.Battle.BattlePokemonInfo active_defender = 4;
 	.POGOProtos.Data.Battle.BattlePokemonInfo active_attacker = 5;
 
-    enum Result {
+	enum Result {
 		UNSET = 0;
 		SUCCESS = 1;
 		ERROR_INVALID_ATTACK_ACTIONS = 2;
 		ERROR_NOT_IN_RANGE = 3;
-    }
+	}
 }
 message CatchPokemonResponse {
 	.POGOProtos.Networking.Responses.CatchPokemonResponse.CatchStatus status = 1;
@@ -146,7 +146,7 @@ message DownloadItemTemplatesResponse {
 		.POGOProtos.Settings.Master.MoveSettings move_settings = 4;
 		.POGOProtos.Settings.Master.MoveSequenceSettings move_sequence_settings = 5;
 		.POGOProtos.Settings.Master.TypeEffectiveSettings type_effective = 8;
-		.POGOProtos.Settings.Master.BadgeSettings badge_settings = 10; 
+		.POGOProtos.Settings.Master.BadgeSettings badge_settings = 10;
 		.POGOProtos.Settings.Master.CameraSettings camera = 11;
 		.POGOProtos.Settings.Master.PlayerLevelSettings player_level = 12;
 		.POGOProtos.Settings.Master.GymLevelSettings gym_level = 13;
@@ -160,7 +160,7 @@ message DownloadItemTemplatesResponse {
 }
 message DownloadRemoteConfigVersionResponse {
 	.POGOProtos.Networking.Responses.DownloadRemoteConfigVersionResponse.Result result = 1;
-	uint64 item_templates_timestamp_ms = 2; // Latest available?
+	uint64 item_templates_timestamp_ms = 2;  // Latest available?
 	uint64 asset_digest_timestamp_ms = 3;
 
 	enum Result {
@@ -303,8 +303,7 @@ message GetAssetDigestResponse {
 	repeated .POGOProtos.Data.AssetDigestEntry digest = 1;
 	uint64 timestamp_ms = 2;
 }
-message GetBuddyWalkedResponse
-{
+message GetBuddyWalkedResponse {
 	bool success = 1;
 	.POGOProtos.Enums.PokemonFamilyId family_candy_id = 2;
 	int32 candy_earned_count = 3;
@@ -327,10 +326,11 @@ message GetGymDetailsResponse {
 }
 message GetHatchedEggsResponse {
 	bool success = 1;
-	repeated fixed64 pokemon_id = 2 [packed=true];
+	repeated fixed64 pokemon_id = 2 [packed = true];
 	repeated int32 experience_awarded = 3;
 	repeated int32 candy_awarded = 4;
 	repeated int32 stardust_awarded = 5;
+	repeated float egg_km_walked = 6;
 }
 message GetIncensePokemonResponse {
 	.POGOProtos.Networking.Responses.GetIncensePokemonResponse.Result result = 1;
@@ -451,8 +451,7 @@ message SetAvatarResponse {
 		FAILURE = 3;
 	}
 }
-message SetBuddyPokemonResponse
-{
+message SetBuddyPokemonResponse {
 	.POGOProtos.Networking.Responses.SetBuddyPokemonResponse.Result result = 1;
 	.POGOProtos.Data.BuddyPokemon updated_buddy = 2;
 
@@ -580,7 +579,7 @@ message UseItemEggIncubatorResponse {
 }
 message UseItemGymResponse {
 	.POGOProtos.Networking.Responses.UseItemGymResponse.Result result = 1;
-	int64 updated_gp = 2; // Gym Points (?)
+	int64 updated_gp = 2;  // Gym Points (?)
 
 	enum Result {
 		UNSET = 0;

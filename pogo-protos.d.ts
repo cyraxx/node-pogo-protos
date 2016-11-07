@@ -329,6 +329,15 @@ export namespace Data {
         buddy_candy_awarded: number;
         getBuddyCandyAwarded(): number;
         setBuddyCandyAwarded(value: any, noAssert?: boolean);
+        buddy_total_km_walked: number;
+        getBuddyTotalKmWalked(): number;
+        setBuddyTotalKmWalked(value: any, noAssert?: boolean);
+        display_pokemon_id: number;
+        getDisplayPokemonId(): number;
+        setDisplayPokemonId(value: any, noAssert?: boolean);
+        display_cp: number;
+        getDisplayCp(): number;
+        setDisplayCp(value: any, noAssert?: boolean);
     }
 
     interface PokemonDataData {
@@ -363,6 +372,9 @@ export namespace Data {
         nickname?: string;
         from_fort?: number;
         buddy_candy_awarded?: number;
+        buddy_total_km_walked?: number;
+        display_pokemon_id?: number;
+        display_cp?: number;
     }
 
 }
@@ -680,9 +692,9 @@ export namespace Data.Battle {
     export class BattleAction extends ProtoBufMessage {
         constructor(data: BattleActionData);
         static decode(buffer?: any, length?: number | string, enc?: string): BattleAction;
-        Type: Battle.BattleActionType;
-        get_Type(): Battle.BattleActionType;
-        set_Type(value: any, noAssert?: boolean);
+        type: Battle.BattleActionType;
+        getType(): Battle.BattleActionType;
+        setType(value: any, noAssert?: boolean);
         action_start_ms: Long;
         getActionStartMs(): Long;
         setActionStartMs(value: any, noAssert?: boolean);
@@ -707,12 +719,12 @@ export namespace Data.Battle {
         battle_results: Battle.BattleResults;
         getBattleResults(): Battle.BattleResults;
         setBattleResults(value: any, noAssert?: boolean);
-        damage_windows_start_timestamp_mss: Long;
-        getDamageWindowsStartTimestampMss(): Long;
-        setDamageWindowsStartTimestampMss(value: any, noAssert?: boolean);
-        damage_windows_end_timestamp_mss: Long;
-        getDamageWindowsEndTimestampMss(): Long;
-        setDamageWindowsEndTimestampMss(value: any, noAssert?: boolean);
+        damage_windows_start_timestamp_ms: Long;
+        getDamageWindowsStartTimestampMs(): Long;
+        setDamageWindowsStartTimestampMs(value: any, noAssert?: boolean);
+        damage_windows_end_timestamp_ms: Long;
+        getDamageWindowsEndTimestampMs(): Long;
+        setDamageWindowsEndTimestampMs(value: any, noAssert?: boolean);
         player_left: Battle.BattleParticipant;
         getPlayerLeft(): Battle.BattleParticipant;
         setPlayerLeft(value: any, noAssert?: boolean);
@@ -722,7 +734,7 @@ export namespace Data.Battle {
     }
 
     interface BattleActionData {
-        Type?: Battle.BattleActionType;
+        type?: Battle.BattleActionType;
         action_start_ms?: Long;
         duration_ms?: number;
         energy_delta?: number;
@@ -731,8 +743,8 @@ export namespace Data.Battle {
         active_pokemon_id?: Long;
         player_joined?: Battle.BattleParticipant;
         battle_results?: Battle.BattleResults;
-        damage_windows_start_timestamp_mss?: Long;
-        damage_windows_end_timestamp_mss?: Long;
+        damage_windows_start_timestamp_ms?: Long;
+        damage_windows_end_timestamp_ms?: Long;
         player_left?: Battle.BattleParticipant;
         target_pokemon_id?: Long;
     }
@@ -1033,6 +1045,44 @@ export namespace Data.Logs {
 }
 
 
+export namespace Data.Quests {
+
+    export class DailyQuest extends ProtoBufMessage {
+        constructor(data: DailyQuestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): DailyQuest;
+        current_period_bucket: number;
+        getCurrentPeriodBucket(): number;
+        setCurrentPeriodBucket(value: any, noAssert?: boolean);
+        current_streak_count: number;
+        getCurrentStreakCount(): number;
+        setCurrentStreakCount(value: any, noAssert?: boolean);
+    }
+
+    interface DailyQuestData {
+        current_period_bucket?: number;
+        current_streak_count?: number;
+    }
+
+
+    export class Quest extends ProtoBufMessage {
+        constructor(data: QuestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): Quest;
+        quest_type: Enums.QuestType;
+        getQuestType(): Enums.QuestType;
+        setQuestType(value: any, noAssert?: boolean);
+        daily_quest: Quests.DailyQuest;
+        getDailyQuest(): Quests.DailyQuest;
+        setDailyQuest(value: any, noAssert?: boolean);
+    }
+
+    interface QuestData {
+        quest_type?: Enums.QuestType;
+        daily_quest?: Quests.DailyQuest;
+    }
+
+}
+
+
 export namespace Inventory {
 
     export class AppliedItem extends ProtoBufMessage {
@@ -1215,6 +1265,9 @@ export namespace Inventory {
         candy: Inventory.Candy;
         getCandy(): Inventory.Candy;
         setCandy(value: any, noAssert?: boolean);
+        quest: Data.Quests.Quest;
+        getQuest(): Data.Quests.Quest;
+        setQuest(value: any, noAssert?: boolean);
     }
 
     interface InventoryItemDataData {
@@ -1228,6 +1281,7 @@ export namespace Inventory {
         applied_items?: Inventory.AppliedItems;
         egg_incubators?: Inventory.EggIncubators;
         candy?: Inventory.Candy;
+        quest?: Data.Quests.Quest;
     }
 
 
@@ -1880,9 +1934,9 @@ export namespace Networking.Requests.Messages {
         attack_actions: Data.Battle.BattleAction[];
         getAttackActions(): Data.Battle.BattleAction[];
         setAttackActions(value: any, noAssert?: boolean);
-        last_retrieved_actions: Data.Battle.BattleAction;
-        getLastRetrievedActions(): Data.Battle.BattleAction;
-        setLastRetrievedActions(value: any, noAssert?: boolean);
+        last_retrieved_action: Data.Battle.BattleAction;
+        getLastRetrievedAction(): Data.Battle.BattleAction;
+        setLastRetrievedAction(value: any, noAssert?: boolean);
         player_latitude: number;
         getPlayerLatitude(): number;
         setPlayerLatitude(value: any, noAssert?: boolean);
@@ -1895,7 +1949,7 @@ export namespace Networking.Requests.Messages {
         gym_id?: string;
         battle_id?: string;
         attack_actions: Data.Battle.BattleAction[];
-        last_retrieved_actions?: Data.Battle.BattleAction;
+        last_retrieved_action?: Data.Battle.BattleAction;
         player_latitude?: number;
         player_longitude?: number;
     }
@@ -3027,17 +3081,26 @@ export namespace Networking.Envelopes {
     export class Signature extends ProtoBufMessage {
         constructor(data: SignatureData);
         static decode(buffer?: any, length?: number | string, enc?: string): Signature;
+        field1: Envelopes.UnknownMessage[];
+        getField1(): Envelopes.UnknownMessage[];
+        setField1(value: any, noAssert?: boolean);
         timestamp_since_start: Long;
         getTimestampSinceStart(): Long;
         setTimestampSinceStart(value: any, noAssert?: boolean);
+        field3: string;
+        getField3(): string;
+        setField3(value: any, noAssert?: boolean);
         location_fix: Signature.LocationFix[];
         getLocationFix(): Signature.LocationFix[];
         setLocationFix(value: any, noAssert?: boolean);
-        gps_info: Signature.AndroidGpsInfo;
-        getGpsInfo(): Signature.AndroidGpsInfo;
+        gps_info: Signature.AndroidGpsInfo[];
+        getGpsInfo(): Signature.AndroidGpsInfo[];
         setGpsInfo(value: any, noAssert?: boolean);
-        sensor_info: Signature.SensorInfo;
-        getSensorInfo(): Signature.SensorInfo;
+        field6: Envelopes.UnknownMessage[];
+        getField6(): Envelopes.UnknownMessage[];
+        setField6(value: any, noAssert?: boolean);
+        sensor_info: Signature.SensorInfo[];
+        getSensorInfo(): Signature.SensorInfo[];
         setSensorInfo(value: any, noAssert?: boolean);
         device_info: Signature.DeviceInfo;
         getDeviceInfo(): Signature.DeviceInfo;
@@ -3048,9 +3111,39 @@ export namespace Networking.Envelopes {
         location_hash1: number;
         getLocationHash1(): number;
         setLocationHash1(value: any, noAssert?: boolean);
+        field11: boolean;
+        getField11(): boolean;
+        setField11(value: any, noAssert?: boolean);
+        field12: boolean;
+        getField12(): boolean;
+        setField12(value: any, noAssert?: boolean);
+        field13: number;
+        getField13(): number;
+        setField13(value: any, noAssert?: boolean);
+        field14: number;
+        getField14(): number;
+        setField14(value: any, noAssert?: boolean);
+        field15: string;
+        getField15(): string;
+        setField15(value: any, noAssert?: boolean);
+        field16: number;
+        getField16(): number;
+        setField16(value: any, noAssert?: boolean);
+        field17: string;
+        getField17(): string;
+        setField17(value: any, noAssert?: boolean);
+        field18: string;
+        getField18(): string;
+        setField18(value: any, noAssert?: boolean);
+        field19: boolean;
+        getField19(): boolean;
+        setField19(value: any, noAssert?: boolean);
         location_hash2: number;
         getLocationHash2(): number;
         setLocationHash2(value: any, noAssert?: boolean);
+        field21: boolean;
+        getField21(): boolean;
+        setField21(value: any, noAssert?: boolean);
         session_hash: ByteBuffer;
         getSessionHash(): ByteBuffer;
         setSessionHash(value: any, noAssert?: boolean);
@@ -3066,14 +3159,27 @@ export namespace Networking.Envelopes {
     }
 
     interface SignatureData {
+        field1: Envelopes.UnknownMessage[];
         timestamp_since_start?: Long;
+        field3?: string;
         location_fix: Signature.LocationFix[];
-        gps_info?: Signature.AndroidGpsInfo;
-        sensor_info?: Signature.SensorInfo;
+        gps_info: Signature.AndroidGpsInfo[];
+        field6: Envelopes.UnknownMessage[];
+        sensor_info: Signature.SensorInfo[];
         device_info?: Signature.DeviceInfo;
         activity_status?: Signature.ActivityStatus;
         location_hash1?: number;
+        field11?: boolean;
+        field12?: boolean;
+        field13?: number;
+        field14?: number;
+        field15?: string;
+        field16?: number;
+        field17?: string;
+        field18?: string;
+        field19?: boolean;
         location_hash2?: number;
+        field21?: boolean;
         session_hash?: ByteBuffer;
         timestamp?: Long;
         request_hash: Long[];
@@ -3300,24 +3406,27 @@ export namespace Networking.Envelopes.Signature {
         magnetic_field_z: number;
         getMagneticFieldZ(): number;
         setMagneticFieldZ(value: any, noAssert?: boolean);
-        rotation_vector_x: number;
-        getRotationVectorX(): number;
-        setRotationVectorX(value: any, noAssert?: boolean);
-        rotation_vector_y: number;
-        getRotationVectorY(): number;
-        setRotationVectorY(value: any, noAssert?: boolean);
-        rotation_vector_z: number;
-        getRotationVectorZ(): number;
-        setRotationVectorZ(value: any, noAssert?: boolean);
-        gyroscope_raw_x: number;
-        getGyroscopeRawX(): number;
-        setGyroscopeRawX(value: any, noAssert?: boolean);
-        gyroscope_raw_y: number;
-        getGyroscopeRawY(): number;
-        setGyroscopeRawY(value: any, noAssert?: boolean);
-        gyroscope_raw_z: number;
-        getGyroscopeRawZ(): number;
-        setGyroscopeRawZ(value: any, noAssert?: boolean);
+        magnetic_field_accuracy: number;
+        getMagneticFieldAccuracy(): number;
+        setMagneticFieldAccuracy(value: any, noAssert?: boolean);
+        attitude_pitch: number;
+        getAttitudePitch(): number;
+        setAttitudePitch(value: any, noAssert?: boolean);
+        attitude_yaw: number;
+        getAttitudeYaw(): number;
+        setAttitudeYaw(value: any, noAssert?: boolean);
+        attitude_roll: number;
+        getAttitudeRoll(): number;
+        setAttitudeRoll(value: any, noAssert?: boolean);
+        rotation_rate_x: number;
+        getRotationRateX(): number;
+        setRotationRateX(value: any, noAssert?: boolean);
+        rotation_rate_y: number;
+        getRotationRateY(): number;
+        setRotationRateY(value: any, noAssert?: boolean);
+        rotation_rate_z: number;
+        getRotationRateZ(): number;
+        setRotationRateZ(value: any, noAssert?: boolean);
         gravity_x: number;
         getGravityX(): number;
         setGravityX(value: any, noAssert?: boolean);
@@ -3327,9 +3436,9 @@ export namespace Networking.Envelopes.Signature {
         gravity_z: number;
         getGravityZ(): number;
         setGravityZ(value: any, noAssert?: boolean);
-        accelerometer_axes: Long;
-        getAccelerometerAxes(): Long;
-        setAccelerometerAxes(value: any, noAssert?: boolean);
+        status: number;
+        getStatus(): number;
+        setStatus(value: any, noAssert?: boolean);
     }
 
     interface SensorInfoData {
@@ -3340,16 +3449,17 @@ export namespace Networking.Envelopes.Signature {
         magnetic_field_x?: number;
         magnetic_field_y?: number;
         magnetic_field_z?: number;
-        rotation_vector_x?: number;
-        rotation_vector_y?: number;
-        rotation_vector_z?: number;
-        gyroscope_raw_x?: number;
-        gyroscope_raw_y?: number;
-        gyroscope_raw_z?: number;
+        magnetic_field_accuracy?: number;
+        attitude_pitch?: number;
+        attitude_yaw?: number;
+        attitude_roll?: number;
+        rotation_rate_x?: number;
+        rotation_rate_y?: number;
+        rotation_rate_z?: number;
         gravity_x?: number;
         gravity_y?: number;
         gravity_z?: number;
-        accelerometer_axes?: Long;
+        status?: number;
     }
 
 
@@ -4087,6 +4197,9 @@ export namespace Networking.Responses {
         stardust_awarded: number[];
         getStardustAwarded(): number[];
         setStardustAwarded(value: any, noAssert?: boolean);
+        egg_km_walked: number[];
+        getEggKmWalked(): number[];
+        setEggKmWalked(value: any, noAssert?: boolean);
     }
 
     interface GetHatchedEggsResponseData {
@@ -4095,6 +4208,7 @@ export namespace Networking.Responses {
         experience_awarded: number[];
         candy_awarded: number[];
         stardust_awarded: number[];
+        egg_km_walked: number[];
     }
 
 
@@ -4745,6 +4859,27 @@ export namespace Settings {
     }
 
 
+    export class FestivalSettings extends ProtoBufMessage {
+        constructor(data: FestivalSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): FestivalSettings;
+        festival_type: FestivalSettings.FestivalType;
+        getFestivalType(): FestivalSettings.FestivalType;
+        setFestivalType(value: any, noAssert?: boolean);
+        key: string;
+        getKey(): string;
+        setKey(value: any, noAssert?: boolean);
+        vector: string;
+        getVector(): string;
+        setVector(value: any, noAssert?: boolean);
+    }
+
+    interface FestivalSettingsData {
+        festival_type?: FestivalSettings.FestivalType;
+        key?: string;
+        vector?: string;
+    }
+
+
     export class FortSettings extends ProtoBufMessage {
         constructor(data: FortSettingsData);
         static decode(buffer?: any, length?: number | string, enc?: string): FortSettings;
@@ -4799,6 +4934,9 @@ export namespace Settings {
         gps_settings: Settings.GpsSettings;
         getGpsSettings(): Settings.GpsSettings;
         setGpsSettings(value: any, noAssert?: boolean);
+        festival_settings: Settings.FestivalSettings;
+        getFestivalSettings(): Settings.FestivalSettings;
+        setFestivalSettings(value: any, noAssert?: boolean);
     }
 
     interface GlobalSettingsData {
@@ -4808,6 +4946,7 @@ export namespace Settings {
         inventory_settings?: Settings.InventorySettings;
         minimum_client_version?: string;
         gps_settings?: Settings.GpsSettings;
+        festival_settings?: Settings.FestivalSettings;
     }
 
 
@@ -5884,6 +6023,9 @@ export namespace Enums {
         ACTIVITY_HATCH_EGG_LARGE_BONUS = 21,
         ACTIVITY_DEFEAT_GYM_DEFENDER = 22,
         ACTIVITY_DEFEAT_GYM_LEADER = 23,
+        ACTIVITY_CATCH_FIRST_CATCH_STREAK_BONUS = 24,
+        ACTIVITY_SEARCH_FORT_FIRST_OF_THE_DAY = 25,
+        ACTIVITY_SEARCH_FORT_STREAK_BONUS = 26,
     }
 
 
@@ -6481,6 +6623,13 @@ export namespace Enums {
     }
 
 
+    export const enum QuestType {
+        QUEST_UNKNOWN_TYPE = 0,
+        QUEST_FIRST_CATCH_OF_THE_DAY = 1,
+        QUEST_FIRST_POKESTOP_OF_THE_DAY = 2,
+    }
+
+
     export const enum TeamColor {
         NEUTRAL = 0,
         BLUE = 1,
@@ -7067,6 +7216,16 @@ export namespace Networking.Responses.UseItemXpBoostResponse {
         ERROR_XP_BOOST_ALREADY_ACTIVE = 3,
         ERROR_NO_ITEMS_REMAINING = 4,
         ERROR_LOCATION_UNSET = 5,
+    }
+
+}
+
+
+export namespace Settings.FestivalSettings {
+
+    export const enum FestivalType {
+        NONE = 0,
+        HALLOWEEN = 1,
     }
 
 }
