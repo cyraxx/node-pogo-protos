@@ -68,6 +68,27 @@ export namespace Data {
     }
 
 
+    export class BackgroundToken extends ProtoBufMessage {
+        constructor(data: BackgroundTokenData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BackgroundToken;
+        token: ByteBuffer;
+        getToken(): ByteBuffer;
+        setToken(value: any, noAssert?: boolean);
+        expiration_time: Long;
+        getExpirationTime(): Long;
+        setExpirationTime(value: any, noAssert?: boolean);
+        iv: ByteBuffer;
+        getIv(): ByteBuffer;
+        setIv(value: any, noAssert?: boolean);
+    }
+
+    interface BackgroundTokenData {
+        token?: ByteBuffer;
+        expiration_time?: Long;
+        iv?: ByteBuffer;
+    }
+
+
     export class BuddyPokemon extends ProtoBufMessage {
         constructor(data: BuddyPokemonData);
         static decode(buffer?: any, length?: number | string, enc?: string): BuddyPokemon;
@@ -86,6 +107,19 @@ export namespace Data {
         id?: Long;
         start_km_walked?: number;
         last_km_awarded?: number;
+    }
+
+
+    export class ClientVersion extends ProtoBufMessage {
+        constructor(data: ClientVersionData);
+        static decode(buffer?: any, length?: number | string, enc?: string): ClientVersion;
+        min_version: string;
+        getMinVersion(): string;
+        setMinVersion(value: any, noAssert?: boolean);
+    }
+
+    interface ClientVersionData {
+        min_version?: string;
     }
 
 
@@ -185,6 +219,9 @@ export namespace Data {
         buddy_pokemon: Data.BuddyPokemon;
         getBuddyPokemon(): Data.BuddyPokemon;
         setBuddyPokemon(value: any, noAssert?: boolean);
+        battle_lockout_end_ms: Long;
+        getBattleLockoutEndMs(): Long;
+        setBattleLockoutEndMs(value: any, noAssert?: boolean);
     }
 
     interface PlayerDataData {
@@ -201,6 +238,7 @@ export namespace Data {
         currencies: Player.Currency[];
         remaining_codename_claims?: number;
         buddy_pokemon?: Data.BuddyPokemon;
+        battle_lockout_end_ms?: Long;
     }
 
 
@@ -649,6 +687,23 @@ export namespace Data.Player {
 }
 
 
+export namespace Data.Badge {
+
+    export class BadgeCaptureReward extends ProtoBufMessage {
+        constructor(data: BadgeCaptureRewardData);
+        static decode(buffer?: any, length?: number | string, enc?: string): BadgeCaptureReward;
+        capture_reward_multiplier: number;
+        getCaptureRewardMultiplier(): number;
+        setCaptureRewardMultiplier(value: any, noAssert?: boolean);
+    }
+
+    interface BadgeCaptureRewardData {
+        capture_reward_multiplier?: number;
+    }
+
+}
+
+
 export namespace Data.Gym {
 
     export class GymMembership extends ProtoBufMessage {
@@ -660,11 +715,15 @@ export namespace Data.Gym {
         trainer_public_profile: Player.PlayerPublicProfile;
         getTrainerPublicProfile(): Player.PlayerPublicProfile;
         setTrainerPublicProfile(value: any, noAssert?: boolean);
+        training_pokemon: Data.PokemonData;
+        getTrainingPokemon(): Data.PokemonData;
+        setTrainingPokemon(value: any, noAssert?: boolean);
     }
 
     interface GymMembershipData {
         pokemon_data?: Data.PokemonData;
         trainer_public_profile?: Player.PlayerPublicProfile;
+        training_pokemon?: Data.PokemonData;
     }
 
 
@@ -677,11 +736,15 @@ export namespace Data.Gym {
         memberships: Gym.GymMembership[];
         getMemberships(): Gym.GymMembership[];
         setMemberships(value: any, noAssert?: boolean);
+        deploy_lockout: boolean;
+        getDeployLockout(): boolean;
+        setDeployLockout(value: any, noAssert?: boolean);
     }
 
     interface GymStateData {
         fort_data?: Map.Fort.FortData;
         memberships: Gym.GymMembership[];
+        deploy_lockout?: boolean;
     }
 
 }
@@ -1285,6 +1348,59 @@ export namespace Inventory {
     }
 
 
+    export class InventoryKey extends ProtoBufMessage {
+        constructor(data: InventoryKeyData);
+        static decode(buffer?: any, length?: number | string, enc?: string): InventoryKey;
+        pokemon_id: Long;
+        getPokemonId(): Long;
+        setPokemonId(value: any, noAssert?: boolean);
+        item: Item.ItemId;
+        getItem(): Item.ItemId;
+        setItem(value: any, noAssert?: boolean);
+        pokedex_entry_id: number;
+        getPokedexEntryId(): number;
+        setPokedexEntryId(value: any, noAssert?: boolean);
+        player_stats: boolean;
+        getPlayerStats(): boolean;
+        setPlayerStats(value: any, noAssert?: boolean);
+        player_currency: boolean;
+        getPlayerCurrency(): boolean;
+        setPlayerCurrency(value: any, noAssert?: boolean);
+        player_camera: boolean;
+        getPlayerCamera(): boolean;
+        setPlayerCamera(value: any, noAssert?: boolean);
+        inventory_upgrades: boolean;
+        getInventoryUpgrades(): boolean;
+        setInventoryUpgrades(value: any, noAssert?: boolean);
+        applied_items: boolean;
+        getAppliedItems(): boolean;
+        setAppliedItems(value: any, noAssert?: boolean);
+        egg_incubators: boolean;
+        getEggIncubators(): boolean;
+        setEggIncubators(value: any, noAssert?: boolean);
+        pokemon_family_id: Enums.PokemonFamilyId;
+        getPokemonFamilyId(): Enums.PokemonFamilyId;
+        setPokemonFamilyId(value: any, noAssert?: boolean);
+        quest_type: Enums.QuestType;
+        getQuestType(): Enums.QuestType;
+        setQuestType(value: any, noAssert?: boolean);
+    }
+
+    interface InventoryKeyData {
+        pokemon_id?: Long;
+        item?: Item.ItemId;
+        pokedex_entry_id?: number;
+        player_stats?: boolean;
+        player_currency?: boolean;
+        player_camera?: boolean;
+        inventory_upgrades?: boolean;
+        applied_items?: boolean;
+        egg_incubators?: boolean;
+        pokemon_family_id?: Enums.PokemonFamilyId;
+        quest_type?: Enums.QuestType;
+    }
+
+
     export class InventoryUpgrade extends ProtoBufMessage {
         constructor(data: InventoryUpgradeData);
         static decode(buffer?: any, length?: number | string, enc?: string): InventoryUpgrade;
@@ -1542,12 +1658,6 @@ export namespace Map.Fort {
         longitude: number;
         getLongitude(): number;
         setLongitude(value: any, noAssert?: boolean);
-        enabled: boolean;
-        getEnabled(): boolean;
-        setEnabled(value: any, noAssert?: boolean);
-        type: Fort.FortType;
-        getType(): Fort.FortType;
-        setType(value: any, noAssert?: boolean);
         owned_by_team: Enums.TeamColor;
         getOwnedByTeam(): Enums.TeamColor;
         setOwnedByTeam(value: any, noAssert?: boolean);
@@ -1557,6 +1667,12 @@ export namespace Map.Fort {
         guard_pokemon_cp: number;
         getGuardPokemonCp(): number;
         setGuardPokemonCp(value: any, noAssert?: boolean);
+        enabled: boolean;
+        getEnabled(): boolean;
+        setEnabled(value: any, noAssert?: boolean);
+        type: Fort.FortType;
+        getType(): Fort.FortType;
+        setType(value: any, noAssert?: boolean);
         gym_points: Long;
         getGymPoints(): Long;
         setGymPoints(value: any, noAssert?: boolean);
@@ -1578,6 +1694,9 @@ export namespace Map.Fort {
         rendering_type: Fort.FortRenderingType;
         getRenderingType(): Fort.FortRenderingType;
         setRenderingType(value: any, noAssert?: boolean);
+        deploy_lockout_end_ms: Long;
+        getDeployLockoutEndMs(): Long;
+        setDeployLockoutEndMs(value: any, noAssert?: boolean);
     }
 
     interface FortDataData {
@@ -1585,11 +1704,11 @@ export namespace Map.Fort {
         last_modified_timestamp_ms?: Long;
         latitude?: number;
         longitude?: number;
-        enabled?: boolean;
-        type?: Fort.FortType;
         owned_by_team?: Enums.TeamColor;
         guard_pokemon_id?: Enums.PokemonId;
         guard_pokemon_cp?: number;
+        enabled?: boolean;
+        type?: Fort.FortType;
         gym_points?: Long;
         is_in_battle?: boolean;
         active_fort_modifier: Inventory.Item.ItemId[];
@@ -1597,6 +1716,7 @@ export namespace Map.Fort {
         cooldown_complete_timestamp_ms?: Long;
         sponsor?: Fort.FortSponsor;
         rendering_type?: Fort.FortRenderingType;
+        deploy_lockout_end_ms?: Long;
     }
 
 
@@ -1681,6 +1801,9 @@ export namespace Map.Fort {
         UNSET_SPONSOR = 0,
         MCDONALDS = 1,
         POKEMON_STORE = 2,
+        TOHO = 3,
+        SOFTBANK = 4,
+        GLOBE = 5,
     }
 
 
@@ -1822,6 +1945,7 @@ export namespace Networking.Requests {
         DOWNLOAD_SETTINGS = 5,
         DOWNLOAD_ITEM_TEMPLATES = 6,
         DOWNLOAD_REMOTE_CONFIG_VERSION = 7,
+        REGISTER_BACKGROUND_DEVICE = 8,
         FORT_SEARCH = 101,
         ENCOUNTER = 102,
         CATCH_POKEMON = 103,
@@ -2524,6 +2648,23 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class RegisterBackgroundDeviceMessage extends ProtoBufMessage {
+        constructor(data: RegisterBackgroundDeviceMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): RegisterBackgroundDeviceMessage;
+        device_type: string;
+        getDeviceType(): string;
+        setDeviceType(value: any, noAssert?: boolean);
+        device_id: string;
+        getDeviceId(): string;
+        setDeviceId(value: any, noAssert?: boolean);
+    }
+
+    interface RegisterBackgroundDeviceMessageData {
+        device_type?: string;
+        device_id?: string;
+    }
+
+
     export class ReleasePokemonMessage extends ProtoBufMessage {
         constructor(data: ReleasePokemonMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): ReleasePokemonMessage;
@@ -2797,11 +2938,15 @@ export namespace Networking.Requests.Messages.GetPlayerMessage {
         language: string;
         getLanguage(): string;
         setLanguage(value: any, noAssert?: boolean);
+        timezone: string;
+        getTimezone(): string;
+        setTimezone(value: any, noAssert?: boolean);
     }
 
     interface PlayerLocaleData {
         country?: string;
         language?: string;
+        timezone?: string;
     }
 
 }
@@ -3634,6 +3779,9 @@ export namespace Networking.Responses {
         capture_award: Data.Capture.CaptureAward;
         getCaptureAward(): Data.Capture.CaptureAward;
         setCaptureAward(value: any, noAssert?: boolean);
+        capture_reason: CatchPokemonResponse.CaptureReason;
+        getCaptureReason(): CatchPokemonResponse.CaptureReason;
+        setCaptureReason(value: any, noAssert?: boolean);
     }
 
     interface CatchPokemonResponseData {
@@ -3641,6 +3789,7 @@ export namespace Networking.Responses {
         miss_percent?: number;
         captured_pokemon_id?: Long;
         capture_award?: Data.Capture.CaptureAward;
+        capture_reason?: CatchPokemonResponse.CaptureReason;
     }
 
 
@@ -4313,11 +4462,19 @@ export namespace Networking.Responses {
         player_data: Data.PlayerData;
         getPlayerData(): Data.PlayerData;
         setPlayerData(value: any, noAssert?: boolean);
+        banned: boolean;
+        getBanned(): boolean;
+        setBanned(value: any, noAssert?: boolean);
+        warn: boolean;
+        getWarn(): boolean;
+        setWarn(value: any, noAssert?: boolean);
     }
 
     interface GetPlayerResponseData {
         success?: boolean;
         player_data?: Data.PlayerData;
+        banned?: boolean;
+        warn?: boolean;
     }
 
 
@@ -4445,6 +4602,23 @@ export namespace Networking.Responses {
     interface RecycleInventoryItemResponseData {
         result?: RecycleInventoryItemResponse.Result;
         new_count?: number;
+    }
+
+
+    export class RegisterBackgroundDeviceResponse extends ProtoBufMessage {
+        constructor(data: RegisterBackgroundDeviceResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): RegisterBackgroundDeviceResponse;
+        status: RegisterBackgroundDeviceResponse.Status;
+        getStatus(): RegisterBackgroundDeviceResponse.Status;
+        setStatus(value: any, noAssert?: boolean);
+        token: Data.BackgroundToken;
+        getToken(): Data.BackgroundToken;
+        setToken(value: any, noAssert?: boolean);
+    }
+
+    interface RegisterBackgroundDeviceResponseData {
+        status?: RegisterBackgroundDeviceResponse.Status;
+        token?: Data.BackgroundToken;
     }
 
 
@@ -4584,6 +4758,9 @@ export namespace Networking.Responses {
         battle_log: Data.Battle.BattleLog;
         getBattleLog(): Data.Battle.BattleLog;
         setBattleLog(value: any, noAssert?: boolean);
+        attacker: Data.Battle.BattleParticipant;
+        getAttacker(): Data.Battle.BattleParticipant;
+        setAttacker(value: any, noAssert?: boolean);
     }
 
     interface StartGymBattleResponseData {
@@ -4593,6 +4770,7 @@ export namespace Networking.Responses {
         battle_id?: string;
         defender?: Data.Battle.BattleParticipant;
         battle_log?: Data.Battle.BattleLog;
+        attacker?: Data.Battle.BattleParticipant;
     }
 
 
@@ -4820,6 +4998,9 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         equipped_badges: Settings.Master.EquippedBadgeSettings;
         getEquippedBadges(): Settings.Master.EquippedBadgeSettings;
         setEquippedBadges(value: any, noAssert?: boolean);
+        quest_settings: Settings.Master.QuestSettings;
+        getQuestSettings(): Settings.Master.QuestSettings;
+        setQuestSettings(value: any, noAssert?: boolean);
     }
 
     interface ItemTemplateData {
@@ -4839,6 +5020,7 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         iap_settings?: Settings.Master.IapSettings;
         pokemon_upgrades?: Settings.Master.PokemonUpgradeSettings;
         equipped_badges?: Settings.Master.EquippedBadgeSettings;
+        quest_settings?: Settings.Master.QuestSettings;
     }
 
 }
@@ -4856,6 +5038,19 @@ export namespace Settings {
 
     interface DownloadSettingsActionData {
         hash?: string;
+    }
+
+
+    export class EventSettings extends ProtoBufMessage {
+        constructor(data: EventSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): EventSettings;
+        condolence_ribbon_country: string[];
+        getCondolenceRibbonCountry(): string[];
+        setCondolenceRibbonCountry(value: any, noAssert?: boolean);
+    }
+
+    interface EventSettingsData {
+        condolence_ribbon_country: string[];
     }
 
 
@@ -4937,6 +5132,15 @@ export namespace Settings {
         festival_settings: Settings.FestivalSettings;
         getFestivalSettings(): Settings.FestivalSettings;
         setFestivalSettings(value: any, noAssert?: boolean);
+        event_settings: Settings.EventSettings;
+        getEventSettings(): Settings.EventSettings;
+        setEventSettings(value: any, noAssert?: boolean);
+        max_pokemon_types: number;
+        getMaxPokemonTypes(): number;
+        setMaxPokemonTypes(value: any, noAssert?: boolean);
+        sfida_settings: Settings.SfidaSettings;
+        getSfidaSettings(): Settings.SfidaSettings;
+        setSfidaSettings(value: any, noAssert?: boolean);
     }
 
     interface GlobalSettingsData {
@@ -4947,6 +5151,9 @@ export namespace Settings {
         minimum_client_version?: string;
         gps_settings?: Settings.GpsSettings;
         festival_settings?: Settings.FestivalSettings;
+        event_settings?: Settings.EventSettings;
+        max_pokemon_types?: number;
+        sfida_settings?: Settings.SfidaSettings;
     }
 
 
@@ -5057,6 +5264,19 @@ export namespace Settings {
         google_maps_api_key?: string;
     }
 
+
+    export class SfidaSettings extends ProtoBufMessage {
+        constructor(data: SfidaSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SfidaSettings;
+        low_battery_threshold: number;
+        getLowBatteryThreshold(): number;
+        setLowBatteryThreshold(value: any, noAssert?: boolean);
+    }
+
+    interface SfidaSettingsData {
+        low_battery_threshold?: number;
+    }
+
 }
 
 
@@ -5074,12 +5294,16 @@ export namespace Settings.Master {
         targets: number[];
         getTargets(): number[];
         setTargets(value: any, noAssert?: boolean);
+        capture_reward: Data.Badge.BadgeCaptureReward[];
+        getCaptureReward(): Data.Badge.BadgeCaptureReward[];
+        setCaptureReward(value: any, noAssert?: boolean);
     }
 
     interface BadgeSettingsData {
         badge_type?: Enums.BadgeType;
         badge_rank?: number;
         targets: number[];
+        capture_reward: Data.Badge.BadgeCaptureReward[];
     }
 
 
@@ -5618,6 +5842,9 @@ export namespace Settings.Master {
         buddy_size: PokemonSettings.BuddySize;
         getBuddySize(): PokemonSettings.BuddySize;
         setBuddySize(value: any, noAssert?: boolean);
+        model_height: number;
+        getModelHeight(): number;
+        setModelHeight(value: any, noAssert?: boolean);
     }
 
     interface PokemonSettingsData {
@@ -5644,6 +5871,7 @@ export namespace Settings.Master {
         candy_to_evolve?: number;
         km_buddy_distance?: number;
         buddy_size?: PokemonSettings.BuddySize;
+        model_height?: number;
     }
 
 
@@ -5669,6 +5897,23 @@ export namespace Settings.Master {
         allowed_levels_above_player?: number;
         candy_cost: number[];
         stardust_cost: number[];
+    }
+
+
+    export class QuestSettings extends ProtoBufMessage {
+        constructor(data: QuestSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): QuestSettings;
+        quest_type: Enums.QuestType;
+        getQuestType(): Enums.QuestType;
+        setQuestType(value: any, noAssert?: boolean);
+        daily_quest: Quest.DailyQuestSettings;
+        getDailyQuest(): Quest.DailyQuestSettings;
+        setDailyQuest(value: any, noAssert?: boolean);
+    }
+
+    interface QuestSettingsData {
+        quest_type?: Enums.QuestType;
+        daily_quest?: Quest.DailyQuestSettings;
     }
 
 
@@ -5996,6 +6241,35 @@ export namespace Settings.Master.Pokemon {
 }
 
 
+export namespace Settings.Master.Quest {
+
+    export class DailyQuestSettings extends ProtoBufMessage {
+        constructor(data: DailyQuestSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): DailyQuestSettings;
+        buckets_per_day: number;
+        getBucketsPerDay(): number;
+        setBucketsPerDay(value: any, noAssert?: boolean);
+        streak_length: number;
+        getStreakLength(): number;
+        setStreakLength(value: any, noAssert?: boolean);
+        bonus_multiplier: number;
+        getBonusMultiplier(): number;
+        setBonusMultiplier(value: any, noAssert?: boolean);
+        streak_bonus_multiplier: number;
+        getStreakBonusMultiplier(): number;
+        setStreakBonusMultiplier(value: any, noAssert?: boolean);
+    }
+
+    interface DailyQuestSettingsData {
+        buckets_per_day?: number;
+        streak_length?: number;
+        bonus_multiplier?: number;
+        streak_bonus_multiplier?: number;
+    }
+
+}
+
+
 export namespace Enums {
 
     export const enum ActivityType {
@@ -6095,6 +6369,13 @@ export namespace Enums {
         CAM_TARGET_SHOULDER_ATTACKER_DEFENDER = 12,
         CAM_TARGET_SHOULDER_ATTACKER_DEFENDER_MIRROR = 13,
         CAM_TARGET_ATTACKER_DEFENDER_WORLD = 14,
+    }
+
+
+    export const enum EncounterType {
+        SPAWN_POINT = 0,
+        INCENSE = 1,
+        DISK = 2,
     }
 
 
@@ -6239,6 +6520,58 @@ export namespace Enums {
         FAMILY_DRATINI = 147,
         FAMILY_MEWTWO = 150,
         FAMILY_MEW = 151,
+        FAMILY_CHIKORITA = 152,
+        FAMILY_CYNDAQUIL = 155,
+        FAMILY_TOTODILE = 158,
+        FAMILY_SENTRET = 161,
+        FAMILY_HOOTHOOT = 163,
+        FAMILY_LEDYBA = 165,
+        FAMILY_SPINARAK = 167,
+        FAMILY_CHINCHOU = 170,
+        FAMILY_TOGEPI = 175,
+        FAMILY_NATU = 177,
+        FAMILY_MAREEP = 179,
+        FAMILY_MARILL = 183,
+        FAMILY_SUDOWOODO = 185,
+        FAMILY_HOPPIP = 187,
+        FAMILY_AIPOM = 190,
+        FAMILY_SUNKERN = 191,
+        FAMILY_YANMA = 193,
+        FAMILY_WOOPER = 194,
+        FAMILY_MURKROW = 198,
+        FAMILY_MISDREAVUS = 200,
+        FAMILY_UNOWN = 201,
+        FAMILY_WOBBUFFET = 202,
+        FAMILY_GIRAFARIG = 203,
+        FAMILY_PINECO = 204,
+        FAMILY_DUNSPARCE = 206,
+        FAMILY_GLIGAR = 207,
+        FAMILY_SNUBBULL = 209,
+        FAMILY_QWILFISH = 211,
+        FAMILY_SHUCKLE = 213,
+        FAMILY_HERACROSS = 214,
+        FAMILY_SNEASEL = 215,
+        FAMILY_TEDDIURSA = 216,
+        FAMILY_SLUGMA = 218,
+        FAMILY_SWINUB = 220,
+        FAMILY_CORSOLA = 222,
+        FAMILY_REMORAID = 223,
+        FAMILY_DELIBIRD = 225,
+        FAMILY_MANTINE = 226,
+        FAMILY_SKARMORY = 227,
+        FAMILY_HOUNDOUR = 228,
+        FAMILY_PHANPY = 231,
+        FAMILY_STANTLER = 234,
+        FAMILY_SMEARGLE = 235,
+        FAMILY_TYROGUE = 236,
+        FAMILY_MILTANK = 241,
+        FAMILY_RAIKOU = 243,
+        FAMILY_ENTEI = 244,
+        FAMILY_SUICUNE = 245,
+        FAMILY_LARVITAR = 246,
+        FAMILY_LUGIA = 249,
+        FAMILY_HO_OH = 250,
+        FAMILY_CELEBI = 251,
     }
 
 
@@ -6395,6 +6728,106 @@ export namespace Enums {
         DRAGONITE = 149,
         MEWTWO = 150,
         MEW = 151,
+        CHIKORITA = 152,
+        BAYLEEF = 153,
+        MEGANIUM = 154,
+        CYNDAQUIL = 155,
+        QUILAVA = 156,
+        TYPHLOSION = 157,
+        TOTODILE = 158,
+        CROCONAW = 159,
+        FERALIGATR = 160,
+        SENTRET = 161,
+        FURRET = 162,
+        HOOTHOOT = 163,
+        NOCTOWL = 164,
+        LEDYBA = 165,
+        LEDIAN = 166,
+        SPINARAK = 167,
+        ARIADOS = 168,
+        CROBAT = 169,
+        CHINCHOU = 170,
+        LANTURN = 171,
+        PICHU = 172,
+        CLEFFA = 173,
+        IGGLYBUFF = 174,
+        TOGEPI = 175,
+        TOGETIC = 176,
+        NATU = 177,
+        XATU = 178,
+        MAREEP = 179,
+        FLAAFFY = 180,
+        AMPHAROS = 181,
+        BELLOSSOM = 182,
+        MARILL = 183,
+        AZUMARILL = 184,
+        SUDOWOODO = 185,
+        POLITOED = 186,
+        HOPPIP = 187,
+        SKIPLOOM = 188,
+        JUMPLUFF = 189,
+        AIPOM = 190,
+        SUNKERN = 191,
+        SUNFLORA = 192,
+        YANMA = 193,
+        WOOPER = 194,
+        QUAGSIRE = 195,
+        ESPEON = 196,
+        UMBREON = 197,
+        MURKROW = 198,
+        SLOWKING = 199,
+        MISDREAVUS = 200,
+        UNOWN = 201,
+        WOBBUFFET = 202,
+        GIRAFARIG = 203,
+        PINECO = 204,
+        FORRETRESS = 205,
+        DUNSPARCE = 206,
+        GLIGAR = 207,
+        STEELIX = 208,
+        SNUBBULL = 209,
+        GRANBULL = 210,
+        QWILFISH = 211,
+        SCIZOR = 212,
+        SHUCKLE = 213,
+        HERACROSS = 214,
+        SNEASEL = 215,
+        TEDDIURSA = 216,
+        URSARING = 217,
+        SLUGMA = 218,
+        MAGCARGO = 219,
+        SWINUB = 220,
+        PILOSWINE = 221,
+        CORSOLA = 222,
+        REMORAID = 223,
+        OCTILLERY = 224,
+        DELIBIRD = 225,
+        MANTINE = 226,
+        SKARMORY = 227,
+        HOUNDOUR = 228,
+        HOUNDOOM = 229,
+        KINGDRA = 230,
+        PHANPY = 231,
+        DONPHAN = 232,
+        PORYGON2 = 233,
+        STANTLER = 234,
+        SMEARGLE = 235,
+        TYROGUE = 236,
+        HITMONTOP = 237,
+        SMOOCHUM = 238,
+        ELEKID = 239,
+        MAGBY = 240,
+        MILTANK = 241,
+        BLISSEY = 242,
+        RAIKOU = 243,
+        ENTEI = 244,
+        SUICUNE = 245,
+        LARVITAR = 246,
+        PUPITAR = 247,
+        TYRANITAR = 248,
+        LUGIA = 249,
+        HO_OH = 250,
+        CELEBI = 251,
     }
 
 
@@ -6579,6 +7012,7 @@ export namespace Enums {
         STEEL_WING_FAST = 239,
         FIRE_FANG_FAST = 240,
         ROCK_SMASH_FAST = 241,
+        TRANSFORM_FAST = 242,
     }
 
 
@@ -6756,6 +7190,13 @@ export namespace Networking.Responses.CatchPokemonResponse {
         CATCH_MISSED = 4,
     }
 
+
+    export const enum CaptureReason {
+        UNSET = 0,
+        DEFAULT = 1,
+        ELEMENTAL_BADGE = 2,
+    }
+
 }
 
 
@@ -6908,6 +7349,7 @@ export namespace Networking.Responses.FortDeployPokemonResponse {
         ERROR_POKEMON_NOT_FULL_HP = 7,
         ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 8,
         ERROR_POKEMON_IS_BUDDY = 9,
+        ERROR_FORT_DEPLOY_LOCKOUT = 10,
     }
 
 }
@@ -7015,6 +7457,17 @@ export namespace Networking.Responses.RecycleInventoryItemResponse {
         SUCCESS = 1,
         ERROR_NOT_ENOUGH_COPIES = 2,
         ERROR_CANNOT_RECYCLE_INCUBATORS = 3,
+    }
+
+}
+
+
+export namespace Networking.Responses.RegisterBackgroundDeviceResponse {
+
+    export const enum Status {
+        UNSET = 0,
+        SUCCESS = 1,
+        ERROR = 2,
     }
 
 }

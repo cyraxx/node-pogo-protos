@@ -2,14 +2,17 @@ syntax = "proto3";
 package POGOProtos.Settings.Master;
 
 import public "POGOProtos.Enums.proto";
+import public "POGOProtos.Data.Badge.proto";
 import public "POGOProtos.Inventory.Item.proto";
 import public "POGOProtos.Settings.Master.Item.proto";
 import public "POGOProtos.Settings.Master.Pokemon.proto";
+import public "POGOProtos.Settings.Master.Quest.proto";
 
 message BadgeSettings {
 	.POGOProtos.Enums.BadgeType badge_type = 1;
 	int32 badge_rank = 2;
 	repeated int32 targets = 3;
+	repeated .POGOProtos.Data.Badge.BadgeCaptureReward capture_reward = 4;
 }
 message CameraSettings {
 	string next_camera = 1;
@@ -151,6 +154,7 @@ message PokemonSettings {
 	int32 candy_to_evolve = 22;
 	float km_buddy_distance = 23;
 	.POGOProtos.Settings.Master.PokemonSettings.BuddySize buddy_size = 24;
+	float model_height = 25;
 
 	enum BuddySize {
 		BUDDY_MEDIUM = 0;
@@ -164,6 +168,10 @@ message PokemonUpgradeSettings {
 	int32 allowed_levels_above_player = 2;
 	repeated int32 candy_cost = 3;
 	repeated int32 stardust_cost = 4;
+}
+message QuestSettings {
+	.POGOProtos.Enums.QuestType quest_type = 1;
+	.POGOProtos.Settings.Master.Quest.DailyQuestSettings daily_quest = 2;
 }
 message TypeEffectiveSettings {
 	repeated float attack_scalar = 1;

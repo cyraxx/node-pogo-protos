@@ -13,10 +13,18 @@ message AssetDigestEntry {
 	int32 size = 5;
 	bytes key = 6;
 }
+message BackgroundToken {
+	bytes token = 1;
+	int64 expiration_time = 2;
+	bytes iv = 3;
+}
 message BuddyPokemon {
 	fixed64 id = 1;
 	double start_km_walked = 2;
 	double last_km_awarded = 3;
+}
+message ClientVersion {
+	string min_version = 1;
 }
 message DownloadUrlEntry {
 	string asset_id = 1;
@@ -45,6 +53,7 @@ message PlayerData {
 	repeated .POGOProtos.Data.Player.Currency currencies = 14;
 	int32 remaining_codename_claims = 15;
 	.POGOProtos.Data.BuddyPokemon buddy_pokemon = 16;
+	int64 battle_lockout_end_ms = 17;
 }
 message PokedexEntry {
 	.POGOProtos.Enums.PokemonId pokemon_id = 1;

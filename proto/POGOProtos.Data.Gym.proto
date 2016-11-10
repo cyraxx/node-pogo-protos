@@ -8,8 +8,10 @@ import public "POGOProtos.Map.Fort.proto";
 message GymMembership {
 	.POGOProtos.Data.PokemonData pokemon_data = 1;
 	.POGOProtos.Data.Player.PlayerPublicProfile trainer_public_profile = 2;
+	.POGOProtos.Data.PokemonData training_pokemon = 3;
 }
 message GymState {
 	.POGOProtos.Map.Fort.FortData fort_data = 1;
 	repeated .POGOProtos.Data.Gym.GymMembership memberships = 2;
+	bool deploy_lockout = 3;
 }
