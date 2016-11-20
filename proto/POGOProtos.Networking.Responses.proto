@@ -48,6 +48,7 @@ message CatchPokemonResponse {
 	fixed64 captured_pokemon_id = 3;
 	.POGOProtos.Data.Capture.CaptureAward capture_award = 4;
 	.POGOProtos.Networking.Responses.CatchPokemonResponse.CaptureReason capture_reason = 5;
+	int32 display_pokedex_id = 6;
 
 	enum CatchStatus {
 		CATCH_ERROR = 0;
@@ -261,6 +262,7 @@ message FortDeployPokemonResponse {
 		ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 8;
 		ERROR_POKEMON_IS_BUDDY = 9;
 		ERROR_FORT_DEPLOY_LOCKOUT = 10;
+		ERROR_PLAYER_HAS_NO_NICKNAME = 11;
 	}
 }
 message FortDetailsResponse {
