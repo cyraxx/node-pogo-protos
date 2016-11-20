@@ -1478,11 +1478,15 @@ export namespace Inventory.Item {
         item_count: number;
         getItemCount(): number;
         setItemCount(value: any, noAssert?: boolean);
+        bonus_count: number;
+        getBonusCount(): number;
+        setBonusCount(value: any, noAssert?: boolean);
     }
 
     interface ItemAwardData {
         item_id?: Item.ItemId;
         item_count?: number;
+        bonus_count?: number;
     }
 
 
@@ -1804,6 +1808,9 @@ export namespace Map.Fort {
         TOHO = 3,
         SOFTBANK = 4,
         GLOBE = 5,
+        SPATULA = 6,
+        THERMOMETER = 7,
+        KNIFE = 8,
     }
 
 
@@ -3782,6 +3789,9 @@ export namespace Networking.Responses {
         capture_reason: CatchPokemonResponse.CaptureReason;
         getCaptureReason(): CatchPokemonResponse.CaptureReason;
         setCaptureReason(value: any, noAssert?: boolean);
+        display_pokedex_id: number;
+        getDisplayPokedexId(): number;
+        setDisplayPokedexId(value: any, noAssert?: boolean);
     }
 
     interface CatchPokemonResponseData {
@@ -3790,6 +3800,7 @@ export namespace Networking.Responses {
         captured_pokemon_id?: Long;
         capture_award?: Data.Capture.CaptureAward;
         capture_reason?: CatchPokemonResponse.CaptureReason;
+        display_pokedex_id?: number;
     }
 
 
@@ -5252,6 +5263,9 @@ export namespace Settings {
         google_maps_api_key: string;
         getGoogleMapsApiKey(): string;
         setGoogleMapsApiKey(value: any, noAssert?: boolean);
+        min_nearby_hide_sightings: number;
+        getMinNearbyHideSightings(): number;
+        setMinNearbyHideSightings(value: any, noAssert?: boolean);
     }
 
     interface MapSettingsData {
@@ -5262,6 +5276,7 @@ export namespace Settings {
         get_map_objects_max_refresh_seconds?: number;
         get_map_objects_min_distance_meters?: number;
         google_maps_api_key?: string;
+        min_nearby_hide_sightings?: number;
     }
 
 
@@ -7350,6 +7365,7 @@ export namespace Networking.Responses.FortDeployPokemonResponse {
         ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 8,
         ERROR_POKEMON_IS_BUDDY = 9,
         ERROR_FORT_DEPLOY_LOCKOUT = 10,
+        ERROR_PLAYER_HAS_NO_NICKNAME = 11,
     }
 
 }
