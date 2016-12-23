@@ -16,6 +16,7 @@ message FestivalSettings {
 	enum FestivalType {
 		NONE = 0;
 		HALLOWEEN = 1;
+		HOLIDAY = 2;
 	}
 }
 message FortSettings {

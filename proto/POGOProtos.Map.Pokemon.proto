@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Map.Pokemon;
 
-import public "POGOProtos.Enums.proto";
 import public "POGOProtos.Data.proto";
+import public "POGOProtos.Enums.proto";
 
 message MapPokemon {
 	string spawn_point_id = 1;
@@ -12,6 +12,7 @@ message MapPokemon {
 	int64 expiration_timestamp_ms = 4;
 	double latitude = 5;
 	double longitude = 6;
+	.POGOProtos.Data.PokemonDisplay pokemon_display = 7;
 }
 message NearbyPokemon {
 	.POGOProtos.Enums.PokemonId pokemon_id = 1;
@@ -19,6 +20,7 @@ message NearbyPokemon {
 	fixed64 encounter_id = 3;
 	string fort_id = 4;
 	string fort_image_url = 5;
+	.POGOProtos.Data.PokemonDisplay pokemon_display = 6;
 }
 message WildPokemon {
 	fixed64 encounter_id = 1;
