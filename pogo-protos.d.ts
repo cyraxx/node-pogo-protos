@@ -222,6 +222,9 @@ export namespace Data {
         battle_lockout_end_ms: Long;
         getBattleLockoutEndMs(): Long;
         setBattleLockoutEndMs(value: any, noAssert?: boolean);
+        secondary_player_avatar: Player.PlayerAvatar;
+        getSecondaryPlayerAvatar(): Player.PlayerAvatar;
+        setSecondaryPlayerAvatar(value: any, noAssert?: boolean);
     }
 
     interface PlayerDataData {
@@ -239,6 +242,7 @@ export namespace Data {
         remaining_codename_claims?: number;
         buddy_pokemon?: Data.BuddyPokemon;
         battle_lockout_end_ms?: Long;
+        secondary_player_avatar?: Player.PlayerAvatar;
     }
 
 
@@ -376,6 +380,9 @@ export namespace Data {
         display_cp: number;
         getDisplayCp(): number;
         setDisplayCp(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface PokemonDataData {
@@ -413,6 +420,28 @@ export namespace Data {
         buddy_total_km_walked?: number;
         display_pokemon_id?: number;
         display_cp?: number;
+        pokemon_display?: Data.PokemonDisplay;
+    }
+
+
+    export class PokemonDisplay extends ProtoBufMessage {
+        constructor(data: PokemonDisplayData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PokemonDisplay;
+        costume: PokemonDisplay.Costume;
+        getCostume(): PokemonDisplay.Costume;
+        setCostume(value: any, noAssert?: boolean);
+        gender: PokemonDisplay.Gender;
+        getGender(): PokemonDisplay.Gender;
+        setGender(value: any, noAssert?: boolean);
+        shiny: boolean;
+        getShiny(): boolean;
+        setShiny(value: any, noAssert?: boolean);
+    }
+
+    interface PokemonDisplayData {
+        costume?: PokemonDisplay.Costume;
+        gender?: PokemonDisplay.Gender;
+        shiny?: boolean;
     }
 
 }
@@ -522,6 +551,33 @@ export namespace Data.Player {
         backpack: number;
         getBackpack(): number;
         setBackpack(value: any, noAssert?: boolean);
+        avatar_hair: string;
+        getAvatarHair(): string;
+        setAvatarHair(value: any, noAssert?: boolean);
+        avatar_shirt: string;
+        getAvatarShirt(): string;
+        setAvatarShirt(value: any, noAssert?: boolean);
+        avatar_pants: string;
+        getAvatarPants(): string;
+        setAvatarPants(value: any, noAssert?: boolean);
+        avatar_hat: string;
+        getAvatarHat(): string;
+        setAvatarHat(value: any, noAssert?: boolean);
+        avatar_shoes: string;
+        getAvatarShoes(): string;
+        setAvatarShoes(value: any, noAssert?: boolean);
+        avatar_eyes: string;
+        getAvatarEyes(): string;
+        setAvatarEyes(value: any, noAssert?: boolean);
+        avatar_backpack: string;
+        getAvatarBackpack(): string;
+        setAvatarBackpack(value: any, noAssert?: boolean);
+        avatar_gloves: string;
+        getAvatarGloves(): string;
+        setAvatarGloves(value: any, noAssert?: boolean);
+        avatar_socks: string;
+        getAvatarSocks(): string;
+        setAvatarSocks(value: any, noAssert?: boolean);
     }
 
     interface PlayerAvatarData {
@@ -534,6 +590,15 @@ export namespace Data.Player {
         gender?: Enums.Gender;
         eyes?: number;
         backpack?: number;
+        avatar_hair?: string;
+        avatar_shirt?: string;
+        avatar_pants?: string;
+        avatar_hat?: string;
+        avatar_shoes?: string;
+        avatar_eyes?: string;
+        avatar_backpack?: string;
+        avatar_gloves?: string;
+        avatar_socks?: string;
     }
 
 
@@ -656,6 +721,12 @@ export namespace Data.Player {
         small_rattata_caught: number;
         getSmallRattataCaught(): number;
         setSmallRattataCaught(value: any, noAssert?: boolean);
+        used_km_pool: number;
+        getUsedKmPool(): number;
+        setUsedKmPool(value: any, noAssert?: boolean);
+        last_km_refill_ms: Long;
+        getLastKmRefillMs(): Long;
+        setLastKmRefillMs(value: any, noAssert?: boolean);
     }
 
     interface PlayerStatsData {
@@ -682,6 +753,56 @@ export namespace Data.Player {
         pokemon_deployed?: number;
         pokemon_caught_by_type: number[];
         small_rattata_caught?: number;
+        used_km_pool?: number;
+        last_km_refill_ms?: Long;
+    }
+
+
+    export const enum PlayerAvatarType {
+        PLAYER_AVATAR_MALE = 0,
+        PLAYER_AVATAR_FEMALE = 1,
+    }
+
+}
+
+
+export namespace Data.Avatar {
+
+    export class AvatarCustomization extends ProtoBufMessage {
+        constructor(data: AvatarCustomizationData);
+        static decode(buffer?: any, length?: number | string, enc?: string): AvatarCustomization;
+        avatar_template_id: string;
+        getAvatarTemplateId(): string;
+        setAvatarTemplateId(value: any, noAssert?: boolean);
+        labels: AvatarCustomization.Label[];
+        getLabels(): AvatarCustomization.Label[];
+        setLabels(value: any, noAssert?: boolean);
+    }
+
+    interface AvatarCustomizationData {
+        avatar_template_id?: string;
+        labels: AvatarCustomization.Label[];
+    }
+
+
+    export class AvatarItem extends ProtoBufMessage {
+        constructor(data: AvatarItemData);
+        static decode(buffer?: any, length?: number | string, enc?: string): AvatarItem;
+        avatar_template_id: string;
+        getAvatarTemplateId(): string;
+        setAvatarTemplateId(value: any, noAssert?: boolean);
+        new_timestamp_ms: Long;
+        getNewTimestampMs(): Long;
+        setNewTimestampMs(value: any, noAssert?: boolean);
+        viewed: boolean;
+        getViewed(): boolean;
+        setViewed(value: any, noAssert?: boolean);
+    }
+
+    interface AvatarItemData {
+        avatar_template_id?: string;
+        new_timestamp_ms?: Long;
+        viewed?: boolean;
     }
 
 }
@@ -695,10 +816,14 @@ export namespace Data.Badge {
         capture_reward_multiplier: number;
         getCaptureRewardMultiplier(): number;
         setCaptureRewardMultiplier(value: any, noAssert?: boolean);
+        avatar_template_ids: string[];
+        getAvatarTemplateIds(): string[];
+        setAvatarTemplateIds(value: any, noAssert?: boolean);
     }
 
     interface BadgeCaptureRewardData {
         capture_reward_multiplier?: number;
+        avatar_template_ids: string[];
     }
 
 }
@@ -1331,6 +1456,9 @@ export namespace Inventory {
         quest: Data.Quests.Quest;
         getQuest(): Data.Quests.Quest;
         setQuest(value: any, noAssert?: boolean);
+        avatar_item: Data.Avatar.AvatarItem;
+        getAvatarItem(): Data.Avatar.AvatarItem;
+        setAvatarItem(value: any, noAssert?: boolean);
     }
 
     interface InventoryItemDataData {
@@ -1345,6 +1473,7 @@ export namespace Inventory {
         egg_incubators?: Inventory.EggIncubators;
         candy?: Inventory.Candy;
         quest?: Data.Quests.Quest;
+        avatar_item?: Data.Avatar.AvatarItem;
     }
 
 
@@ -1384,6 +1513,9 @@ export namespace Inventory {
         quest_type: Enums.QuestType;
         getQuestType(): Enums.QuestType;
         setQuestType(value: any, noAssert?: boolean);
+        avatar_template_id: string;
+        getAvatarTemplateId(): string;
+        setAvatarTemplateId(value: any, noAssert?: boolean);
     }
 
     interface InventoryKeyData {
@@ -1398,6 +1530,7 @@ export namespace Inventory {
         egg_incubators?: boolean;
         pokemon_family_id?: Enums.PokemonFamilyId;
         quest_type?: Enums.QuestType;
+        avatar_template_id?: string;
     }
 
 
@@ -1701,6 +1834,9 @@ export namespace Map.Fort {
         deploy_lockout_end_ms: Long;
         getDeployLockoutEndMs(): Long;
         setDeployLockoutEndMs(value: any, noAssert?: boolean);
+        guard_pokemon_display: Data.PokemonDisplay;
+        getGuardPokemonDisplay(): Data.PokemonDisplay;
+        setGuardPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface FortDataData {
@@ -1721,6 +1857,7 @@ export namespace Map.Fort {
         sponsor?: Fort.FortSponsor;
         rendering_type?: Fort.FortRenderingType;
         deploy_lockout_end_ms?: Long;
+        guard_pokemon_display?: Data.PokemonDisplay;
     }
 
 
@@ -1811,6 +1948,8 @@ export namespace Map.Fort {
         SPATULA = 6,
         THERMOMETER = 7,
         KNIFE = 8,
+        GRILL = 9,
+        SMOKER = 10,
     }
 
 
@@ -1845,6 +1984,9 @@ export namespace Map.Pokemon {
         longitude: number;
         getLongitude(): number;
         setLongitude(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface MapPokemonData {
@@ -1854,6 +1996,7 @@ export namespace Map.Pokemon {
         expiration_timestamp_ms?: Long;
         latitude?: number;
         longitude?: number;
+        pokemon_display?: Data.PokemonDisplay;
     }
 
 
@@ -1875,6 +2018,9 @@ export namespace Map.Pokemon {
         fort_image_url: string;
         getFortImageUrl(): string;
         setFortImageUrl(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface NearbyPokemonData {
@@ -1883,6 +2029,7 @@ export namespace Map.Pokemon {
         encounter_id?: Long;
         fort_id?: string;
         fort_image_url?: string;
+        pokemon_display?: Data.PokemonDisplay;
     }
 
 
@@ -2002,8 +2149,6 @@ export namespace Networking.Requests {
         GET_BUDDY_WALKED = 153,
         GET_ASSET_DIGEST = 300,
         GET_DOWNLOAD_URLS = 301,
-        GET_SUGGESTED_CODENAMES = 401,
-        CHECK_CODENAME_AVAILABLE = 402,
         CLAIM_CODENAME = 403,
         SET_AVATAR = 404,
         SET_PLAYER_TEAM = 405,
@@ -2021,6 +2166,8 @@ export namespace Networking.Requests {
         SFIDA_ACTION = 804,
         SFIDA_DOWSER = 805,
         SFIDA_CAPTURE = 806,
+        LIST_AVATAR_CUSTOMIZATIONS = 807,
+        SET_AVATAR_ITEM_AS_VIEWED = 808,
     }
 
 }
@@ -2136,19 +2283,6 @@ export namespace Networking.Requests.Messages {
     }
 
 
-    export class CheckCodenameAvailableMessage extends ProtoBufMessage {
-        constructor(data: CheckCodenameAvailableMessageData);
-        static decode(buffer?: any, length?: number | string, enc?: string): CheckCodenameAvailableMessage;
-        codename: string;
-        getCodename(): string;
-        setCodename(value: any, noAssert?: boolean);
-    }
-
-    interface CheckCodenameAvailableMessageData {
-        codename?: string;
-    }
-
-
     export class ClaimCodenameMessage extends ProtoBufMessage {
         constructor(data: ClaimCodenameMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): ClaimCodenameMessage;
@@ -2184,6 +2318,27 @@ export namespace Networking.Requests.Messages {
         fort_id?: string;
         player_latitude?: number;
         player_longitude?: number;
+    }
+
+
+    export class DownloadItemTemplatesMessage extends ProtoBufMessage {
+        constructor(data: DownloadItemTemplatesMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): DownloadItemTemplatesMessage;
+        paginate: boolean;
+        getPaginate(): boolean;
+        setPaginate(value: any, noAssert?: boolean);
+        page_offset: number;
+        getPageOffset(): number;
+        setPageOffset(value: any, noAssert?: boolean);
+        page_timestamp: Long;
+        getPageTimestamp(): Long;
+        setPageTimestamp(value: any, noAssert?: boolean);
+    }
+
+    interface DownloadItemTemplatesMessageData {
+        paginate?: boolean;
+        page_offset?: number;
+        page_timestamp?: Long;
     }
 
 
@@ -2583,6 +2738,35 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class ListAvatarCustomizationsMessage extends ProtoBufMessage {
+        constructor(data: ListAvatarCustomizationsMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): ListAvatarCustomizationsMessage;
+        avatar_type: Data.Player.PlayerAvatarType;
+        getAvatarType(): Data.Player.PlayerAvatarType;
+        setAvatarType(value: any, noAssert?: boolean);
+        slot: Enums.Slot[];
+        getSlot(): Enums.Slot[];
+        setSlot(value: any, noAssert?: boolean);
+        filters: Enums.Filter[];
+        getFilters(): Enums.Filter[];
+        setFilters(value: any, noAssert?: boolean);
+        start: number;
+        getStart(): number;
+        setStart(value: any, noAssert?: boolean);
+        limit: number;
+        getLimit(): number;
+        setLimit(value: any, noAssert?: boolean);
+    }
+
+    interface ListAvatarCustomizationsMessageData {
+        avatar_type?: Data.Player.PlayerAvatarType;
+        slot: Enums.Slot[];
+        filters: Enums.Filter[];
+        start?: number;
+        limit?: number;
+    }
+
+
     export class MarkTutorialCompleteMessage extends ProtoBufMessage {
         constructor(data: MarkTutorialCompleteMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): MarkTutorialCompleteMessage;
@@ -2678,10 +2862,27 @@ export namespace Networking.Requests.Messages {
         pokemon_id: Long;
         getPokemonId(): Long;
         setPokemonId(value: any, noAssert?: boolean);
+        pokemon_ids: Long[];
+        getPokemonIds(): Long[];
+        setPokemonIds(value: any, noAssert?: boolean);
     }
 
     interface ReleasePokemonMessageData {
         pokemon_id?: Long;
+        pokemon_ids: Long[];
+    }
+
+
+    export class SetAvatarItemAsViewedMessage extends ProtoBufMessage {
+        constructor(data: SetAvatarItemAsViewedMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SetAvatarItemAsViewedMessage;
+        avatar_template_id: string[];
+        getAvatarTemplateId(): string[];
+        setAvatarTemplateId(value: any, noAssert?: boolean);
+    }
+
+    interface SetAvatarItemAsViewedMessageData {
+        avatar_template_id: string[];
     }
 
 
@@ -3816,12 +4017,16 @@ export namespace Networking.Responses {
         awarded_badge_levels: number[];
         getAwardedBadgeLevels(): number[];
         setAwardedBadgeLevels(value: any, noAssert?: boolean);
+        avatar_template_ids: string[];
+        getAvatarTemplateIds(): string[];
+        setAvatarTemplateIds(value: any, noAssert?: boolean);
     }
 
     interface CheckAwardedBadgesResponseData {
         success?: boolean;
         awarded_badges: Enums.BadgeType[];
         awarded_badge_levels: number[];
+        avatar_template_ids: string[];
     }
 
 
@@ -3958,21 +4163,25 @@ export namespace Networking.Responses {
     export class DownloadItemTemplatesResponse extends ProtoBufMessage {
         constructor(data: DownloadItemTemplatesResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): DownloadItemTemplatesResponse;
-        success: boolean;
-        getSuccess(): boolean;
-        setSuccess(value: any, noAssert?: boolean);
+        result: DownloadItemTemplatesResponse.Result;
+        getResult(): DownloadItemTemplatesResponse.Result;
+        setResult(value: any, noAssert?: boolean);
         item_templates: DownloadItemTemplatesResponse.ItemTemplate[];
         getItemTemplates(): DownloadItemTemplatesResponse.ItemTemplate[];
         setItemTemplates(value: any, noAssert?: boolean);
         timestamp_ms: Long;
         getTimestampMs(): Long;
         setTimestampMs(value: any, noAssert?: boolean);
+        page_offset: number;
+        getPageOffset(): number;
+        setPageOffset(value: any, noAssert?: boolean);
     }
 
     interface DownloadItemTemplatesResponseData {
-        success?: boolean;
+        result?: DownloadItemTemplatesResponse.Result;
         item_templates: DownloadItemTemplatesResponse.ItemTemplate[];
         timestamp_ms?: Long;
+        page_offset?: number;
     }
 
 
@@ -4328,6 +4537,9 @@ export namespace Networking.Responses {
         description: string;
         getDescription(): string;
         setDescription(value: any, noAssert?: boolean);
+        secondary_url: string[];
+        getSecondaryUrl(): string[];
+        setSecondaryUrl(value: any, noAssert?: boolean);
     }
 
     interface GetGymDetailsResponseData {
@@ -4336,6 +4548,7 @@ export namespace Networking.Responses {
         urls: string[];
         result?: GetGymDetailsResponse.Result;
         description?: string;
+        secondary_url: string[];
     }
 
 
@@ -4396,6 +4609,9 @@ export namespace Networking.Responses {
         disappear_timestamp_ms: Long;
         getDisappearTimestampMs(): Long;
         setDisappearTimestampMs(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface GetIncensePokemonResponseData {
@@ -4406,6 +4622,7 @@ export namespace Networking.Responses {
         encounter_location?: string;
         encounter_id?: Long;
         disappear_timestamp_ms?: Long;
+        pokemon_display?: Data.PokemonDisplay;
     }
 
 
@@ -4435,11 +4652,15 @@ export namespace Networking.Responses {
         status: Map.MapObjectsStatus;
         getStatus(): Map.MapObjectsStatus;
         setStatus(value: any, noAssert?: boolean);
+        time_of_day: GetMapObjectsResponse.TimeOfDay;
+        getTimeOfDay(): GetMapObjectsResponse.TimeOfDay;
+        setTimeOfDay(value: any, noAssert?: boolean);
     }
 
     interface GetMapObjectsResponseData {
         map_cells: Map.MapCell[];
         status?: Map.MapObjectsStatus;
+        time_of_day?: GetMapObjectsResponse.TimeOfDay;
     }
 
 
@@ -4489,23 +4710,6 @@ export namespace Networking.Responses {
     }
 
 
-    export class GetSuggestedCodenamesResponse extends ProtoBufMessage {
-        constructor(data: GetSuggestedCodenamesResponseData);
-        static decode(buffer?: any, length?: number | string, enc?: string): GetSuggestedCodenamesResponse;
-        codenames: string[];
-        getCodenames(): string[];
-        setCodenames(value: any, noAssert?: boolean);
-        success: boolean;
-        getSuccess(): boolean;
-        setSuccess(value: any, noAssert?: boolean);
-    }
-
-    interface GetSuggestedCodenamesResponseData {
-        codenames: string[];
-        success?: boolean;
-    }
-
-
     export class IncenseEncounterResponse extends ProtoBufMessage {
         constructor(data: IncenseEncounterResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): IncenseEncounterResponse;
@@ -4545,6 +4749,23 @@ export namespace Networking.Responses {
         result?: LevelUpRewardsResponse.Result;
         items_awarded: Inventory.Item.ItemAward[];
         items_unlocked: Inventory.Item.ItemId[];
+    }
+
+
+    export class ListAvatarCustomizationsResponse extends ProtoBufMessage {
+        constructor(data: ListAvatarCustomizationsResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): ListAvatarCustomizationsResponse;
+        result: ListAvatarCustomizationsResponse.Result;
+        getResult(): ListAvatarCustomizationsResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+        avatar_customizations: Data.Avatar.AvatarCustomization;
+        getAvatarCustomizations(): Data.Avatar.AvatarCustomization;
+        setAvatarCustomizations(value: any, noAssert?: boolean);
+    }
+
+    interface ListAvatarCustomizationsResponseData {
+        result?: ListAvatarCustomizationsResponse.Result;
+        avatar_customizations?: Data.Avatar.AvatarCustomization;
     }
 
 
@@ -4647,6 +4868,19 @@ export namespace Networking.Responses {
     interface ReleasePokemonResponseData {
         result?: ReleasePokemonResponse.Result;
         candy_awarded?: number;
+    }
+
+
+    export class SetAvatarItemAsViewedResponse extends ProtoBufMessage {
+        constructor(data: SetAvatarItemAsViewedResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SetAvatarItemAsViewedResponse;
+        result: SetAvatarItemAsViewedResponse.Result;
+        getResult(): SetAvatarItemAsViewedResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+    }
+
+    interface SetAvatarItemAsViewedResponseData {
+        result?: SetAvatarItemAsViewedResponse.Result;
     }
 
 
@@ -5012,6 +5246,9 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         quest_settings: Settings.Master.QuestSettings;
         getQuestSettings(): Settings.Master.QuestSettings;
         setQuestSettings(value: any, noAssert?: boolean);
+        avatar_customization: Settings.Master.AvatarCustomizationSettings;
+        getAvatarCustomization(): Settings.Master.AvatarCustomizationSettings;
+        setAvatarCustomization(value: any, noAssert?: boolean);
     }
 
     interface ItemTemplateData {
@@ -5032,6 +5269,15 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         pokemon_upgrades?: Settings.Master.PokemonUpgradeSettings;
         equipped_badges?: Settings.Master.EquippedBadgeSettings;
         quest_settings?: Settings.Master.QuestSettings;
+        avatar_customization?: Settings.Master.AvatarCustomizationSettings;
+    }
+
+
+    export const enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        PAGE = 2,
+        RETRY = 3,
     }
 
 }
@@ -5296,6 +5542,63 @@ export namespace Settings {
 
 
 export namespace Settings.Master {
+
+    export class AvatarCustomizationSettings extends ProtoBufMessage {
+        constructor(data: AvatarCustomizationSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): AvatarCustomizationSettings;
+        enabled: boolean;
+        getEnabled(): boolean;
+        setEnabled(value: any, noAssert?: boolean);
+        avatar_type: Data.Player.PlayerAvatarType;
+        getAvatarType(): Data.Player.PlayerAvatarType;
+        setAvatarType(value: any, noAssert?: boolean);
+        slot: Enums.Slot[];
+        getSlot(): Enums.Slot[];
+        setSlot(value: any, noAssert?: boolean);
+        bundle_name: string;
+        getBundleName(): string;
+        setBundleName(value: any, noAssert?: boolean);
+        asset_name: string;
+        getAssetName(): string;
+        setAssetName(value: any, noAssert?: boolean);
+        group_name: string;
+        getGroupName(): string;
+        setGroupName(value: any, noAssert?: boolean);
+        sort_order: number;
+        getSortOrder(): number;
+        setSortOrder(value: any, noAssert?: boolean);
+        unlock_type: AvatarCustomizationSettings.AvatarCustomizationUnlockType;
+        getUnlockType(): AvatarCustomizationSettings.AvatarCustomizationUnlockType;
+        setUnlockType(value: any, noAssert?: boolean);
+        promo_type: AvatarCustomizationSettings.AvatarCustomizationPromoType[];
+        getPromoType(): AvatarCustomizationSettings.AvatarCustomizationPromoType[];
+        setPromoType(value: any, noAssert?: boolean);
+        unlock_badge_type: Enums.BadgeType;
+        getUnlockBadgeType(): Enums.BadgeType;
+        setUnlockBadgeType(value: any, noAssert?: boolean);
+        unlock_badge_level: number;
+        getUnlockBadgeLevel(): number;
+        setUnlockBadgeLevel(value: any, noAssert?: boolean);
+        iap_sku: string;
+        getIapSku(): string;
+        setIapSku(value: any, noAssert?: boolean);
+    }
+
+    interface AvatarCustomizationSettingsData {
+        enabled?: boolean;
+        avatar_type?: Data.Player.PlayerAvatarType;
+        slot: Enums.Slot[];
+        bundle_name?: string;
+        asset_name?: string;
+        group_name?: string;
+        sort_order?: number;
+        unlock_type?: AvatarCustomizationSettings.AvatarCustomizationUnlockType;
+        promo_type: AvatarCustomizationSettings.AvatarCustomizationPromoType[];
+        unlock_badge_type?: Enums.BadgeType;
+        unlock_badge_level?: number;
+        iap_sku?: string;
+    }
+
 
     export class BadgeSettings extends ProtoBufMessage {
         constructor(data: BadgeSettingsData);
@@ -6394,6 +6697,17 @@ export namespace Enums {
     }
 
 
+    export const enum Filter {
+        UNSET_FILTER = 0,
+        ALL = 1,
+        DEFAULT = 2,
+        OWNED = 3,
+        FEATURED = 4,
+        PURCHASABLE = 5,
+        UNLOCKABLE = 6,
+    }
+
+
     export const enum Gender {
         MALE = 0,
         FEMALE = 1,
@@ -6406,6 +6720,7 @@ export namespace Enums {
         IAP_CATEGORY_ITEMS = 2,
         IAP_CATEGORY_UPGRADES = 3,
         IAP_CATEGORY_POKECOINS = 4,
+        IAP_CATEGORY_AVATAR = 5,
     }
 
 
@@ -7079,6 +7394,20 @@ export namespace Enums {
     }
 
 
+    export const enum Slot {
+        UNSET_SLOT = 0,
+        HAIR = 1,
+        SHIRT = 2,
+        PANTS = 3,
+        HAT = 4,
+        SHOES = 5,
+        EYES = 6,
+        BACKPACK = 7,
+        GLOVES = 8,
+        SOCKS = 9,
+    }
+
+
     export const enum TeamColor {
         NEUTRAL = 0,
         BLUE = 1,
@@ -7098,6 +7427,41 @@ export namespace Enums {
         FIRST_TIME_EXPERIENCE_COMPLETE = 7,
         POKESTOP_TUTORIAL = 8,
         GYM_TUTORIAL = 9,
+    }
+
+}
+
+
+export namespace Data.PokemonDisplay {
+
+    export const enum Costume {
+        UNSET = 0,
+        HOLIDAY_2016 = 1,
+    }
+
+
+    export const enum Gender {
+        GENDER_UNSET = 0,
+        MALE = 1,
+        FEMALE = 2,
+        GENDERLESS = 3,
+    }
+
+}
+
+
+export namespace Data.Avatar.AvatarCustomization {
+
+    export const enum Label {
+        UNSET_LABEL = 0,
+        DEFAULT = 1,
+        OWNED = 2,
+        FEATURED = 3,
+        NEW = 4,
+        SALE = 5,
+        PURCHASABLE = 6,
+        UNLOCKABLE = 7,
+        VIEWED = 8,
     }
 
 }
@@ -7420,6 +7784,17 @@ export namespace Networking.Responses.GetIncensePokemonResponse {
 }
 
 
+export namespace Networking.Responses.GetMapObjectsResponse {
+
+    export const enum TimeOfDay {
+        NONE = 0,
+        DAY = 1,
+        NIGHT = 2,
+    }
+
+}
+
+
 export namespace Networking.Responses.GetPlayerProfileResponse {
 
     export const enum Result {
@@ -7448,6 +7823,17 @@ export namespace Networking.Responses.LevelUpRewardsResponse {
         UNSET = 0,
         SUCCESS = 1,
         AWARDED_ALREADY = 2,
+    }
+
+}
+
+
+export namespace Networking.Responses.ListAvatarCustomizationsResponse {
+
+    export const enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        FAILURE = 2,
     }
 
 }
@@ -7503,6 +7889,17 @@ export namespace Networking.Responses.ReleasePokemonResponse {
 }
 
 
+export namespace Networking.Responses.SetAvatarItemAsViewedResponse {
+
+    export const enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        FAILURE = 2,
+    }
+
+}
+
+
 export namespace Networking.Responses.SetAvatarResponse {
 
     export const enum Status {
@@ -7510,6 +7907,9 @@ export namespace Networking.Responses.SetAvatarResponse {
         SUCCESS = 1,
         AVATAR_ALREADY_SET = 2,
         FAILURE = 3,
+        SLOT_NOT_ALLOWED = 4,
+        ITEM_NOT_OWNED = 5,
+        INVALID_AVATAR_TYPE = 6,
     }
 
 }
@@ -7695,6 +8095,26 @@ export namespace Settings.FestivalSettings {
     export const enum FestivalType {
         NONE = 0,
         HALLOWEEN = 1,
+        HOLIDAY = 2,
+    }
+
+}
+
+
+export namespace Settings.Master.AvatarCustomizationSettings {
+
+    export const enum AvatarCustomizationPromoType {
+        UNSET_PROMO_TYPE = 0,
+        SALE = 1,
+        FEATURED = 2,
+    }
+
+
+    export const enum AvatarCustomizationUnlockType {
+        UNSET_UNLOCK_TYPE = 0,
+        DEFAULT = 1,
+        MEDAL_REWARD = 2,
+        IAP_CLOTHING = 3,
     }
 
 }
@@ -7707,6 +8127,7 @@ export namespace Settings.Master.PokemonSettings {
         BUDDY_SHOULDER = 1,
         BUDDY_BIG = 2,
         BUDDY_FLYING = 3,
+        BUDDY_BABY = 4,
     }
 
 }

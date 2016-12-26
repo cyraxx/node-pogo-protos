@@ -2,6 +2,7 @@ syntax = "proto3";
 package POGOProtos;
 
 import public "POGOProtos.Data.proto";
+import public "POGOProtos.Data.Avatar.proto";
 import public "POGOProtos.Data.Badge.proto";
 import public "POGOProtos.Data.Battle.proto";
 import public "POGOProtos.Data.Capture.proto";

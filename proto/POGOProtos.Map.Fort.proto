@@ -1,6 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Map.Fort;
 
+import public "POGOProtos.Data.proto";
 import public "POGOProtos.Enums.proto";
 import public "POGOProtos.Inventory.Item.proto";
 
@@ -22,6 +23,7 @@ message FortData {
 	.POGOProtos.Map.Fort.FortSponsor sponsor = 15;
 	.POGOProtos.Map.Fort.FortRenderingType rendering_type = 16;
 	int64 deploy_lockout_end_ms = 17;
+	.POGOProtos.Data.PokemonDisplay guard_pokemon_display = 18;
 }
 message FortLureInfo {
 	string fort_id = 1;
@@ -48,6 +50,8 @@ enum FortSponsor {
 	SPATULA = 6;
 	THERMOMETER = 7;
 	KNIFE = 8;
+	GRILL = 9;
+	SMOKER = 10;
 }
 message FortSummary {
 	string fort_summary_id = 1;

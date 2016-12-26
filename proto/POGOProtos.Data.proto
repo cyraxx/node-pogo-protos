@@ -54,6 +54,7 @@ message PlayerData {
 	int32 remaining_codename_claims = 15;
 	.POGOProtos.Data.BuddyPokemon buddy_pokemon = 16;
 	int64 battle_lockout_end_ms = 17;
+	.POGOProtos.Data.Player.PlayerAvatar secondary_player_avatar = 18;
 }
 message PokedexEntry {
 	.POGOProtos.Enums.PokemonId pokemon_id = 1;
@@ -97,4 +98,22 @@ message PokemonData {
 	float buddy_total_km_walked = 33;
 	int32 display_pokemon_id = 34;
 	int32 display_cp = 35;
+	.POGOProtos.Data.PokemonDisplay pokemon_display = 36;
+}
+message PokemonDisplay {
+	Costume costume = 1;
+	Gender gender = 2;
+	bool shiny = 3;
+
+	enum Costume {
+		UNSET = 0;
+		HOLIDAY_2016 = 1;
+	}
+
+	enum Gender {
+		GENDER_UNSET = 0;
+		MALE = 1;
+		FEMALE = 2;
+		GENDERLESS = 3;
+	}
 }

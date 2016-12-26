@@ -35,9 +35,6 @@ message CheckAwardedBadgesMessage {
 message CheckChallengeMessage {
 	bool debug_request = 1;
 }
-message CheckCodenameAvailableMessage {
-	string codename = 1;
-}
 message ClaimCodenameMessage {
 	string codename = 1;
 }
@@ -54,7 +51,9 @@ message DiskEncounterMessage {
 	double player_longitude = 4;
 }
 message DownloadItemTemplatesMessage {
-	// No message needed.
+	bool paginate = 1;
+	int32 page_offset = 2;
+	uint64 page_timestamp = 3;
 }
 message DownloadRemoteConfigVersionMessage {
 	.POGOProtos.Enums.Platform platform = 1;
@@ -157,15 +156,19 @@ message GetPlayerMessage {
 message GetPlayerProfileMessage {
 	string player_name = 1;
 }
-message GetSuggestedCodenamesMessage {
-	// No message needed.
-}
 message IncenseEncounterMessage {
 	uint64 encounter_id = 1;
 	string encounter_location = 2;
 }
 message LevelUpRewardsMessage {
 	int32 level = 1;
+}
+message ListAvatarCustomizationsMessage {
+	.POGOProtos.Data.Player.PlayerAvatarType avatar_type = 1;
+	repeated .POGOProtos.Enums.Slot slot = 2;
+	repeated .POGOProtos.Enums.Filter filters = 3;
+	int32 start = 4;
+	int32 limit = 5;
 }
 message MarkTutorialCompleteMessage {
 	repeated .POGOProtos.Enums.TutorialState tutorials_completed = 1;
@@ -190,6 +193,10 @@ message RegisterBackgroundDeviceMessage {
 }
 message ReleasePokemonMessage {
 	fixed64 pokemon_id = 1;
+	repeated fixed64 pokemon_ids = 2;
+}
+message SetAvatarItemAsViewedMessage {
+	repeated string avatar_template_id = 1;
 }
 message SetAvatarMessage {
 	.POGOProtos.Data.Player.PlayerAvatar player_avatar = 2;

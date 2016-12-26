@@ -98,6 +98,15 @@ enum EncounterType {
 	INCENSE = 1;
 	DISK = 2;
 }
+enum Filter {
+	UNSET_FILTER = 0;
+	ALL = 1;
+	DEFAULT = 2;
+	OWNED = 3;
+	FEATURED = 4;
+	PURCHASABLE = 5;
+	UNLOCKABLE = 6;
+}
 enum Gender {
 	MALE = 0;
 	FEMALE = 1;
@@ -108,6 +117,7 @@ enum HoloIapItemCategory {
 	IAP_CATEGORY_ITEMS = 2;
 	IAP_CATEGORY_UPGRADES = 3;
 	IAP_CATEGORY_POKECOINS = 4;
+	IAP_CATEGORY_AVATAR = 5;
 }
 enum ItemCategory {
 	ITEM_CATEGORY_NONE = 0;
@@ -758,6 +768,18 @@ enum QuestType {
 	QUEST_UNKNOWN_TYPE = 0;
 	QUEST_FIRST_CATCH_OF_THE_DAY = 1;
 	QUEST_FIRST_POKESTOP_OF_THE_DAY = 2;
+}
+enum Slot {
+	UNSET_SLOT = 0;
+	HAIR = 1;
+	SHIRT = 2;
+	PANTS = 3;
+	HAT = 4;
+	SHOES = 5;
+	EYES = 6;
+	BACKPACK = 7;
+	GLOVES = 8;
+	SOCKS = 9;
 }
 enum TeamColor {
 	NEUTRAL = 0;
