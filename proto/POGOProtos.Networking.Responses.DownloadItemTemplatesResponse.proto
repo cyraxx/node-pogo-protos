@@ -1,23 +1,23 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Settings/Master/AvatarCustomizationSettings.proto";
-import "POGOProtos/Settings/Master/ItemSettings.proto";
-import "POGOProtos/Settings/Master/MoveSettings.proto";
-import "POGOProtos/Settings/Master/BadgeSettings.proto";
-import "POGOProtos/Settings/Master/PokemonSettings.proto";
-import "POGOProtos/Settings/Master/MoveSequenceSettings.proto";
-import "POGOProtos/Settings/Master/TypeEffectiveSettings.proto";
-import "POGOProtos/Settings/Master/CameraSettings.proto";
-import "POGOProtos/Settings/Master/PlayerLevelSettings.proto";
-import "POGOProtos/Settings/Master/GymLevelSettings.proto";
-import "POGOProtos/Settings/Master/GymBattleSettings.proto";
-import "POGOProtos/Settings/Master/EncounterSettings.proto";
-import "POGOProtos/Settings/Master/IapItemDisplay.proto";
-import "POGOProtos/Settings/Master/IapSettings.proto";
-import "POGOProtos/Settings/Master/PokemonUpgradeSettings.proto";
-import "POGOProtos/Settings/Master/EquippedBadgeSettings.proto";
-import "POGOProtos/Settings/Master/QuestSettings.proto";
+import public "POGOProtos.Settings.Master.AvatarCustomizationSettings.proto";
+import public "POGOProtos.Settings.Master.ItemSettings.proto";
+import public "POGOProtos.Settings.Master.MoveSettings.proto";
+import public "POGOProtos.Settings.Master.BadgeSettings.proto";
+import public "POGOProtos.Settings.Master.PokemonSettings.proto";
+import public "POGOProtos.Settings.Master.MoveSequenceSettings.proto";
+import public "POGOProtos.Settings.Master.TypeEffectiveSettings.proto";
+import public "POGOProtos.Settings.Master.CameraSettings.proto";
+import public "POGOProtos.Settings.Master.PlayerLevelSettings.proto";
+import public "POGOProtos.Settings.Master.GymLevelSettings.proto";
+import public "POGOProtos.Settings.Master.GymBattleSettings.proto";
+import public "POGOProtos.Settings.Master.EncounterSettings.proto";
+import public "POGOProtos.Settings.Master.IapItemDisplay.proto";
+import public "POGOProtos.Settings.Master.IapSettings.proto";
+import public "POGOProtos.Settings.Master.PokemonUpgradeSettings.proto";
+import public "POGOProtos.Settings.Master.EquippedBadgeSettings.proto";
+import public "POGOProtos.Settings.Master.QuestSettings.proto";
 
 message DownloadItemTemplatesResponse {
 	Result result = 1;

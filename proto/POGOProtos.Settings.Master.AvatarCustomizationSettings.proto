@@ -1,9 +1,9 @@
 syntax = "proto3";
 package POGOProtos.Settings.Master;
 
-import "POGOProtos/Data/Player/PlayerAvatarType.proto";
-import "POGOProtos/Enums/BadgeType.proto";
-import "POGOProtos/Enums/Slot.proto";
+import public "POGOProtos.Data.Player.PlayerAvatarType.proto";
+import public "POGOProtos.Enums.BadgeType.proto";
+import public "POGOProtos.Enums.Slot.proto";
 
 message AvatarCustomizationSettings {
 	bool enabled = 1;

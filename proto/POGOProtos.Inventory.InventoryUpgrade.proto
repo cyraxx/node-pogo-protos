@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Inventory;
 
-import "POGOProtos/Inventory/Item/ItemId.proto";
-import "POGOProtos/Inventory/InventoryUpgradeType.proto";
+import public "POGOProtos.Inventory.Item.ItemId.proto";
+import public "POGOProtos.Inventory.InventoryUpgradeType.proto";
 
 message InventoryUpgrade {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;

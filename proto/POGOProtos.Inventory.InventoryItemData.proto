@@ -1,18 +1,18 @@
 syntax = "proto3";
 package POGOProtos.Inventory;
 
-import "POGOProtos/Inventory/Item/ItemData.proto";
-import "POGOProtos/Inventory/AppliedItems.proto";
-import "POGOProtos/Inventory/EggIncubators.proto";
-import "POGOProtos/Inventory/Candy.proto";
-import "POGOProtos/Inventory/InventoryUpgrades.proto";
-import "POGOProtos/Data/Avatar/AvatarItem.proto";
-import "POGOProtos/Data/PokemonData.proto";
-import "POGOProtos/Data/PokedexEntry.proto";
-import "POGOProtos/Data/Player/PlayerStats.proto";
-import "POGOProtos/Data/Player/PlayerCurrency.proto";
-import "POGOProtos/Data/Player/PlayerCamera.proto";
-import "POGOProtos/Data/Quests/Quest.proto";
+import public "POGOProtos.Inventory.Item.ItemData.proto";
+import public "POGOProtos.Inventory.AppliedItems.proto";
+import public "POGOProtos.Inventory.EggIncubators.proto";
+import public "POGOProtos.Inventory.Candy.proto";
+import public "POGOProtos.Inventory.InventoryUpgrades.proto";
+import public "POGOProtos.Data.Avatar.AvatarItem.proto";
+import public "POGOProtos.Data.PokemonData.proto";
+import public "POGOProtos.Data.PokedexEntry.proto";
+import public "POGOProtos.Data.Player.PlayerStats.proto";
+import public "POGOProtos.Data.Player.PlayerCurrency.proto";
+import public "POGOProtos.Data.Player.PlayerCamera.proto";
+import public "POGOProtos.Data.Quests.Quest.proto";
 
 message InventoryItemData {
 	.POGOProtos.Data.PokemonData pokemon_data = 1;

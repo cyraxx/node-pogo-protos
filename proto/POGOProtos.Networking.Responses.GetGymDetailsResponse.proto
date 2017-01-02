@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/Gym/GymState.proto";
+import public "POGOProtos.Data.Gym.GymState.proto";
 
 message GetGymDetailsResponse {
 	.POGOProtos.Data.Gym.GymState gym_state = 1;

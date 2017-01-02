@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Networking.Platform.Responses;
 
-import "POGOProtos/Data/Player/Currency.proto";
-import "POGOProtos/Inventory/Item/ItemData.proto";
+import public "POGOProtos.Data.Player.Currency.proto";
+import public "POGOProtos.Inventory.Item.ItemData.proto";
 
 message GetStoreItemsResponse {
 	Status status = 1;                                                //unconfirmed

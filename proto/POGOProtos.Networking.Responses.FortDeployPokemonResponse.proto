@@ -1,9 +1,9 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/PokemonData.proto";
-import "POGOProtos/Data/Gym/GymState.proto";
-import "POGOProtos/Networking/Responses/FortDetailsResponse.proto";
+import public "POGOProtos.Data.PokemonData.proto";
+import public "POGOProtos.Data.Gym.GymState.proto";
+import public "POGOProtos.Networking.Responses.FortDetailsResponse.proto";
 
 message FortDeployPokemonResponse {
 	.POGOProtos.Networking.Responses.FortDeployPokemonResponse.Result result = 1;

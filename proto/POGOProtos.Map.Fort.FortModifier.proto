@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Map.Fort;
 
-import "POGOProtos/Inventory/Item/ItemId.proto";
+import public "POGOProtos.Inventory.Item.ItemId.proto";
 
 message FortModifier {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;

@@ -1,10 +1,10 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/PokemonData.proto";
-import "POGOProtos/Enums/TeamColor.proto";
-import "POGOProtos/Map/Fort/FortType.proto";
-import "POGOProtos/Map/Fort/FortModifier.proto";
+import public "POGOProtos.Data.PokemonData.proto";
+import public "POGOProtos.Enums.TeamColor.proto";
+import public "POGOProtos.Map.Fort.FortType.proto";
+import public "POGOProtos.Map.Fort.FortModifier.proto";
 
 message FortDetailsResponse {
 	string fort_id = 1;

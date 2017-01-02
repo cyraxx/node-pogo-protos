@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Inventory/AppliedItem.proto";
+import public "POGOProtos.Inventory.AppliedItem.proto";
 
 message UseIncenseResponse {
 	.POGOProtos.Networking.Responses.UseIncenseResponse.Result result = 1;

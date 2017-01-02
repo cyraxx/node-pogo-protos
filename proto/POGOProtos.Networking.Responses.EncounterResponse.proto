@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/Capture/CaptureProbability.proto";
-import "POGOProtos/Map/Pokemon/WildPokemon.proto";
+import public "POGOProtos.Data.Capture.CaptureProbability.proto";
+import public "POGOProtos.Map.Pokemon.WildPokemon.proto";
 
 message EncounterResponse {
 	.POGOProtos.Map.Pokemon.WildPokemon wild_pokemon = 1;

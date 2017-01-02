@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/PokemonData.proto";
-import "POGOProtos/Data/Capture/CaptureProbability.proto";
+import public "POGOProtos.Data.PokemonData.proto";
+import public "POGOProtos.Data.Capture.CaptureProbability.proto";
 
 message IncenseEncounterResponse {
 	.POGOProtos.Networking.Responses.IncenseEncounterResponse.Result result = 1;

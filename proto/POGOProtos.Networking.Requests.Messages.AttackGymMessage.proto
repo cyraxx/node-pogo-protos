@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Requests.Messages;
 
-import "POGOProtos/Data/Battle/BattleAction.proto";
+import public "POGOProtos.Data.Battle.BattleAction.proto";
 
 message AttackGymMessage {
 	string gym_id = 1;

@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Map/Fort/FortData.proto";
-import "POGOProtos/Map/Pokemon/WildPokemon.proto";
+import public "POGOProtos.Map.Fort.FortData.proto";
+import public "POGOProtos.Map.Pokemon.WildPokemon.proto";
 
 message PlayerUpdateResponse {
 	repeated .POGOProtos.Map.Pokemon.WildPokemon wild_pokemons = 1;

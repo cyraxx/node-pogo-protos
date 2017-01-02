@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Settings.Master;
 
-import "POGOProtos/Enums/CameraTarget.proto";
-import "POGOProtos/Enums/CameraInterpolation.proto";
+import public "POGOProtos.Enums.CameraTarget.proto";
+import public "POGOProtos.Enums.CameraInterpolation.proto";
 
 message CameraSettings {
 	string next_camera = 1;

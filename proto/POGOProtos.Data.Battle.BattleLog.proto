@@ -1,9 +1,9 @@
 syntax = "proto3";
 package POGOProtos.Data.Battle;
 
-import "POGOProtos/Data/Battle/BattleState.proto";
-import "POGOProtos/Data/Battle/BattleType.proto";
-import "POGOProtos/Data/Battle/BattleAction.proto";
+import public "POGOProtos.Data.Battle.BattleState.proto";
+import public "POGOProtos.Data.Battle.BattleType.proto";
+import public "POGOProtos.Data.Battle.BattleAction.proto";
 
 message BattleLog {
 	.POGOProtos.Data.Battle.BattleState state = 1;

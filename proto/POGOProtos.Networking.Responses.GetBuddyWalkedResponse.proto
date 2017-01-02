@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Enums/PokemonFamilyId.proto";
+import public "POGOProtos.Enums.PokemonFamilyId.proto";
 
 message GetBuddyWalkedResponse {
 	bool success = 1;

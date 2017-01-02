@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Settings/GlobalSettings.proto";
+import public "POGOProtos.Settings.GlobalSettings.proto";
 
 message DownloadSettingsResponse {
 	string error = 1;

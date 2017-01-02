@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Requests.Messages;
 
-import "POGOProtos/Enums/TutorialState.proto";
+import public "POGOProtos.Enums.TutorialState.proto";
 
 message MarkTutorialCompleteMessage {
 	repeated .POGOProtos.Enums.TutorialState tutorials_completed = 1;

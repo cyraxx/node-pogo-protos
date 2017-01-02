@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Data/Player/EquippedBadge.proto";
+import public "POGOProtos.Data.Player.EquippedBadge.proto";
 
 message EquipBadgeResponse {
 	.POGOProtos.Networking.Responses.EquipBadgeResponse.Result result = 1;

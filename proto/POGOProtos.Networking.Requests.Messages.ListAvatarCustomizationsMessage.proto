@@ -1,9 +1,9 @@
 syntax = "proto3";
 package POGOProtos.Networking.Requests.Messages;
 
-import "POGOProtos/Data/Player/PlayerAvatarType.proto";
-import "POGOProtos/Enums/Slot.proto";
-import "POGOProtos/Enums/Filter.proto";
+import public "POGOProtos.Data.Player.PlayerAvatarType.proto";
+import public "POGOProtos.Enums.Slot.proto";
+import public "POGOProtos.Enums.Filter.proto";
 
 message ListAvatarCustomizationsMessage {
 	.POGOProtos.Data.Player.PlayerAvatarType avatar_type = 1;

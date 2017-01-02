@@ -1,7 +1,7 @@
 syntax = "proto3";
 package POGOProtos.Networking.Responses;
 
-import "POGOProtos/Inventory/EggIncubator.proto";
+import public "POGOProtos.Inventory.EggIncubator.proto";
 
 message UseItemEggIncubatorResponse {
 	.POGOProtos.Networking.Responses.UseItemEggIncubatorResponse.Result result = 1;

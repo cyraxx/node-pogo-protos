@@ -142,7 +142,6 @@ import public "POGOProtos.Networking.Requests.Messages.ListAvatarCustomizationsM
 import public "POGOProtos.Networking.Requests.Messages.MarkTutorialCompleteMessage.proto";
 import public "POGOProtos.Networking.Requests.Messages.NicknamePokemonMessage.proto";
 import public "POGOProtos.Networking.Requests.Messages.PlayerUpdateMessage.proto";
-import public "POGOProtos.Networking.Requests.Messages.README.txt";
 import public "POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.proto";
 import public "POGOProtos.Networking.Requests.Messages.RegisterBackgroundDeviceMessage.proto";
 import public "POGOProtos.Networking.Requests.Messages.ReleasePokemonMessage.proto";
@@ -203,7 +202,6 @@ import public "POGOProtos.Networking.Responses.ListAvatarCustomizationsResponse.
 import public "POGOProtos.Networking.Responses.MarkTutorialCompleteResponse.proto";
 import public "POGOProtos.Networking.Responses.NicknamePokemonResponse.proto";
 import public "POGOProtos.Networking.Responses.PlayerUpdateResponse.proto";
-import public "POGOProtos.Networking.Responses.README.txt";
 import public "POGOProtos.Networking.Responses.RecycleInventoryItemResponse.proto";
 import public "POGOProtos.Networking.Responses.RegisterBackgroundDeviceResponse.proto";
 import public "POGOProtos.Networking.Responses.ReleasePokemonResponse.proto";

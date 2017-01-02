@@ -89,7 +89,7 @@ message Signature {
 	repeated UnknownMessage field6 = 6;
 	repeated SensorInfo sensor_info = 7;
 	DeviceInfo device_info = 8;
-	ActivityStatus activity_status = 9;
+	optional ActivityStatus activity_status = 9;
 	int32 location_hash1 = 10;
 	bool field11 = 11;
 	bool field12 = 12;

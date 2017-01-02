@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Networking.Envelopes;
 
-import "POGOProtos/Networking/Envelopes/AuthTicket.proto";
-import "POGOProtos/Networking/Platform/PlatformRequestType.proto";
+import public "POGOProtos.Networking.Envelopes.AuthTicket.proto";
+import public "POGOProtos.Networking.Platform.PlatformRequestType.proto";
 
 message ResponseEnvelope {
 	StatusCode status_code = 1;

@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Inventory;
 
-import "POGOProtos/Inventory/Item/ItemId.proto";
-import "POGOProtos/Inventory/EggIncubatorType.proto";
+import public "POGOProtos.Inventory.Item.ItemId.proto";
+import public "POGOProtos.Inventory.EggIncubatorType.proto";
 
 message EggIncubator {
 	string id = 1;

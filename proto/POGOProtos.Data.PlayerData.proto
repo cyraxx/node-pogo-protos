@@ -1,14 +1,14 @@
 syntax = "proto3";
 package POGOProtos.Data;
 
-import "POGOProtos/Enums/TutorialState.proto";
-import "POGOProtos/Data/Player/PlayerAvatar.proto";
-import "POGOProtos/Data/Player/DailyBonus.proto";
-import "POGOProtos/Data/Player/EquippedBadge.proto";
-import "POGOProtos/Data/Player/ContactSettings.proto";
-import "POGOProtos/Data/Player/Currency.proto";
-import "POGOProtos/Data/BuddyPokemon.proto";
-import "POGOProtos/Enums/TeamColor.proto";
+import public "POGOProtos.Enums.TutorialState.proto";
+import public "POGOProtos.Data.Player.PlayerAvatar.proto";
+import public "POGOProtos.Data.Player.DailyBonus.proto";
+import public "POGOProtos.Data.Player.EquippedBadge.proto";
+import public "POGOProtos.Data.Player.ContactSettings.proto";
+import public "POGOProtos.Data.Player.Currency.proto";
+import public "POGOProtos.Data.BuddyPokemon.proto";
+import public "POGOProtos.Enums.TeamColor.proto";
 
 message PlayerData {
 	int64 creation_timestamp_ms = 1;

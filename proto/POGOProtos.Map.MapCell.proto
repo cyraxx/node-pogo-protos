@@ -1,12 +1,12 @@
 syntax = "proto3";
 package POGOProtos.Map;
 
-import "POGOProtos/Map/SpawnPoint.proto";
-import "POGOProtos/Map/Fort/FortData.proto";
-import "POGOProtos/Map/Fort/FortSummary.proto";
-import "POGOProtos/Map/Pokemon/NearbyPokemon.proto";
-import "POGOProtos/Map/Pokemon/WildPokemon.proto";
-import "POGOProtos/Map/Pokemon/MapPokemon.proto";
+import public "POGOProtos.Map.SpawnPoint.proto";
+import public "POGOProtos.Map.Fort.FortData.proto";
+import public "POGOProtos.Map.Fort.FortSummary.proto";
+import public "POGOProtos.Map.Pokemon.NearbyPokemon.proto";
+import public "POGOProtos.Map.Pokemon.WildPokemon.proto";
+import public "POGOProtos.Map.Pokemon.MapPokemon.proto";
 
 // A cell is a geographical "zone" containing objects like pokemon, gyms, and pokestops.
 message MapCell {

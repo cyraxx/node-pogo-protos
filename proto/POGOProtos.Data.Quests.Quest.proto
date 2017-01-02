@@ -1,8 +1,8 @@
 syntax = "proto3";
 package POGOProtos.Data.Quests;
 
-import "POGOProtos/Enums/QuestType.proto";
-import "POGOProtos/Data/Quests/DailyQuest.proto";
+import public "POGOProtos.Enums.QuestType.proto";
+import public "POGOProtos.Data.Quests.DailyQuest.proto";
 
 message Quest {
 	.POGOProtos.Enums.QuestType quest_type = 1;
