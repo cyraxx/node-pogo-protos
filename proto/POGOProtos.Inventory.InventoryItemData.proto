@@ -1,0 +1,30 @@
+syntax = "proto3";
+package POGOProtos.Inventory;
+
+import public "POGOProtos.Inventory.Item.ItemData.proto";
+import public "POGOProtos.Inventory.AppliedItems.proto";
+import public "POGOProtos.Inventory.EggIncubators.proto";
+import public "POGOProtos.Inventory.Candy.proto";
+import public "POGOProtos.Inventory.InventoryUpgrades.proto";
+import public "POGOProtos.Data.Avatar.AvatarItem.proto";
+import public "POGOProtos.Data.PokemonData.proto";
+import public "POGOProtos.Data.PokedexEntry.proto";
+import public "POGOProtos.Data.Player.PlayerStats.proto";
+import public "POGOProtos.Data.Player.PlayerCurrency.proto";
+import public "POGOProtos.Data.Player.PlayerCamera.proto";
+import public "POGOProtos.Data.Quests.Quest.proto";
+
+message InventoryItemData {
+	.POGOProtos.Data.PokemonData pokemon_data = 1;
+	.POGOProtos.Inventory.Item.ItemData item = 2;
+	.POGOProtos.Data.PokedexEntry pokedex_entry = 3;
+	.POGOProtos.Data.Player.PlayerStats player_stats = 4;
+	.POGOProtos.Data.Player.PlayerCurrency player_currency = 5;
+	.POGOProtos.Data.Player.PlayerCamera player_camera = 6;
+	.POGOProtos.Inventory.InventoryUpgrades inventory_upgrades = 7;
+	.POGOProtos.Inventory.AppliedItems applied_items = 8;
+	.POGOProtos.Inventory.EggIncubators egg_incubators = 9;
+	.POGOProtos.Inventory.Candy candy = 10;
+	.POGOProtos.Data.Quests.Quest quest = 11;
+	.POGOProtos.Data.Avatar.AvatarItem avatar_item = 12;
+}

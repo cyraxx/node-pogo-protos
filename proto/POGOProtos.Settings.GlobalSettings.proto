@@ -1,0 +1,24 @@
+syntax = "proto3";
+package POGOProtos.Settings;
+
+import public "POGOProtos.Settings.FortSettings.proto";
+import public "POGOProtos.Settings.MapSettings.proto";
+import public "POGOProtos.Settings.LevelSettings.proto";
+import public "POGOProtos.Settings.InventorySettings.proto";
+import public "POGOProtos.Settings.GpsSettings.proto";
+import public "POGOProtos.Settings.FestivalSettings.proto";
+import public "POGOProtos.Settings.EventSettings.proto";
+import public "POGOProtos.Settings.SfidaSettings.proto";
+
+message GlobalSettings {
+	.POGOProtos.Settings.FortSettings fort_settings = 2;
+	.POGOProtos.Settings.MapSettings map_settings = 3;
+	.POGOProtos.Settings.LevelSettings level_settings = 4;
+	.POGOProtos.Settings.InventorySettings inventory_settings = 5;
+	string minimum_client_version = 6;
+	.POGOProtos.Settings.GpsSettings gps_settings = 7;
+	.POGOProtos.Settings.FestivalSettings festival_settings = 8;
+	.POGOProtos.Settings.EventSettings event_settings = 9;
+	int32 max_pokemon_types = 10;
+	.POGOProtos.Settings.SfidaSettings sfida_settings = 11;
+}
