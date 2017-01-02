@@ -14,7 +14,7 @@ function addPackedOption(ns) {
                 field.options.packed = true;
             }
         });
-        ns.getChildren(protobuf.Reflect.Message).map(addPackedOption);
+        ns.getChildren(protobuf.Reflect.Message).forEach(addPackedOption);
     } else if (ns instanceof protobuf.Reflect.Namespace) {
         ns.children.forEach(addPackedOption);
     }
