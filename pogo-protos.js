@@ -9,11 +9,12 @@ protobuf.loadProtoFile(path.join(__dirname, 'proto', 'POGOProtos.proto'), builde
 // See also: https://github.com/dcodeIO/protobuf.js/issues/432
 function addPackedOption(ns) {
     if (ns instanceof protobuf.Reflect.Message) {
-        ns.getChildren(protobuf.Reflect.Field).forEach(field => {
+        ns.getChildren(protobuf.Reflect.Message.Field).forEach(field => {
             if (field.repeated && protobuf.PACKABLE_WIRE_TYPES.indexOf(field.type.wireType) != -1) {
                 field.options.packed = true;
             }
         });
+        ns.getChildren(protobuf.Reflect.Message).forEach(addPackedOption);
     } else if (ns instanceof protobuf.Reflect.Namespace) {
         ns.children.forEach(addPackedOption);
     }
