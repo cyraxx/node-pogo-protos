@@ -169,6 +169,7 @@ message DownloadItemTemplatesResponse {
 		.POGOProtos.Settings.Master.EquippedBadgeSettings equipped_badges = 19;
 		.POGOProtos.Settings.Master.QuestSettings quest_settings = 20;
 		.POGOProtos.Settings.Master.AvatarCustomizationSettings avatar_customization = 21;
+		.POGOProtos.Settings.Master.FormSettings form_settings = 22;
 	}
 
 	enum Result {
@@ -253,6 +254,7 @@ message EvolvePokemonResponse {
 		FAILED_INSUFFICIENT_RESOURCES = 3;
 		FAILED_POKEMON_CANNOT_EVOLVE = 4;
 		FAILED_POKEMON_IS_DEPLOYED = 5;
+		FAILED_INVALID_ITEM_REQUIREMENT = 6;
 	}
 }
 message FortDeployPokemonResponse {
@@ -354,6 +356,7 @@ message GetHatchedEggsResponse {
 	repeated int32 candy_awarded = 4;
 	repeated int32 stardust_awarded = 5;
 	repeated float egg_km_walked = 6;
+	repeated .POGOProtos.Data.PokemonData hatched_pokemon = 7;
 }
 message GetIncensePokemonResponse {
 	.POGOProtos.Networking.Responses.GetIncensePokemonResponse.Result result = 1;

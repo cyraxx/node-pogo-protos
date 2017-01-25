@@ -62,6 +62,10 @@ message PokedexEntry {
 	int32 times_captured = 3;
 	int32 evolution_stone_pieces = 4;
 	int32 evolution_stones = 5;
+	repeated .POGOProtos.Enums.Costume captured_costumes = 6;
+	repeated .POGOProtos.Enums.Form captured_forms = 7;
+	repeated .POGOProtos.Enums.Gender captured_genders = 8;
+	bool captured_shiny = 9;
 }
 message PokemonData {
 	fixed64 id = 1;
@@ -101,19 +105,8 @@ message PokemonData {
 	.POGOProtos.Data.PokemonDisplay pokemon_display = 36;
 }
 message PokemonDisplay {
-	Costume costume = 1;
-	Gender gender = 2;
+	.POGOProtos.Enums.Costume costume = 1;
+	.POGOProtos.Enums.Gender gender = 2;
 	bool shiny = 3;
-
-	enum Costume {
-		UNSET = 0;
-		HOLIDAY_2016 = 1;
-	}
-
-	enum Gender {
-		GENDER_UNSET = 0;
-		MALE = 1;
-		FEMALE = 2;
-		GENDERLESS = 3;
-	}
+	.POGOProtos.Enums.Form form = 4;
 }

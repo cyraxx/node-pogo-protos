@@ -82,6 +82,7 @@ message EquipBadgeMessage {
 }
 message EvolvePokemonMessage {
 	fixed64 pokemon_id = 1;
+	.POGOProtos.Inventory.Item.ItemId evolution_item_requirement = 2;
 }
 message FortDeployPokemonMessage {
 	string fort_id = 1;

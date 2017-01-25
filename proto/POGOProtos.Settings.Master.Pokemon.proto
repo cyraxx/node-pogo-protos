@@ -2,6 +2,7 @@ syntax = "proto3";
 package POGOProtos.Settings.Master.Pokemon;
 
 import public "POGOProtos.Enums.proto";
+import public "POGOProtos.Inventory.Item.proto";
 
 message CameraAttributes {
 	float disk_radius_m = 1;
@@ -20,6 +21,10 @@ message EncounterAttributes {
 	float movement_timer_s = 7;
 	float jump_time_s = 8;
 	float attack_timer_s = 9;
+}
+message EvolutionBranch {
+	.POGOProtos.Enums.PokemonId evolution = 1;
+	.POGOProtos.Inventory.Item.ItemId evolution_item_requirement = 2;
 }
 message StatsAttributes {
 	int32 base_stamina = 1;

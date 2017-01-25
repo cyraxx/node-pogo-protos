@@ -38,6 +38,7 @@ message GlobalSettings {
 	.POGOProtos.Settings.EventSettings event_settings = 9;
 	int32 max_pokemon_types = 10;
 	.POGOProtos.Settings.SfidaSettings sfida_settings = 11;
+	.POGOProtos.Settings.NewsSettings news_settings = 12;
 }
 message GpsSettings {
 	float driving_warning_speed_meters_per_second = 1;
@@ -65,6 +66,14 @@ message MapSettings {
 	float get_map_objects_min_distance_meters = 6;
 	string google_maps_api_key = 7;
 	int32 min_nearby_hide_sightings = 8;
+}
+message NewsSettings {
+	repeated News news = 1;
+
+	message News {
+		string news_bundle_id = 1;
+		repeated string exclusive_countries = 2;
+	}
 }
 message SfidaSettings {
 	float low_battery_threshold = 1;

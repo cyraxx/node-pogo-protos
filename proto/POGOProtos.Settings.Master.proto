@@ -20,8 +20,9 @@ message AvatarCustomizationSettings {
 	AvatarCustomizationUnlockType unlock_type = 8;
 	repeated AvatarCustomizationPromoType promo_type = 9;
 	.POGOProtos.Enums.BadgeType unlock_badge_type = 10;
-	int32 unlock_badge_level = 12;
 	string iap_sku = 11;
+	int32 unlock_badge_level = 12;
+	string icon_name = 13;
 
 	enum AvatarCustomizationPromoType {
 		UNSET_PROMO_TYPE = 0;
@@ -71,6 +72,15 @@ message EquippedBadgeSettings {
 	int64 equip_badge_cooldown_ms = 1;
 	repeated float catch_probability_bonus = 2;
 	repeated float flee_probability_bonus = 3;
+}
+message FormSettings {
+	.POGOProtos.Enums.PokemonId pokemon = 1;
+	repeated Form forms = 2;
+
+	message Form {
+		.POGOProtos.Enums.Form form = 1;
+		int32 asset_bundle_value = 2;
+	}
 }
 message GymBattleSettings {
 	float energy_per_sec = 1;
@@ -183,6 +193,7 @@ message PokemonSettings {
 	float km_buddy_distance = 23;
 	.POGOProtos.Settings.Master.PokemonSettings.BuddySize buddy_size = 24;
 	float model_height = 25;
+	repeated .POGOProtos.Settings.Master.Pokemon.EvolutionBranch evolution_branch = 26;
 
 	enum BuddySize {
 		BUDDY_MEDIUM = 0;
