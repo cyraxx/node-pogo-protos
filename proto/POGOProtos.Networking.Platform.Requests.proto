@@ -10,3 +10,6 @@ message BuyItemPokeCoinsRequest {
 message SendEncryptedSignatureRequest {
 	bytes encrypted_signature = 1;
 }
+message UnknownPtr8Request {
+	string message = 1;
+}

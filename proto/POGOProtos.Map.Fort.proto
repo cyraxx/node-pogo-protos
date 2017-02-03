@@ -55,6 +55,10 @@ enum FortSponsor {
 	PAN = 11;
 	BBQ = 12;
 	FRYER = 13;
+	STEAMER = 14;
+	HOOD = 15;
+	SLOWCOOKER = 16;
+	MIXER = 17;
 }
 message FortSummary {
 	string fort_summary_id = 1;

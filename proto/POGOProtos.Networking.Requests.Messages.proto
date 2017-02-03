@@ -240,6 +240,11 @@ message UseItemEggIncubatorMessage {
 	string item_id = 1;
 	uint64 pokemon_id = 2;
 }
+message UseItemEncounterMessage {
+	.POGOProtos.Inventory.Item.ItemId item = 1;
+	fixed64 encounter_id = 2;
+	string spawn_point_guid = 3;
+}
 message UseItemGymMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
 	string gym_id = 2;

@@ -276,6 +276,18 @@ export namespace Data {
         captured_shiny: boolean;
         getCapturedShiny(): boolean;
         setCapturedShiny(value: any, noAssert?: boolean);
+        encountered_costumes: Enums.Costume[];
+        getEncounteredCostumes(): Enums.Costume[];
+        setEncounteredCostumes(value: any, noAssert?: boolean);
+        encountered_forms: Enums.Form[];
+        getEncounteredForms(): Enums.Form[];
+        setEncounteredForms(value: any, noAssert?: boolean);
+        encountered_genders: Enums.Gender[];
+        getEncounteredGenders(): Enums.Gender[];
+        setEncounteredGenders(value: any, noAssert?: boolean);
+        encountered_shiny: boolean;
+        getEncounteredShiny(): boolean;
+        setEncounteredShiny(value: any, noAssert?: boolean);
     }
 
     interface PokedexEntryData {
@@ -288,6 +300,10 @@ export namespace Data {
         captured_forms: Enums.Form[];
         captured_genders: Enums.Gender[];
         captured_shiny?: boolean;
+        encountered_costumes: Enums.Costume[];
+        encountered_forms: Enums.Form[];
+        encountered_genders: Enums.Gender[];
+        encountered_shiny?: boolean;
     }
 
 
@@ -1991,6 +2007,10 @@ export namespace Map.Fort {
         PAN = 11,
         BBQ = 12,
         FRYER = 13,
+        STEAMER = 14,
+        HOOD = 15,
+        SLOWCOOKER = 16,
+        MIXER = 17,
     }
 
 
@@ -2188,6 +2208,7 @@ export namespace Networking.Requests {
         SET_CONTACT_SETTINGS = 151,
         SET_BUDDY_POKEMON = 152,
         GET_BUDDY_WALKED = 153,
+        USE_ITEM_ENCOUNTER = 154,
         GET_ASSET_DIGEST = 300,
         GET_DOWNLOAD_URLS = 301,
         CLAIM_CODENAME = 403,
@@ -3093,6 +3114,27 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class UseItemEncounterMessage extends ProtoBufMessage {
+        constructor(data: UseItemEncounterMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UseItemEncounterMessage;
+        item: Inventory.Item.ItemId;
+        getItem(): Inventory.Item.ItemId;
+        setItem(value: any, noAssert?: boolean);
+        encounter_id: Long;
+        getEncounterId(): Long;
+        setEncounterId(value: any, noAssert?: boolean);
+        spawn_point_guid: string;
+        getSpawnPointGuid(): string;
+        setSpawnPointGuid(value: any, noAssert?: boolean);
+    }
+
+    interface UseItemEncounterMessageData {
+        item?: Inventory.Item.ItemId;
+        encounter_id?: Long;
+        spawn_point_guid?: string;
+    }
+
+
     export class UseItemGymMessage extends ProtoBufMessage {
         constructor(data: UseItemGymMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): UseItemGymMessage;
@@ -3245,6 +3287,19 @@ export namespace Networking.Platform.Requests {
         encrypted_signature?: ByteBuffer;
     }
 
+
+    export class UnknownPtr8Request extends ProtoBufMessage {
+        constructor(data: UnknownPtr8RequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UnknownPtr8Request;
+        message: string;
+        getMessage(): string;
+        setMessage(value: any, noAssert?: boolean);
+    }
+
+    interface UnknownPtr8RequestData {
+        message?: string;
+    }
+
 }
 
 
@@ -3315,6 +3370,19 @@ export namespace Networking.Platform.Responses {
 
     interface SendEncryptedSignatureResponseData {
         received?: boolean;
+    }
+
+
+    export class UnknownPtr8Response extends ProtoBufMessage {
+        constructor(data: UnknownPtr8ResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UnknownPtr8Response;
+        message: string;
+        getMessage(): string;
+        setMessage(value: any, noAssert?: boolean);
+    }
+
+    interface UnknownPtr8ResponseData {
+        message?: string;
     }
 
 }
@@ -4196,12 +4264,16 @@ export namespace Networking.Responses {
         capture_probability: Data.Capture.CaptureProbability;
         getCaptureProbability(): Data.Capture.CaptureProbability;
         setCaptureProbability(value: any, noAssert?: boolean);
+        active_item: Inventory.Item.ItemId;
+        getActiveItem(): Inventory.Item.ItemId;
+        setActiveItem(value: any, noAssert?: boolean);
     }
 
     interface DiskEncounterResponseData {
         result?: DiskEncounterResponse.Result;
         pokemon_data?: Data.PokemonData;
         capture_probability?: Data.Capture.CaptureProbability;
+        active_item?: Inventory.Item.ItemId;
     }
 
 
@@ -4300,6 +4372,9 @@ export namespace Networking.Responses {
         capture_probability: Data.Capture.CaptureProbability;
         getCaptureProbability(): Data.Capture.CaptureProbability;
         setCaptureProbability(value: any, noAssert?: boolean);
+        active_item: Inventory.Item.ItemId;
+        getActiveItem(): Inventory.Item.ItemId;
+        setActiveItem(value: any, noAssert?: boolean);
     }
 
     interface EncounterResponseData {
@@ -4307,6 +4382,7 @@ export namespace Networking.Responses {
         background?: EncounterResponse.Background;
         status?: EncounterResponse.Status;
         capture_probability?: Data.Capture.CaptureProbability;
+        active_item?: Inventory.Item.ItemId;
     }
 
 
@@ -4771,12 +4847,16 @@ export namespace Networking.Responses {
         capture_probability: Data.Capture.CaptureProbability;
         getCaptureProbability(): Data.Capture.CaptureProbability;
         setCaptureProbability(value: any, noAssert?: boolean);
+        active_item: Inventory.Item.ItemId;
+        getActiveItem(): Inventory.Item.ItemId;
+        setActiveItem(value: any, noAssert?: boolean);
     }
 
     interface IncenseEncounterResponseData {
         result?: IncenseEncounterResponse.Result;
         pokemon_data?: Data.PokemonData;
         capture_probability?: Data.Capture.CaptureProbability;
+        active_item?: Inventory.Item.ItemId;
     }
 
 
@@ -5153,6 +5233,27 @@ export namespace Networking.Responses {
     interface UseItemEggIncubatorResponseData {
         result?: UseItemEggIncubatorResponse.Result;
         egg_incubator?: Inventory.EggIncubator;
+    }
+
+
+    export class UseItemEncounterResponse extends ProtoBufMessage {
+        constructor(data: UseItemEncounterResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UseItemEncounterResponse;
+        status: UseItemEncounterResponse.Status;
+        getStatus(): UseItemEncounterResponse.Status;
+        setStatus(value: any, noAssert?: boolean);
+        capture_probability: Data.Capture.CaptureProbability;
+        getCaptureProbability(): Data.Capture.CaptureProbability;
+        setCaptureProbability(value: any, noAssert?: boolean);
+        active_item: Inventory.Item.ItemId;
+        getActiveItem(): Inventory.Item.ItemId;
+        setActiveItem(value: any, noAssert?: boolean);
+    }
+
+    interface UseItemEncounterResponseData {
+        status?: UseItemEncounterResponse.Status;
+        capture_probability?: Data.Capture.CaptureProbability;
+        active_item?: Inventory.Item.ItemId;
     }
 
 
@@ -6654,6 +6755,33 @@ export namespace Settings.Master.Pokemon {
         attack_timer_s: number;
         getAttackTimerS(): number;
         setAttackTimerS(value: any, noAssert?: boolean);
+        bonus_candy_capture_reward: number;
+        getBonusCandyCaptureReward(): number;
+        setBonusCandyCaptureReward(value: any, noAssert?: boolean);
+        bonus_stardust_capture_reward: number;
+        getBonusStardustCaptureReward(): number;
+        setBonusStardustCaptureReward(value: any, noAssert?: boolean);
+        attack_probability: number;
+        getAttackProbability(): number;
+        setAttackProbability(value: any, noAssert?: boolean);
+        dodge_probability: number;
+        getDodgeProbability(): number;
+        setDodgeProbability(value: any, noAssert?: boolean);
+        dodge_duration_s: number;
+        getDodgeDurationS(): number;
+        setDodgeDurationS(value: any, noAssert?: boolean);
+        dodge_distance: number;
+        getDodgeDistance(): number;
+        setDodgeDistance(value: any, noAssert?: boolean);
+        camera_distance: number;
+        getCameraDistance(): number;
+        setCameraDistance(value: any, noAssert?: boolean);
+        min_pokemon_action_frequency_s: number;
+        getMinPokemonActionFrequencyS(): number;
+        setMinPokemonActionFrequencyS(value: any, noAssert?: boolean);
+        max_pokemon_action_frequency_s: number;
+        getMaxPokemonActionFrequencyS(): number;
+        setMaxPokemonActionFrequencyS(value: any, noAssert?: boolean);
     }
 
     interface EncounterAttributesData {
@@ -6666,6 +6794,15 @@ export namespace Settings.Master.Pokemon {
         movement_timer_s?: number;
         jump_time_s?: number;
         attack_timer_s?: number;
+        bonus_candy_capture_reward?: number;
+        bonus_stardust_capture_reward?: number;
+        attack_probability?: number;
+        dodge_probability?: number;
+        dodge_duration_s?: number;
+        dodge_distance?: number;
+        camera_distance?: number;
+        min_pokemon_action_frequency_s?: number;
+        max_pokemon_action_frequency_s?: number;
     }
 
 
@@ -6678,11 +6815,15 @@ export namespace Settings.Master.Pokemon {
         evolution_item_requirement: Inventory.Item.ItemId;
         getEvolutionItemRequirement(): Inventory.Item.ItemId;
         setEvolutionItemRequirement(value: any, noAssert?: boolean);
+        candy_cost: number;
+        getCandyCost(): number;
+        setCandyCost(value: any, noAssert?: boolean);
     }
 
     interface EvolutionBranchData {
         evolution?: Enums.PokemonId;
         evolution_item_requirement?: Inventory.Item.ItemId;
+        candy_cost?: number;
     }
 
 
@@ -6814,6 +6955,7 @@ export namespace Enums {
         BADGE_TYPE_FAIRY = 35,
         BADGE_SMALL_RATTATA = 36,
         BADGE_PIKACHU = 37,
+        BADGE_UNOWN = 38,
     }
 
 
@@ -6952,6 +7094,7 @@ export namespace Enums {
         ITEM_EFFECT_CAP_CHANCE_MULTI_THROW = 1012,
         ITEM_EFFECT_CAP_CHANCE_ALWAYS = 1013,
         ITEM_EFFECT_CAP_CHANCE_SINGLE_THROW = 1014,
+        ITEM_EFFECT_CANDY_AWARD = 1015,
     }
 
 
@@ -7794,6 +7937,7 @@ export namespace Networking.Responses.CatchPokemonResponse {
         UNSET = 0,
         DEFAULT = 1,
         ELEMENTAL_BADGE = 2,
+        CRITICAL_CATCH = 3,
     }
 
 }
@@ -8254,6 +8398,19 @@ export namespace Networking.Responses.UseItemEggIncubatorResponse {
         ERROR_INCUBATOR_ALREADY_IN_USE = 5,
         ERROR_POKEMON_ALREADY_INCUBATING = 6,
         ERROR_INCUBATOR_NO_USES_REMAINING = 7,
+    }
+
+}
+
+
+export namespace Networking.Responses.UseItemEncounterResponse {
+
+    export const enum Status {
+        SUCCESS = 0,
+        ALREADY_COMPLETED = 1,
+        ACTIVE_ITEM_EXISTS = 2,
+        NO_ITEM_IN_INVENTORY = 3,
+        INVALID_ITEM_CATEGORY = 4,
     }
 
 }

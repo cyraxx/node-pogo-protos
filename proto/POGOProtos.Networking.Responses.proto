@@ -5,13 +5,13 @@ import public "POGOProtos.Data.Battle.proto";
 import public "POGOProtos.Data.Capture.proto";
 import public "POGOProtos.Enums.proto";
 import public "POGOProtos.Data.proto";
+import public "POGOProtos.Inventory.Item.proto";
 import public "POGOProtos.Settings.Master.proto";
 import public "POGOProtos.Settings.proto";
 import public "POGOProtos.Map.Pokemon.proto";
 import public "POGOProtos.Data.Player.proto";
 import public "POGOProtos.Data.Gym.proto";
 import public "POGOProtos.Map.Fort.proto";
-import public "POGOProtos.Inventory.Item.proto";
 import public "POGOProtos.Inventory.proto";
 import public "POGOProtos.Map.proto";
 import public "POGOProtos.Data.Avatar.proto";
@@ -63,6 +63,7 @@ message CatchPokemonResponse {
 		UNSET = 0;
 		DEFAULT = 1;
 		ELEMENTAL_BADGE = 2;
+		CRITICAL_CATCH = 3;
 	}
 }
 message CheckAwardedBadgesResponse {
@@ -134,6 +135,7 @@ message DiskEncounterResponse {
 	Result result = 1;
 	.POGOProtos.Data.PokemonData pokemon_data = 2;
 	.POGOProtos.Data.Capture.CaptureProbability capture_probability = 3;
+	.POGOProtos.Inventory.Item.ItemId active_item = 4;
 
 	enum Result {
 		UNKNOWN = 0;
@@ -202,6 +204,7 @@ message EncounterResponse {
 	Background background = 2;
 	Status status = 3;
 	.POGOProtos.Data.Capture.CaptureProbability capture_probability = 4;
+	.POGOProtos.Inventory.Item.ItemId active_item = 5;
 
 	enum Background {
 		PARK = 0;
@@ -409,6 +412,7 @@ message IncenseEncounterResponse {
 	.POGOProtos.Networking.Responses.IncenseEncounterResponse.Result result = 1;
 	.POGOProtos.Data.PokemonData pokemon_data = 2;
 	.POGOProtos.Data.Capture.CaptureProbability capture_probability = 3;
+	.POGOProtos.Inventory.Item.ItemId active_item = 4;
 
 	enum Result {
 		INCENSE_ENCOUNTER_UNKNOWN = 0;
@@ -640,6 +644,19 @@ message UseItemEggIncubatorResponse {
 		ERROR_INCUBATOR_ALREADY_IN_USE = 5;
 		ERROR_POKEMON_ALREADY_INCUBATING = 6;
 		ERROR_INCUBATOR_NO_USES_REMAINING = 7;
+	}
+}
+message UseItemEncounterResponse {
+	Status status = 1;
+	.POGOProtos.Data.Capture.CaptureProbability capture_probability = 2;
+	.POGOProtos.Inventory.Item.ItemId active_item = 3;
+
+	enum Status {
+		SUCCESS = 0;
+		ALREADY_COMPLETED = 1;
+		ACTIVE_ITEM_EXISTS = 2;
+		NO_ITEM_IN_INVENTORY = 3;
+		INVALID_ITEM_CATEGORY = 4;
 	}
 }
 message UseItemGymResponse {

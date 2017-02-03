@@ -48,3 +48,6 @@ message GetStoreItemsResponse {
 message SendEncryptedSignatureResponse {
 	bool received = 1;  // speculated, could be an enum
 }
+message UnknownPtr8Response {
+	string message = 2;
+}
