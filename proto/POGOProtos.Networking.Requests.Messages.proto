@@ -180,10 +180,6 @@ message NicknamePokemonMessage {
 	fixed64 pokemon_id = 1;
 	string nickname = 2;
 }
-message PlayerUpdateMessage {
-	double latitude = 1;
-	double longitude = 2;
-}
 message RecycleInventoryItemMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;
 	int32 count = 2;

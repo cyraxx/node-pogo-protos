@@ -15,6 +15,7 @@ message AvatarCustomization {
 		PURCHASABLE = 6;
 		UNLOCKABLE = 7;
 		VIEWED = 8;
+		LOCKED_PURCHASABLE = 9;
 	}
 }
 message AvatarItem {

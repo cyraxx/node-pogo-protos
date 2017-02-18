@@ -2,6 +2,7 @@ syntax = "proto3";
 package POGOProtos.Data.Logs;
 
 import public "POGOProtos.Enums.proto";
+import public "POGOProtos.Data.proto";
 import public "POGOProtos.Inventory.Item.proto";
 
 message ActionLogEntry {
@@ -18,6 +19,8 @@ message BuddyPokemonLogEntry {
 	.POGOProtos.Data.Logs.BuddyPokemonLogEntry.Result result = 1;
 	.POGOProtos.Enums.PokemonId pokemon_id = 2;
 	int32 amount = 3;
+	.POGOProtos.Data.PokemonDisplay pokemon_display = 4;
+	fixed64 pokemon = 5;
 
 	enum Result {
 		UNSET = 0;
@@ -29,6 +32,7 @@ message CatchPokemonLogEntry {
 	.POGOProtos.Enums.PokemonId pokemon_id = 2;
 	int32 combat_points = 3;
 	fixed64 pokemon_data_id = 4;
+	.POGOProtos.Data.PokemonDisplay pokemon_display = 5;
 
 	enum Result {
 		UNSET = 0;

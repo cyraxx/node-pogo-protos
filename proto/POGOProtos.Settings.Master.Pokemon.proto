@@ -36,6 +36,11 @@ message EvolutionBranch {
 	.POGOProtos.Inventory.Item.ItemId evolution_item_requirement = 2;
 	int32 candy_cost = 3;
 }
+message PokemonGenderSettings {
+	float male_percent = 1;
+	float female_percent = 2;
+	float genderless_percent = 3;
+}
 message StatsAttributes {
 	int32 base_stamina = 1;
 	int32 base_attack = 2;

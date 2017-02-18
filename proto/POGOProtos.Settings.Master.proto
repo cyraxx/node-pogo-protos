@@ -4,9 +4,9 @@ package POGOProtos.Settings.Master;
 import public "POGOProtos.Data.Player.proto";
 import public "POGOProtos.Enums.proto";
 import public "POGOProtos.Data.Badge.proto";
+import public "POGOProtos.Settings.Master.Pokemon.proto";
 import public "POGOProtos.Inventory.Item.proto";
 import public "POGOProtos.Settings.Master.Item.proto";
-import public "POGOProtos.Settings.Master.Pokemon.proto";
 import public "POGOProtos.Settings.Master.Quest.proto";
 
 message AvatarCustomizationSettings {
@@ -23,6 +23,7 @@ message AvatarCustomizationSettings {
 	string iap_sku = 11;
 	int32 unlock_badge_level = 12;
 	string icon_name = 13;
+	int32 unlock_player_level = 14;
 
 	enum AvatarCustomizationPromoType {
 		UNSET_PROMO_TYPE = 0;
@@ -35,6 +36,7 @@ message AvatarCustomizationSettings {
 		DEFAULT = 1;
 		MEDAL_REWARD = 2;
 		IAP_CLOTHING = 3;
+		LEVEL_REWARD = 4;
 	}
 }
 message BadgeSettings {
@@ -81,6 +83,10 @@ message FormSettings {
 		.POGOProtos.Enums.Form form = 1;
 		int32 asset_bundle_value = 2;
 	}
+}
+message GenderSettings {
+	.POGOProtos.Enums.PokemonId pokemon = 1;
+	.POGOProtos.Settings.Master.Pokemon.PokemonGenderSettings gender = 2;
 }
 message GymBattleSettings {
 	float energy_per_sec = 1;

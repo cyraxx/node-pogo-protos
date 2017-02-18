@@ -1220,12 +1220,20 @@ export namespace Data.Logs {
         amount: number;
         getAmount(): number;
         setAmount(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
+        pokemon: Long;
+        getPokemon(): Long;
+        setPokemon(value: any, noAssert?: boolean);
     }
 
     interface BuddyPokemonLogEntryData {
         result?: BuddyPokemonLogEntry.Result;
         pokemon_id?: Enums.PokemonId;
         amount?: number;
+        pokemon_display?: Data.PokemonDisplay;
+        pokemon?: Long;
     }
 
 
@@ -1244,6 +1252,9 @@ export namespace Data.Logs {
         pokemon_data_id: Long;
         getPokemonDataId(): Long;
         setPokemonDataId(value: any, noAssert?: boolean);
+        pokemon_display: Data.PokemonDisplay;
+        getPokemonDisplay(): Data.PokemonDisplay;
+        setPokemonDisplay(value: any, noAssert?: boolean);
     }
 
     interface CatchPokemonLogEntryData {
@@ -1251,6 +1262,7 @@ export namespace Data.Logs {
         pokemon_id?: Enums.PokemonId;
         combat_points?: number;
         pokemon_data_id?: Long;
+        pokemon_display?: Data.PokemonDisplay;
     }
 
 
@@ -2011,6 +2023,8 @@ export namespace Map.Fort {
         HOOD = 15,
         SLOWCOOKER = 16,
         MIXER = 17,
+        SCOOPER = 18,
+        MUFFINTIN = 19,
     }
 
 
@@ -2154,7 +2168,6 @@ export namespace Networking.Requests {
 
     export const enum RequestType {
         METHOD_UNSET = 0,
-        PLAYER_UPDATE = 1,
         GET_PLAYER = 2,
         GET_INVENTORY = 4,
         DOWNLOAD_SETTINGS = 5,
@@ -2165,7 +2178,6 @@ export namespace Networking.Requests {
         ENCOUNTER = 102,
         CATCH_POKEMON = 103,
         FORT_DETAILS = 104,
-        ITEM_USE = 105,
         GET_MAP_OBJECTS = 106,
         FORT_DEPLOY_POKEMON = 110,
         FORT_RECALL_POKEMON = 111,
@@ -2174,14 +2186,7 @@ export namespace Networking.Requests {
         USE_ITEM_CAPTURE = 114,
         USE_ITEM_FLEE = 115,
         USE_ITEM_REVIVE = 116,
-        TRADE_SEARCH = 117,
-        TRADE_OFFER = 118,
-        TRADE_RESPONSE = 119,
-        TRADE_RESULT = 120,
         GET_PLAYER_PROFILE = 121,
-        GET_ITEM_PACK = 122,
-        BUY_ITEM_PACK = 123,
-        BUY_GEM_PACK = 124,
         EVOLVE_POKEMON = 125,
         GET_HATCHED_EGGS = 126,
         ENCOUNTER_TUTORIAL_COMPLETE = 127,
@@ -2215,12 +2220,9 @@ export namespace Networking.Requests {
         SET_AVATAR = 404,
         SET_PLAYER_TEAM = 405,
         MARK_TUTORIAL_COMPLETE = 406,
-        LOAD_SPAWN_POINTS = 500,
         CHECK_CHALLENGE = 600,
         VERIFY_CHALLENGE = 601,
         ECHO = 666,
-        DEBUG_UPDATE_INVENTORY = 700,
-        DEBUG_DELETE_PLAYER = 701,
         SFIDA_REGISTRATION = 800,
         SFIDA_ACTION_LOG = 801,
         SFIDA_CERTIFICATION = 802,
@@ -2868,23 +2870,6 @@ export namespace Networking.Requests.Messages {
     interface NicknamePokemonMessageData {
         pokemon_id?: Long;
         nickname?: string;
-    }
-
-
-    export class PlayerUpdateMessage extends ProtoBufMessage {
-        constructor(data: PlayerUpdateMessageData);
-        static decode(buffer?: any, length?: number | string, enc?: string): PlayerUpdateMessage;
-        latitude: number;
-        getLatitude(): number;
-        setLatitude(value: any, noAssert?: boolean);
-        longitude: number;
-        getLongitude(): number;
-        setLongitude(value: any, noAssert?: boolean);
-    }
-
-    interface PlayerUpdateMessageData {
-        latitude?: number;
-        longitude?: number;
     }
 
 
@@ -4872,12 +4857,16 @@ export namespace Networking.Responses {
         items_unlocked: Inventory.Item.ItemId[];
         getItemsUnlocked(): Inventory.Item.ItemId[];
         setItemsUnlocked(value: any, noAssert?: boolean);
+        avatar_template_ids: string[];
+        getAvatarTemplateIds(): string[];
+        setAvatarTemplateIds(value: any, noAssert?: boolean);
     }
 
     interface LevelUpRewardsResponseData {
         result?: LevelUpRewardsResponse.Result;
         items_awarded: Inventory.Item.ItemAward[];
         items_unlocked: Inventory.Item.ItemId[];
+        avatar_template_ids: string[];
     }
 
 
@@ -4925,27 +4914,6 @@ export namespace Networking.Responses {
 
     interface NicknamePokemonResponseData {
         result?: NicknamePokemonResponse.Result;
-    }
-
-
-    export class PlayerUpdateResponse extends ProtoBufMessage {
-        constructor(data: PlayerUpdateResponseData);
-        static decode(buffer?: any, length?: number | string, enc?: string): PlayerUpdateResponse;
-        wild_pokemons: Map.Pokemon.WildPokemon[];
-        getWildPokemons(): Map.Pokemon.WildPokemon[];
-        setWildPokemons(value: any, noAssert?: boolean);
-        forts: Map.Fort.FortData[];
-        getForts(): Map.Fort.FortData[];
-        setForts(value: any, noAssert?: boolean);
-        forts_nearby: number;
-        getFortsNearby(): number;
-        setFortsNearby(value: any, noAssert?: boolean);
-    }
-
-    interface PlayerUpdateResponseData {
-        wild_pokemons: Map.Pokemon.WildPokemon[];
-        forts: Map.Fort.FortData[];
-        forts_nearby?: number;
     }
 
 
@@ -5402,6 +5370,9 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         form_settings: Settings.Master.FormSettings;
         getFormSettings(): Settings.Master.FormSettings;
         setFormSettings(value: any, noAssert?: boolean);
+        gender_settings: Settings.Master.GenderSettings;
+        getGenderSettings(): Settings.Master.GenderSettings;
+        setGenderSettings(value: any, noAssert?: boolean);
     }
 
     interface ItemTemplateData {
@@ -5424,6 +5395,7 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
         quest_settings?: Settings.Master.QuestSettings;
         avatar_customization?: Settings.Master.AvatarCustomizationSettings;
         form_settings?: Settings.Master.FormSettings;
+        gender_settings?: Settings.Master.GenderSettings;
     }
 
 
@@ -5777,6 +5749,9 @@ export namespace Settings.Master {
         icon_name: string;
         getIconName(): string;
         setIconName(value: any, noAssert?: boolean);
+        unlock_player_level: number;
+        getUnlockPlayerLevel(): number;
+        setUnlockPlayerLevel(value: any, noAssert?: boolean);
     }
 
     interface AvatarCustomizationSettingsData {
@@ -5793,6 +5768,7 @@ export namespace Settings.Master {
         iap_sku?: string;
         unlock_badge_level?: number;
         icon_name?: string;
+        unlock_player_level?: number;
     }
 
 
@@ -5958,6 +5934,23 @@ export namespace Settings.Master {
     interface FormSettingsData {
         pokemon?: Enums.PokemonId;
         forms: FormSettings.Form[];
+    }
+
+
+    export class GenderSettings extends ProtoBufMessage {
+        constructor(data: GenderSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GenderSettings;
+        pokemon: Enums.PokemonId;
+        getPokemon(): Enums.PokemonId;
+        setPokemon(value: any, noAssert?: boolean);
+        gender: Pokemon.PokemonGenderSettings;
+        getGender(): Pokemon.PokemonGenderSettings;
+        setGender(value: any, noAssert?: boolean);
+    }
+
+    interface GenderSettingsData {
+        pokemon?: Enums.PokemonId;
+        gender?: Pokemon.PokemonGenderSettings;
     }
 
 
@@ -6492,6 +6485,187 @@ export namespace Settings.Master.FormSettings {
 }
 
 
+export namespace Settings.Master.Pokemon {
+
+    export class CameraAttributes extends ProtoBufMessage {
+        constructor(data: CameraAttributesData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CameraAttributes;
+        disk_radius_m: number;
+        getDiskRadiusM(): number;
+        setDiskRadiusM(value: any, noAssert?: boolean);
+        cylinder_radius_m: number;
+        getCylinderRadiusM(): number;
+        setCylinderRadiusM(value: any, noAssert?: boolean);
+        cylinder_height_m: number;
+        getCylinderHeightM(): number;
+        setCylinderHeightM(value: any, noAssert?: boolean);
+        cylinder_ground_m: number;
+        getCylinderGroundM(): number;
+        setCylinderGroundM(value: any, noAssert?: boolean);
+        shoulder_mode_scale: number;
+        getShoulderModeScale(): number;
+        setShoulderModeScale(value: any, noAssert?: boolean);
+    }
+
+    interface CameraAttributesData {
+        disk_radius_m?: number;
+        cylinder_radius_m?: number;
+        cylinder_height_m?: number;
+        cylinder_ground_m?: number;
+        shoulder_mode_scale?: number;
+    }
+
+
+    export class EncounterAttributes extends ProtoBufMessage {
+        constructor(data: EncounterAttributesData);
+        static decode(buffer?: any, length?: number | string, enc?: string): EncounterAttributes;
+        base_capture_rate: number;
+        getBaseCaptureRate(): number;
+        setBaseCaptureRate(value: any, noAssert?: boolean);
+        base_flee_rate: number;
+        getBaseFleeRate(): number;
+        setBaseFleeRate(value: any, noAssert?: boolean);
+        collision_radius_m: number;
+        getCollisionRadiusM(): number;
+        setCollisionRadiusM(value: any, noAssert?: boolean);
+        collision_height_m: number;
+        getCollisionHeightM(): number;
+        setCollisionHeightM(value: any, noAssert?: boolean);
+        collision_head_radius_m: number;
+        getCollisionHeadRadiusM(): number;
+        setCollisionHeadRadiusM(value: any, noAssert?: boolean);
+        movement_type: Enums.PokemonMovementType;
+        getMovementType(): Enums.PokemonMovementType;
+        setMovementType(value: any, noAssert?: boolean);
+        movement_timer_s: number;
+        getMovementTimerS(): number;
+        setMovementTimerS(value: any, noAssert?: boolean);
+        jump_time_s: number;
+        getJumpTimeS(): number;
+        setJumpTimeS(value: any, noAssert?: boolean);
+        attack_timer_s: number;
+        getAttackTimerS(): number;
+        setAttackTimerS(value: any, noAssert?: boolean);
+        bonus_candy_capture_reward: number;
+        getBonusCandyCaptureReward(): number;
+        setBonusCandyCaptureReward(value: any, noAssert?: boolean);
+        bonus_stardust_capture_reward: number;
+        getBonusStardustCaptureReward(): number;
+        setBonusStardustCaptureReward(value: any, noAssert?: boolean);
+        attack_probability: number;
+        getAttackProbability(): number;
+        setAttackProbability(value: any, noAssert?: boolean);
+        dodge_probability: number;
+        getDodgeProbability(): number;
+        setDodgeProbability(value: any, noAssert?: boolean);
+        dodge_duration_s: number;
+        getDodgeDurationS(): number;
+        setDodgeDurationS(value: any, noAssert?: boolean);
+        dodge_distance: number;
+        getDodgeDistance(): number;
+        setDodgeDistance(value: any, noAssert?: boolean);
+        camera_distance: number;
+        getCameraDistance(): number;
+        setCameraDistance(value: any, noAssert?: boolean);
+        min_pokemon_action_frequency_s: number;
+        getMinPokemonActionFrequencyS(): number;
+        setMinPokemonActionFrequencyS(value: any, noAssert?: boolean);
+        max_pokemon_action_frequency_s: number;
+        getMaxPokemonActionFrequencyS(): number;
+        setMaxPokemonActionFrequencyS(value: any, noAssert?: boolean);
+    }
+
+    interface EncounterAttributesData {
+        base_capture_rate?: number;
+        base_flee_rate?: number;
+        collision_radius_m?: number;
+        collision_height_m?: number;
+        collision_head_radius_m?: number;
+        movement_type?: Enums.PokemonMovementType;
+        movement_timer_s?: number;
+        jump_time_s?: number;
+        attack_timer_s?: number;
+        bonus_candy_capture_reward?: number;
+        bonus_stardust_capture_reward?: number;
+        attack_probability?: number;
+        dodge_probability?: number;
+        dodge_duration_s?: number;
+        dodge_distance?: number;
+        camera_distance?: number;
+        min_pokemon_action_frequency_s?: number;
+        max_pokemon_action_frequency_s?: number;
+    }
+
+
+    export class EvolutionBranch extends ProtoBufMessage {
+        constructor(data: EvolutionBranchData);
+        static decode(buffer?: any, length?: number | string, enc?: string): EvolutionBranch;
+        evolution: Enums.PokemonId;
+        getEvolution(): Enums.PokemonId;
+        setEvolution(value: any, noAssert?: boolean);
+        evolution_item_requirement: Inventory.Item.ItemId;
+        getEvolutionItemRequirement(): Inventory.Item.ItemId;
+        setEvolutionItemRequirement(value: any, noAssert?: boolean);
+        candy_cost: number;
+        getCandyCost(): number;
+        setCandyCost(value: any, noAssert?: boolean);
+    }
+
+    interface EvolutionBranchData {
+        evolution?: Enums.PokemonId;
+        evolution_item_requirement?: Inventory.Item.ItemId;
+        candy_cost?: number;
+    }
+
+
+    export class PokemonGenderSettings extends ProtoBufMessage {
+        constructor(data: PokemonGenderSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PokemonGenderSettings;
+        male_percent: number;
+        getMalePercent(): number;
+        setMalePercent(value: any, noAssert?: boolean);
+        female_percent: number;
+        getFemalePercent(): number;
+        setFemalePercent(value: any, noAssert?: boolean);
+        genderless_percent: number;
+        getGenderlessPercent(): number;
+        setGenderlessPercent(value: any, noAssert?: boolean);
+    }
+
+    interface PokemonGenderSettingsData {
+        male_percent?: number;
+        female_percent?: number;
+        genderless_percent?: number;
+    }
+
+
+    export class StatsAttributes extends ProtoBufMessage {
+        constructor(data: StatsAttributesData);
+        static decode(buffer?: any, length?: number | string, enc?: string): StatsAttributes;
+        base_stamina: number;
+        getBaseStamina(): number;
+        setBaseStamina(value: any, noAssert?: boolean);
+        base_attack: number;
+        getBaseAttack(): number;
+        setBaseAttack(value: any, noAssert?: boolean);
+        base_defense: number;
+        getBaseDefense(): number;
+        setBaseDefense(value: any, noAssert?: boolean);
+        dodge_energy_delta: number;
+        getDodgeEnergyDelta(): number;
+        setDodgeEnergyDelta(value: any, noAssert?: boolean);
+    }
+
+    interface StatsAttributesData {
+        base_stamina?: number;
+        base_attack?: number;
+        base_defense?: number;
+        dodge_energy_delta?: number;
+    }
+
+}
+
+
 export namespace Settings.Master.Item {
 
     export class BattleAttributes extends ProtoBufMessage {
@@ -6694,166 +6868,6 @@ export namespace Settings.Master.Item {
 }
 
 
-export namespace Settings.Master.Pokemon {
-
-    export class CameraAttributes extends ProtoBufMessage {
-        constructor(data: CameraAttributesData);
-        static decode(buffer?: any, length?: number | string, enc?: string): CameraAttributes;
-        disk_radius_m: number;
-        getDiskRadiusM(): number;
-        setDiskRadiusM(value: any, noAssert?: boolean);
-        cylinder_radius_m: number;
-        getCylinderRadiusM(): number;
-        setCylinderRadiusM(value: any, noAssert?: boolean);
-        cylinder_height_m: number;
-        getCylinderHeightM(): number;
-        setCylinderHeightM(value: any, noAssert?: boolean);
-        cylinder_ground_m: number;
-        getCylinderGroundM(): number;
-        setCylinderGroundM(value: any, noAssert?: boolean);
-        shoulder_mode_scale: number;
-        getShoulderModeScale(): number;
-        setShoulderModeScale(value: any, noAssert?: boolean);
-    }
-
-    interface CameraAttributesData {
-        disk_radius_m?: number;
-        cylinder_radius_m?: number;
-        cylinder_height_m?: number;
-        cylinder_ground_m?: number;
-        shoulder_mode_scale?: number;
-    }
-
-
-    export class EncounterAttributes extends ProtoBufMessage {
-        constructor(data: EncounterAttributesData);
-        static decode(buffer?: any, length?: number | string, enc?: string): EncounterAttributes;
-        base_capture_rate: number;
-        getBaseCaptureRate(): number;
-        setBaseCaptureRate(value: any, noAssert?: boolean);
-        base_flee_rate: number;
-        getBaseFleeRate(): number;
-        setBaseFleeRate(value: any, noAssert?: boolean);
-        collision_radius_m: number;
-        getCollisionRadiusM(): number;
-        setCollisionRadiusM(value: any, noAssert?: boolean);
-        collision_height_m: number;
-        getCollisionHeightM(): number;
-        setCollisionHeightM(value: any, noAssert?: boolean);
-        collision_head_radius_m: number;
-        getCollisionHeadRadiusM(): number;
-        setCollisionHeadRadiusM(value: any, noAssert?: boolean);
-        movement_type: Enums.PokemonMovementType;
-        getMovementType(): Enums.PokemonMovementType;
-        setMovementType(value: any, noAssert?: boolean);
-        movement_timer_s: number;
-        getMovementTimerS(): number;
-        setMovementTimerS(value: any, noAssert?: boolean);
-        jump_time_s: number;
-        getJumpTimeS(): number;
-        setJumpTimeS(value: any, noAssert?: boolean);
-        attack_timer_s: number;
-        getAttackTimerS(): number;
-        setAttackTimerS(value: any, noAssert?: boolean);
-        bonus_candy_capture_reward: number;
-        getBonusCandyCaptureReward(): number;
-        setBonusCandyCaptureReward(value: any, noAssert?: boolean);
-        bonus_stardust_capture_reward: number;
-        getBonusStardustCaptureReward(): number;
-        setBonusStardustCaptureReward(value: any, noAssert?: boolean);
-        attack_probability: number;
-        getAttackProbability(): number;
-        setAttackProbability(value: any, noAssert?: boolean);
-        dodge_probability: number;
-        getDodgeProbability(): number;
-        setDodgeProbability(value: any, noAssert?: boolean);
-        dodge_duration_s: number;
-        getDodgeDurationS(): number;
-        setDodgeDurationS(value: any, noAssert?: boolean);
-        dodge_distance: number;
-        getDodgeDistance(): number;
-        setDodgeDistance(value: any, noAssert?: boolean);
-        camera_distance: number;
-        getCameraDistance(): number;
-        setCameraDistance(value: any, noAssert?: boolean);
-        min_pokemon_action_frequency_s: number;
-        getMinPokemonActionFrequencyS(): number;
-        setMinPokemonActionFrequencyS(value: any, noAssert?: boolean);
-        max_pokemon_action_frequency_s: number;
-        getMaxPokemonActionFrequencyS(): number;
-        setMaxPokemonActionFrequencyS(value: any, noAssert?: boolean);
-    }
-
-    interface EncounterAttributesData {
-        base_capture_rate?: number;
-        base_flee_rate?: number;
-        collision_radius_m?: number;
-        collision_height_m?: number;
-        collision_head_radius_m?: number;
-        movement_type?: Enums.PokemonMovementType;
-        movement_timer_s?: number;
-        jump_time_s?: number;
-        attack_timer_s?: number;
-        bonus_candy_capture_reward?: number;
-        bonus_stardust_capture_reward?: number;
-        attack_probability?: number;
-        dodge_probability?: number;
-        dodge_duration_s?: number;
-        dodge_distance?: number;
-        camera_distance?: number;
-        min_pokemon_action_frequency_s?: number;
-        max_pokemon_action_frequency_s?: number;
-    }
-
-
-    export class EvolutionBranch extends ProtoBufMessage {
-        constructor(data: EvolutionBranchData);
-        static decode(buffer?: any, length?: number | string, enc?: string): EvolutionBranch;
-        evolution: Enums.PokemonId;
-        getEvolution(): Enums.PokemonId;
-        setEvolution(value: any, noAssert?: boolean);
-        evolution_item_requirement: Inventory.Item.ItemId;
-        getEvolutionItemRequirement(): Inventory.Item.ItemId;
-        setEvolutionItemRequirement(value: any, noAssert?: boolean);
-        candy_cost: number;
-        getCandyCost(): number;
-        setCandyCost(value: any, noAssert?: boolean);
-    }
-
-    interface EvolutionBranchData {
-        evolution?: Enums.PokemonId;
-        evolution_item_requirement?: Inventory.Item.ItemId;
-        candy_cost?: number;
-    }
-
-
-    export class StatsAttributes extends ProtoBufMessage {
-        constructor(data: StatsAttributesData);
-        static decode(buffer?: any, length?: number | string, enc?: string): StatsAttributes;
-        base_stamina: number;
-        getBaseStamina(): number;
-        setBaseStamina(value: any, noAssert?: boolean);
-        base_attack: number;
-        getBaseAttack(): number;
-        setBaseAttack(value: any, noAssert?: boolean);
-        base_defense: number;
-        getBaseDefense(): number;
-        setBaseDefense(value: any, noAssert?: boolean);
-        dodge_energy_delta: number;
-        getDodgeEnergyDelta(): number;
-        setDodgeEnergyDelta(value: any, noAssert?: boolean);
-    }
-
-    interface StatsAttributesData {
-        base_stamina?: number;
-        base_attack?: number;
-        base_defense?: number;
-        dodge_energy_delta?: number;
-    }
-
-}
-
-
 export namespace Settings.Master.Quest {
 
     export class DailyQuestSettings extends ProtoBufMessage {
@@ -6956,6 +6970,7 @@ export namespace Enums {
         BADGE_SMALL_RATTATA = 36,
         BADGE_PIKACHU = 37,
         BADGE_UNOWN = 38,
+        BADGE_POKEDEX_ENTRIES_GEN2 = 39,
     }
 
 
@@ -6989,6 +7004,7 @@ export namespace Enums {
     export const enum Costume {
         COSTUME_UNSET = 0,
         HOLIDAY_2016 = 1,
+        ANNIVERSARY = 2,
     }
 
 
@@ -7038,8 +7054,8 @@ export namespace Enums {
         UNOWN_X = 24,
         UNOWN_Y = 25,
         UNOWN_Z = 26,
-        UNOWN_QUESTION_MARK = 27,
-        UNOWN_EXCLAMATION_POINT = 28,
+        UNOWN_EXCLAMATION_POINT = 27,
+        UNOWN_QUESTION_MARK = 28,
     }
 
 
@@ -7104,6 +7120,7 @@ export namespace Enums {
         ANDROID = 2,
         OSX = 3,
         WINDOWS = 4,
+        APPLE_WATCH = 5,
     }
 
 
@@ -7720,6 +7737,7 @@ export namespace Enums {
         SNARL_FAST = 278,
         CRUNCH = 279,
         FOUL_PLAY = 280,
+        HIDDEN_POWER_FAST = 281,
     }
 
 
@@ -7824,6 +7842,7 @@ export namespace Data.Avatar.AvatarCustomization {
         PURCHASABLE = 6,
         UNLOCKABLE = 7,
         VIEWED = 8,
+        LOCKED_PURCHASABLE = 9,
     }
 
 }
@@ -8493,6 +8512,7 @@ export namespace Settings.Master.AvatarCustomizationSettings {
         DEFAULT = 1,
         MEDAL_REWARD = 2,
         IAP_CLOTHING = 3,
+        LEVEL_REWARD = 4,
     }
 
 }
