@@ -806,7 +806,7 @@ export namespace Data.Player {
     }
 
 
-    export const enum PlayerAvatarType {
+    export enum PlayerAvatarType {
         PLAYER_AVATAR_MALE = 0,
         PLAYER_AVATAR_FEMALE = 1,
     }
@@ -1094,7 +1094,7 @@ export namespace Data.Battle {
     }
 
 
-    export const enum BattleActionType {
+    export enum BattleActionType {
         ACTION_UNSET = 0,
         ACTION_ATTACK = 1,
         ACTION_DODGE = 2,
@@ -1109,7 +1109,7 @@ export namespace Data.Battle {
     }
 
 
-    export const enum BattleState {
+    export enum BattleState {
         STATE_UNSET = 0,
         ACTIVE = 1,
         VICTORY = 2,
@@ -1118,7 +1118,7 @@ export namespace Data.Battle {
     }
 
 
-    export const enum BattleType {
+    export enum BattleType {
         BATTLE_TYPE_UNSET = 0,
         BATTLE_TYPE_NORMAL = 1,
         BATTLE_TYPE_TRAINING = 2,
@@ -1628,13 +1628,13 @@ export namespace Inventory {
     }
 
 
-    export const enum EggIncubatorType {
+    export enum EggIncubatorType {
         INCUBATOR_UNSET = 0,
         INCUBATOR_DISTANCE = 1,
     }
 
 
-    export const enum InventoryUpgradeType {
+    export enum InventoryUpgradeType {
         UPGRADE_UNSET = 0,
         INCREASE_ITEM_STORAGE = 1,
         INCREASE_POKEMON_STORAGE = 2,
@@ -1704,7 +1704,7 @@ export namespace Inventory.Item {
     }
 
 
-    export const enum ItemId {
+    export enum ItemId {
         ITEM_UNKNOWN = 0,
         ITEM_POKE_BALL = 1,
         ITEM_GREAT_BALL = 2,
@@ -1743,7 +1743,7 @@ export namespace Inventory.Item {
     }
 
 
-    export const enum ItemType {
+    export enum ItemType {
         ITEM_TYPE_NONE = 0,
         ITEM_TYPE_POKEBALL = 1,
         ITEM_TYPE_POTION = 2,
@@ -1835,7 +1835,7 @@ export namespace Map {
     }
 
 
-    export const enum MapObjectsStatus {
+    export enum MapObjectsStatus {
         UNSET_STATUS = 0,
         SUCCESS = 1,
         LOCATION_UNSET = 2,
@@ -1998,13 +1998,13 @@ export namespace Map.Fort {
     }
 
 
-    export const enum FortRenderingType {
+    export enum FortRenderingType {
         DEFAULT = 0,
         INTERNAL_TEST = 1,
     }
 
 
-    export const enum FortSponsor {
+    export enum FortSponsor {
         UNSET_SPONSOR = 0,
         MCDONALDS = 1,
         POKEMON_STORE = 2,
@@ -2028,7 +2028,7 @@ export namespace Map.Fort {
     }
 
 
-    export const enum FortType {
+    export enum FortType {
         GYM = 0,
         CHECKPOINT = 1,
     }
@@ -2166,7 +2166,7 @@ export namespace Networking.Requests {
     }
 
 
-    export const enum RequestType {
+    export enum RequestType {
         METHOD_UNSET = 0,
         GET_PLAYER = 2,
         GET_INVENTORY = 4,
@@ -2334,6 +2334,17 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class CheckAwardedBadgesMessage extends ProtoBufMessage {
+        constructor(data: CheckAwardedBadgesMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CheckAwardedBadgesMessage;
+
+    }
+
+    interface CheckAwardedBadgesMessageData {
+
+    }
+
+
     export class CheckChallengeMessage extends ProtoBufMessage {
         constructor(data: CheckChallengeMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): CheckChallengeMessage;
@@ -2357,6 +2368,28 @@ export namespace Networking.Requests.Messages {
 
     interface ClaimCodenameMessageData {
         codename?: string;
+    }
+
+
+    export class CollectDailyBonusMessage extends ProtoBufMessage {
+        constructor(data: CollectDailyBonusMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CollectDailyBonusMessage;
+
+    }
+
+    interface CollectDailyBonusMessageData {
+
+    }
+
+
+    export class CollectDailyDefenderBonusMessage extends ProtoBufMessage {
+        constructor(data: CollectDailyDefenderBonusMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): CollectDailyDefenderBonusMessage;
+
+    }
+
+    interface CollectDailyDefenderBonusMessageData {
+
     }
 
 
@@ -2445,6 +2478,17 @@ export namespace Networking.Requests.Messages {
 
     interface DownloadSettingsMessageData {
         hash?: string;
+    }
+
+
+    export class EchoMessage extends ProtoBufMessage {
+        constructor(data: EchoMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): EchoMessage;
+
+    }
+
+    interface EchoMessageData {
+
     }
 
 
@@ -2645,6 +2689,17 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class GetBuddyWalkedMessage extends ProtoBufMessage {
+        constructor(data: GetBuddyWalkedMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetBuddyWalkedMessage;
+
+    }
+
+    interface GetBuddyWalkedMessageData {
+
+    }
+
+
     export class GetDownloadUrlsMessage extends ProtoBufMessage {
         constructor(data: GetDownloadUrlsMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): GetDownloadUrlsMessage;
@@ -2688,6 +2743,17 @@ export namespace Networking.Requests.Messages {
         gym_latitude?: number;
         gym_longitude?: number;
         client_version?: string;
+    }
+
+
+    export class GetHatchedEggsMessage extends ProtoBufMessage {
+        constructor(data: GetHatchedEggsMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetHatchedEggsMessage;
+
+    }
+
+    interface GetHatchedEggsMessageData {
+
     }
 
 
@@ -3003,6 +3069,17 @@ export namespace Networking.Requests.Messages {
 
     interface SetPlayerTeamMessageData {
         team?: Enums.TeamColor;
+    }
+
+
+    export class SfidaActionLogMessage extends ProtoBufMessage {
+        constructor(data: SfidaActionLogMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SfidaActionLogMessage;
+
+    }
+
+    interface SfidaActionLogMessageData {
+
     }
 
 
@@ -3412,7 +3489,7 @@ export namespace Networking.Platform.Responses.GetStoreItemsResponse {
     }
 
 
-    export const enum Status {
+    export enum Status {
         UNDEFINED = 0,
         OKAY = 1,
     }
@@ -3637,6 +3714,17 @@ export namespace Networking.Envelopes {
         unknown25?: Long;
     }
 
+
+    export class UnknownMessage extends ProtoBufMessage {
+        constructor(data: UnknownMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UnknownMessage;
+
+    }
+
+    interface UnknownMessageData {
+
+    }
+
 }
 
 
@@ -3718,7 +3806,7 @@ export namespace Networking.Envelopes.ResponseEnvelope {
     }
 
 
-    export const enum StatusCode {
+    export enum StatusCode {
         UNKNOWN = 0,
         OK = 1,
         OK_RPC_URL_IN_RESPONSE = 2,
@@ -5399,7 +5487,7 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
     }
 
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         PAGE = 2,
@@ -6899,7 +6987,7 @@ export namespace Settings.Master.Quest {
 
 export namespace Enums {
 
-    export const enum ActivityType {
+    export enum ActivityType {
         ACTIVITY_UNKNOWN = 0,
         ACTIVITY_CATCH_POKEMON = 1,
         ACTIVITY_CATCH_LEGEND_POKEMON = 2,
@@ -6930,7 +7018,7 @@ export namespace Enums {
     }
 
 
-    export const enum BadgeType {
+    export enum BadgeType {
         BADGE_UNSET = 0,
         BADGE_TRAVEL_KM = 1,
         BADGE_POKEDEX_ENTRIES = 2,
@@ -6974,7 +7062,7 @@ export namespace Enums {
     }
 
 
-    export const enum CameraInterpolation {
+    export enum CameraInterpolation {
         CAM_INTERP_CUT = 0,
         CAM_INTERP_LINEAR = 1,
         CAM_INTERP_SMOOTH = 2,
@@ -6983,7 +7071,7 @@ export namespace Enums {
     }
 
 
-    export const enum CameraTarget {
+    export enum CameraTarget {
         CAM_TARGET_ATTACKER = 0,
         CAM_TARGET_ATTACKER_EDGE = 1,
         CAM_TARGET_ATTACKER_GROUND = 2,
@@ -7001,21 +7089,21 @@ export namespace Enums {
     }
 
 
-    export const enum Costume {
+    export enum Costume {
         COSTUME_UNSET = 0,
         HOLIDAY_2016 = 1,
         ANNIVERSARY = 2,
     }
 
 
-    export const enum EncounterType {
+    export enum EncounterType {
         SPAWN_POINT = 0,
         INCENSE = 1,
         DISK = 2,
     }
 
 
-    export const enum Filter {
+    export enum Filter {
         UNSET_FILTER = 0,
         ALL = 1,
         DEFAULT = 2,
@@ -7026,7 +7114,7 @@ export namespace Enums {
     }
 
 
-    export const enum Form {
+    export enum Form {
         FORM_UNSET = 0,
         UNOWN_A = 1,
         UNOWN_B = 2,
@@ -7059,7 +7147,7 @@ export namespace Enums {
     }
 
 
-    export const enum Gender {
+    export enum Gender {
         GENDER_UNSET = 0,
         MALE = 1,
         FEMALE = 2,
@@ -7067,7 +7155,7 @@ export namespace Enums {
     }
 
 
-    export const enum HoloIapItemCategory {
+    export enum HoloIapItemCategory {
         IAP_CATEGORY_NONE = 0,
         IAP_CATEGORY_BUNDLE = 1,
         IAP_CATEGORY_ITEMS = 2,
@@ -7077,7 +7165,7 @@ export namespace Enums {
     }
 
 
-    export const enum ItemCategory {
+    export enum ItemCategory {
         ITEM_CATEGORY_NONE = 0,
         ITEM_CATEGORY_POKEBALL = 1,
         ITEM_CATEGORY_FOOD = 2,
@@ -7094,7 +7182,7 @@ export namespace Enums {
     }
 
 
-    export const enum ItemEffect {
+    export enum ItemEffect {
         ITEM_EFFECT_NONE = 0,
         ITEM_EFFECT_CAP_NO_FLEE = 1000,
         ITEM_EFFECT_CAP_NO_MOVEMENT = 1002,
@@ -7114,7 +7202,7 @@ export namespace Enums {
     }
 
 
-    export const enum Platform {
+    export enum Platform {
         UNSET = 0,
         IOS = 1,
         ANDROID = 2,
@@ -7124,7 +7212,7 @@ export namespace Enums {
     }
 
 
-    export const enum PokemonFamilyId {
+    export enum PokemonFamilyId {
         FAMILY_UNSET = 0,
         FAMILY_BULBASAUR = 1,
         FAMILY_CHARMANDER = 4,
@@ -7261,7 +7349,7 @@ export namespace Enums {
     }
 
 
-    export const enum PokemonId {
+    export enum PokemonId {
         MISSINGNO = 0,
         BULBASAUR = 1,
         IVYSAUR = 2,
@@ -7517,7 +7605,7 @@ export namespace Enums {
     }
 
 
-    export const enum PokemonMove {
+    export enum PokemonMove {
         MOVE_UNSET = 0,
         THUNDER_SHOCK = 1,
         QUICK_ATTACK = 2,
@@ -7741,7 +7829,7 @@ export namespace Enums {
     }
 
 
-    export const enum PokemonMovementType {
+    export enum PokemonMovementType {
         MOVEMENT_STATIC = 0,
         MOVEMENT_JUMP = 1,
         MOVEMENT_VERTICAL = 2,
@@ -7752,14 +7840,14 @@ export namespace Enums {
     }
 
 
-    export const enum PokemonRarity {
+    export enum PokemonRarity {
         POKEMON_RARITY_NORMAL = 0,
         POKEMON_RARITY_LEGENDARY = 1,
         POKEMON_RARITY_MYTHIC = 2,
     }
 
 
-    export const enum PokemonType {
+    export enum PokemonType {
         POKEMON_TYPE_NONE = 0,
         POKEMON_TYPE_NORMAL = 1,
         POKEMON_TYPE_FIGHTING = 2,
@@ -7782,14 +7870,14 @@ export namespace Enums {
     }
 
 
-    export const enum QuestType {
+    export enum QuestType {
         QUEST_UNKNOWN_TYPE = 0,
         QUEST_FIRST_CATCH_OF_THE_DAY = 1,
         QUEST_FIRST_POKESTOP_OF_THE_DAY = 2,
     }
 
 
-    export const enum Slot {
+    export enum Slot {
         UNSET_SLOT = 0,
         HAIR = 1,
         SHIRT = 2,
@@ -7806,7 +7894,7 @@ export namespace Enums {
     }
 
 
-    export const enum TeamColor {
+    export enum TeamColor {
         NEUTRAL = 0,
         BLUE = 1,
         RED = 2,
@@ -7814,7 +7902,7 @@ export namespace Enums {
     }
 
 
-    export const enum TutorialState {
+    export enum TutorialState {
         LEGAL_SCREEN = 0,
         AVATAR_SELECTION = 1,
         ACCOUNT_CREATION = 2,
@@ -7832,7 +7920,7 @@ export namespace Enums {
 
 export namespace Data.Avatar.AvatarCustomization {
 
-    export const enum Label {
+    export enum Label {
         UNSET_LABEL = 0,
         DEFAULT = 1,
         OWNED = 2,
@@ -7850,7 +7938,7 @@ export namespace Data.Avatar.AvatarCustomization {
 
 export namespace Data.Logs.BuddyPokemonLogEntry {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         CANDY_FOUND = 1,
     }
@@ -7860,7 +7948,7 @@ export namespace Data.Logs.BuddyPokemonLogEntry {
 
 export namespace Data.Logs.CatchPokemonLogEntry {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         POKEMON_CAPTURED = 1,
         POKEMON_FLED = 2,
@@ -7872,7 +7960,7 @@ export namespace Data.Logs.CatchPokemonLogEntry {
 
 export namespace Data.Logs.FortSearchLogEntry {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
     }
@@ -7882,7 +7970,7 @@ export namespace Data.Logs.FortSearchLogEntry {
 
 export namespace Networking.Platform {
 
-    export const enum PlatformRequestType {
+    export enum PlatformRequestType {
         METHOD_UNSET = 0,
         BUY_ITEM_POKECOINS = 2,
         BUY_ITEM_ANDROID = 3,
@@ -7897,7 +7985,7 @@ export namespace Networking.Platform {
 
 export namespace Networking.Platform.Responses.BuyItemAndroidResponse {
 
-    export const enum Status {
+    export enum Status {
         UNKNOWN = 0,
         SUCCESS = 1,
     }
@@ -7907,7 +7995,7 @@ export namespace Networking.Platform.Responses.BuyItemAndroidResponse {
 
 export namespace Networking.Platform.Responses.BuyItemPokeCoinsResponse {
 
-    export const enum Status {
+    export enum Status {
         UNKNOWN = 0,
         SUCCESS = 1,
         NOT_ENOUGH_POKECOINS = 3,
@@ -7918,7 +8006,7 @@ export namespace Networking.Platform.Responses.BuyItemPokeCoinsResponse {
 
 export namespace Networking.Responses.AddFortModifierResponse {
 
-    export const enum Result {
+    export enum Result {
         NO_RESULT_SET = 0,
         SUCCESS = 1,
         FORT_ALREADY_HAS_MODIFIER = 2,
@@ -7931,7 +8019,7 @@ export namespace Networking.Responses.AddFortModifierResponse {
 
 export namespace Networking.Responses.AttackGymResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_INVALID_ATTACK_ACTIONS = 2,
@@ -7943,7 +8031,7 @@ export namespace Networking.Responses.AttackGymResponse {
 
 export namespace Networking.Responses.CatchPokemonResponse {
 
-    export const enum CatchStatus {
+    export enum CatchStatus {
         CATCH_ERROR = 0,
         CATCH_SUCCESS = 1,
         CATCH_ESCAPE = 2,
@@ -7952,7 +8040,7 @@ export namespace Networking.Responses.CatchPokemonResponse {
     }
 
 
-    export const enum CaptureReason {
+    export enum CaptureReason {
         UNSET = 0,
         DEFAULT = 1,
         ELEMENTAL_BADGE = 2,
@@ -7964,7 +8052,7 @@ export namespace Networking.Responses.CatchPokemonResponse {
 
 export namespace Networking.Responses.CheckCodenameAvailableResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         CODENAME_NOT_AVAILABLE = 2,
@@ -7978,7 +8066,7 @@ export namespace Networking.Responses.CheckCodenameAvailableResponse {
 
 export namespace Networking.Responses.ClaimCodenameResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         CODENAME_NOT_AVAILABLE = 2,
@@ -7992,7 +8080,7 @@ export namespace Networking.Responses.ClaimCodenameResponse {
 
 export namespace Networking.Responses.CollectDailyBonusResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         FAILURE = 2,
@@ -8004,7 +8092,7 @@ export namespace Networking.Responses.CollectDailyBonusResponse {
 
 export namespace Networking.Responses.CollectDailyDefenderBonusResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         FAILURE = 2,
@@ -8017,7 +8105,7 @@ export namespace Networking.Responses.CollectDailyDefenderBonusResponse {
 
 export namespace Networking.Responses.DiskEncounterResponse {
 
-    export const enum Result {
+    export enum Result {
         UNKNOWN = 0,
         SUCCESS = 1,
         NOT_AVAILABLE = 2,
@@ -8031,7 +8119,7 @@ export namespace Networking.Responses.DiskEncounterResponse {
 
 export namespace Networking.Responses.DownloadRemoteConfigVersionResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
     }
@@ -8041,13 +8129,13 @@ export namespace Networking.Responses.DownloadRemoteConfigVersionResponse {
 
 export namespace Networking.Responses.EncounterResponse {
 
-    export const enum Background {
+    export enum Background {
         PARK = 0,
         DESERT = 1,
     }
 
 
-    export const enum Status {
+    export enum Status {
         ENCOUNTER_ERROR = 0,
         ENCOUNTER_SUCCESS = 1,
         ENCOUNTER_NOT_FOUND = 2,
@@ -8063,7 +8151,7 @@ export namespace Networking.Responses.EncounterResponse {
 
 export namespace Networking.Responses.EncounterTutorialCompleteResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_INVALID_POKEMON = 2,
@@ -8074,7 +8162,7 @@ export namespace Networking.Responses.EncounterTutorialCompleteResponse {
 
 export namespace Networking.Responses.EquipBadgeResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         COOLDOWN_ACTIVE = 2,
@@ -8086,7 +8174,7 @@ export namespace Networking.Responses.EquipBadgeResponse {
 
 export namespace Networking.Responses.EvolvePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         FAILED_POKEMON_MISSING = 2,
@@ -8101,7 +8189,7 @@ export namespace Networking.Responses.EvolvePokemonResponse {
 
 export namespace Networking.Responses.FortDeployPokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         NO_RESULT_SET = 0,
         SUCCESS = 1,
         ERROR_ALREADY_HAS_POKEMON_ON_FORT = 2,
@@ -8121,7 +8209,7 @@ export namespace Networking.Responses.FortDeployPokemonResponse {
 
 export namespace Networking.Responses.FortRecallPokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         NO_RESULT_SET = 0,
         SUCCESS = 1,
         ERROR_NOT_IN_RANGE = 2,
@@ -8134,7 +8222,7 @@ export namespace Networking.Responses.FortRecallPokemonResponse {
 
 export namespace Networking.Responses.FortSearchResponse {
 
-    export const enum Result {
+    export enum Result {
         NO_RESULT_SET = 0,
         SUCCESS = 1,
         OUT_OF_RANGE = 2,
@@ -8148,7 +8236,7 @@ export namespace Networking.Responses.FortSearchResponse {
 
 export namespace Networking.Responses.GetGymDetailsResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_NOT_IN_RANGE = 2,
@@ -8159,7 +8247,7 @@ export namespace Networking.Responses.GetGymDetailsResponse {
 
 export namespace Networking.Responses.GetIncensePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         INCENSE_ENCOUNTER_UNKNOWN = 0,
         INCENSE_ENCOUNTER_AVAILABLE = 1,
         INCENSE_ENCOUNTER_NOT_AVAILABLE = 2,
@@ -8170,7 +8258,7 @@ export namespace Networking.Responses.GetIncensePokemonResponse {
 
 export namespace Networking.Responses.GetMapObjectsResponse {
 
-    export const enum TimeOfDay {
+    export enum TimeOfDay {
         NONE = 0,
         DAY = 1,
         NIGHT = 2,
@@ -8181,7 +8269,7 @@ export namespace Networking.Responses.GetMapObjectsResponse {
 
 export namespace Networking.Responses.GetPlayerProfileResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
     }
@@ -8191,7 +8279,7 @@ export namespace Networking.Responses.GetPlayerProfileResponse {
 
 export namespace Networking.Responses.IncenseEncounterResponse {
 
-    export const enum Result {
+    export enum Result {
         INCENSE_ENCOUNTER_UNKNOWN = 0,
         INCENSE_ENCOUNTER_SUCCESS = 1,
         INCENSE_ENCOUNTER_NOT_AVAILABLE = 2,
@@ -8203,7 +8291,7 @@ export namespace Networking.Responses.IncenseEncounterResponse {
 
 export namespace Networking.Responses.LevelUpRewardsResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         AWARDED_ALREADY = 2,
@@ -8214,7 +8302,7 @@ export namespace Networking.Responses.LevelUpRewardsResponse {
 
 export namespace Networking.Responses.ListAvatarCustomizationsResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         FAILURE = 2,
@@ -8225,7 +8313,7 @@ export namespace Networking.Responses.ListAvatarCustomizationsResponse {
 
 export namespace Networking.Responses.NicknamePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_INVALID_NICKNAME = 2,
@@ -8238,7 +8326,7 @@ export namespace Networking.Responses.NicknamePokemonResponse {
 
 export namespace Networking.Responses.RecycleInventoryItemResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_NOT_ENOUGH_COPIES = 2,
@@ -8250,7 +8338,7 @@ export namespace Networking.Responses.RecycleInventoryItemResponse {
 
 export namespace Networking.Responses.RegisterBackgroundDeviceResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         ERROR = 2,
@@ -8261,7 +8349,7 @@ export namespace Networking.Responses.RegisterBackgroundDeviceResponse {
 
 export namespace Networking.Responses.ReleasePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         POKEMON_DEPLOYED = 2,
@@ -8275,7 +8363,7 @@ export namespace Networking.Responses.ReleasePokemonResponse {
 
 export namespace Networking.Responses.SetAvatarItemAsViewedResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         FAILURE = 2,
@@ -8286,7 +8374,7 @@ export namespace Networking.Responses.SetAvatarItemAsViewedResponse {
 
 export namespace Networking.Responses.SetAvatarResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         AVATAR_ALREADY_SET = 2,
@@ -8301,7 +8389,7 @@ export namespace Networking.Responses.SetAvatarResponse {
 
 export namespace Networking.Responses.SetBuddyPokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNEST = 0,
         SUCCESS = 1,
         ERROR_POKEMON_DEPLOYED = 2,
@@ -8314,7 +8402,7 @@ export namespace Networking.Responses.SetBuddyPokemonResponse {
 
 export namespace Networking.Responses.SetContactSettingsResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         FAILURE = 2,
@@ -8325,7 +8413,7 @@ export namespace Networking.Responses.SetContactSettingsResponse {
 
 export namespace Networking.Responses.SetFavoritePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_POKEMON_NOT_FOUND = 2,
@@ -8337,7 +8425,7 @@ export namespace Networking.Responses.SetFavoritePokemonResponse {
 
 export namespace Networking.Responses.SetPlayerTeamResponse {
 
-    export const enum Status {
+    export enum Status {
         UNSET = 0,
         SUCCESS = 1,
         TEAM_ALREADY_SET = 2,
@@ -8349,7 +8437,7 @@ export namespace Networking.Responses.SetPlayerTeamResponse {
 
 export namespace Networking.Responses.SfidaActionLogResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
     }
@@ -8359,7 +8447,7 @@ export namespace Networking.Responses.SfidaActionLogResponse {
 
 export namespace Networking.Responses.StartGymBattleResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_GYM_NOT_FOUND = 2,
@@ -8381,7 +8469,7 @@ export namespace Networking.Responses.StartGymBattleResponse {
 
 export namespace Networking.Responses.UpgradePokemonResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_POKEMON_NOT_FOUND = 2,
@@ -8395,7 +8483,7 @@ export namespace Networking.Responses.UpgradePokemonResponse {
 
 export namespace Networking.Responses.UseIncenseResponse {
 
-    export const enum Result {
+    export enum Result {
         UNKNOWN = 0,
         SUCCESS = 1,
         INCENSE_ALREADY_ACTIVE = 2,
@@ -8408,7 +8496,7 @@ export namespace Networking.Responses.UseIncenseResponse {
 
 export namespace Networking.Responses.UseItemEggIncubatorResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_INCUBATOR_NOT_FOUND = 2,
@@ -8424,7 +8512,7 @@ export namespace Networking.Responses.UseItemEggIncubatorResponse {
 
 export namespace Networking.Responses.UseItemEncounterResponse {
 
-    export const enum Status {
+    export enum Status {
         SUCCESS = 0,
         ALREADY_COMPLETED = 1,
         ACTIVE_ITEM_EXISTS = 2,
@@ -8437,7 +8525,7 @@ export namespace Networking.Responses.UseItemEncounterResponse {
 
 export namespace Networking.Responses.UseItemGymResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_CANNOT_USE = 2,
@@ -8449,7 +8537,7 @@ export namespace Networking.Responses.UseItemGymResponse {
 
 export namespace Networking.Responses.UseItemPotionResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_NO_POKEMON = 2,
@@ -8462,7 +8550,7 @@ export namespace Networking.Responses.UseItemPotionResponse {
 
 export namespace Networking.Responses.UseItemReviveResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_NO_POKEMON = 2,
@@ -8475,7 +8563,7 @@ export namespace Networking.Responses.UseItemReviveResponse {
 
 export namespace Networking.Responses.UseItemXpBoostResponse {
 
-    export const enum Result {
+    export enum Result {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_INVALID_ITEM_TYPE = 2,
@@ -8489,7 +8577,7 @@ export namespace Networking.Responses.UseItemXpBoostResponse {
 
 export namespace Settings.FestivalSettings {
 
-    export const enum FestivalType {
+    export enum FestivalType {
         NONE = 0,
         HALLOWEEN = 1,
         HOLIDAY = 2,
@@ -8500,14 +8588,14 @@ export namespace Settings.FestivalSettings {
 
 export namespace Settings.Master.AvatarCustomizationSettings {
 
-    export const enum AvatarCustomizationPromoType {
+    export enum AvatarCustomizationPromoType {
         UNSET_PROMO_TYPE = 0,
         SALE = 1,
         FEATURED = 2,
     }
 
 
-    export const enum AvatarCustomizationUnlockType {
+    export enum AvatarCustomizationUnlockType {
         UNSET_UNLOCK_TYPE = 0,
         DEFAULT = 1,
         MEDAL_REWARD = 2,
@@ -8520,7 +8608,7 @@ export namespace Settings.Master.AvatarCustomizationSettings {
 
 export namespace Settings.Master.PokemonSettings {
 
-    export const enum BuddySize {
+    export enum BuddySize {
         BUDDY_MEDIUM = 0,
         BUDDY_SHOULDER = 1,
         BUDDY_BIG = 2,

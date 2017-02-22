@@ -29,7 +29,7 @@
   },
   "typings": "./pogo-protos.d.ts",
   "devDependencies": {
-    "npp2ts": "^0.1.6",
+    "npp2ts": "pogosandbox/npp2ts#0.2.0",
     "typescript": "^1.8.10",
     "typescript-formatter": "^2.3.0"
   }
