@@ -10,6 +10,7 @@ import public "POGOProtos.Data.Gym.proto";
 import public "POGOProtos.Data.Logs.proto";
 import public "POGOProtos.Data.Player.proto";
 import public "POGOProtos.Data.Quests.proto";
+import public "POGOProtos.Data.Redeem.proto";
 import public "POGOProtos.Enums.proto";
 import public "POGOProtos.Inventory.proto";
 import public "POGOProtos.Inventory.Item.proto";

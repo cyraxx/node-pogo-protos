@@ -24,6 +24,7 @@ message FortData {
 	.POGOProtos.Map.Fort.FortRenderingType rendering_type = 16;
 	int64 deploy_lockout_end_ms = 17;
 	.POGOProtos.Data.PokemonDisplay guard_pokemon_display = 18;
+	bool closed = 19;
 }
 message FortLureInfo {
 	string fort_id = 1;
@@ -61,6 +62,8 @@ enum FortSponsor {
 	MIXER = 17;
 	SCOOPER = 18;
 	MUFFINTIN = 19;
+	SALAMANDER = 20;
+	PLANCHA = 21;
 }
 message FortSummary {
 	string fort_summary_id = 1;

@@ -37,6 +37,7 @@ message CheckChallengeMessage {
 }
 message ClaimCodenameMessage {
 	string codename = 1;
+	bool force = 2;
 }
 message CollectDailyBonusMessage {
 	// No message needed.
@@ -114,6 +115,9 @@ message GetAssetDigestMessage {
 	string device_model = 3;
 	string locale = 4;
 	uint32 app_version = 5;
+	bool paginate = 6;
+	int32 page_offset = 7;
+	uint64 page_timestamp = 8;
 }
 message GetBuddyWalkedMessage {
 }
@@ -129,6 +133,9 @@ message GetGymDetailsMessage {
 	string client_version = 6;
 }
 message GetHatchedEggsMessage {
+	// No message needed.
+}
+message GetInboxMessage {
 	// No message needed.
 }
 message GetIncensePokemonMessage {
@@ -220,6 +227,11 @@ message StartGymBattleMessage {
 	fixed64 defending_pokemon_id = 3;  // needs to be fixed64, tested by Grover
 	double player_latitude = 4;
 	double player_longitude = 5;
+}
+message UpdateNotificationMessage {
+	repeated string notification_ids = 1;
+	repeated int64 create_timestamp_ms = 2;
+	.POGOProtos.Enums.NotificationState state = 3;
 }
 message UpgradePokemonMessage {
 	fixed64 pokemon_id = 1;

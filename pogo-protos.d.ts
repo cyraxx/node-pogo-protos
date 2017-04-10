@@ -225,6 +225,9 @@ export namespace Data {
         secondary_player_avatar: Player.PlayerAvatar;
         getSecondaryPlayerAvatar(): Player.PlayerAvatar;
         setSecondaryPlayerAvatar(value: any, noAssert?: boolean);
+        name_is_blacklisted: boolean;
+        getNameIsBlacklisted(): boolean;
+        setNameIsBlacklisted(value: any, noAssert?: boolean);
     }
 
     interface PlayerDataData {
@@ -243,6 +246,7 @@ export namespace Data {
         buddy_pokemon?: Data.BuddyPokemon;
         battle_lockout_end_ms?: Long;
         secondary_player_avatar?: Player.PlayerAvatar;
+        name_is_blacklisted?: boolean;
     }
 
 
@@ -478,6 +482,43 @@ export namespace Data {
         gender?: Enums.Gender;
         shiny?: boolean;
         form?: Enums.Form;
+    }
+
+
+    export class RedeemPasscodeReward extends ProtoBufMessage {
+        constructor(data: RedeemPasscodeRewardData);
+        static decode(buffer?: any, length?: number | string, enc?: string): RedeemPasscodeReward;
+        items: Redeem.RedeemedItem[];
+        getItems(): Redeem.RedeemedItem[];
+        setItems(value: any, noAssert?: boolean);
+        avatar_items: Redeem.RedeemedAvatarItem[];
+        getAvatarItems(): Redeem.RedeemedAvatarItem[];
+        setAvatarItems(value: any, noAssert?: boolean);
+        egg_pokemon: Data.PokemonData[];
+        getEggPokemon(): Data.PokemonData[];
+        setEggPokemon(value: any, noAssert?: boolean);
+        pokemon: Data.PokemonData[];
+        getPokemon(): Data.PokemonData[];
+        setPokemon(value: any, noAssert?: boolean);
+        poke_candy: Redeem.PokeCandy[];
+        getPokeCandy(): Redeem.PokeCandy[];
+        setPokeCandy(value: any, noAssert?: boolean);
+        stardust: number;
+        getStardust(): number;
+        setStardust(value: any, noAssert?: boolean);
+        pokecoins: number;
+        getPokecoins(): number;
+        setPokecoins(value: any, noAssert?: boolean);
+    }
+
+    interface RedeemPasscodeRewardData {
+        items: Redeem.RedeemedItem[];
+        avatar_items: Redeem.RedeemedAvatarItem[];
+        egg_pokemon: Data.PokemonData[];
+        pokemon: Data.PokemonData[];
+        poke_candy: Redeem.PokeCandy[];
+        stardust?: number;
+        pokecoins?: number;
     }
 
 }
@@ -809,6 +850,61 @@ export namespace Data.Player {
     export enum PlayerAvatarType {
         PLAYER_AVATAR_MALE = 0,
         PLAYER_AVATAR_FEMALE = 1,
+    }
+
+}
+
+
+export namespace Data.Redeem {
+
+    export class PokeCandy extends ProtoBufMessage {
+        constructor(data: PokeCandyData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PokeCandy;
+        pokemon_id: Long;
+        getPokemonId(): Long;
+        setPokemonId(value: any, noAssert?: boolean);
+        candy_count: number;
+        getCandyCount(): number;
+        setCandyCount(value: any, noAssert?: boolean);
+    }
+
+    interface PokeCandyData {
+        pokemon_id?: Long;
+        candy_count?: number;
+    }
+
+
+    export class RedeemedAvatarItem extends ProtoBufMessage {
+        constructor(data: RedeemedAvatarItemData);
+        static decode(buffer?: any, length?: number | string, enc?: string): RedeemedAvatarItem;
+        avatar_template_id: string;
+        getAvatarTemplateId(): string;
+        setAvatarTemplateId(value: any, noAssert?: boolean);
+        item_count: number;
+        getItemCount(): number;
+        setItemCount(value: any, noAssert?: boolean);
+    }
+
+    interface RedeemedAvatarItemData {
+        avatar_template_id?: string;
+        item_count?: number;
+    }
+
+
+    export class RedeemedItem extends ProtoBufMessage {
+        constructor(data: RedeemedItemData);
+        static decode(buffer?: any, length?: number | string, enc?: string): RedeemedItem;
+        item: Inventory.Item.ItemId;
+        getItem(): Inventory.Item.ItemId;
+        setItem(value: any, noAssert?: boolean);
+        item_count: number;
+        getItemCount(): number;
+        setItemCount(value: any, noAssert?: boolean);
+    }
+
+    interface RedeemedItemData {
+        item?: Inventory.Item.ItemId;
+        item_count?: number;
     }
 
 }
@@ -1281,6 +1377,9 @@ export namespace Data.Logs {
         eggs: number;
         getEggs(): number;
         setEggs(value: any, noAssert?: boolean);
+        pokemon_eggs: Data.PokemonData[];
+        getPokemonEggs(): Data.PokemonData[];
+        setPokemonEggs(value: any, noAssert?: boolean);
     }
 
     interface FortSearchLogEntryData {
@@ -1288,6 +1387,7 @@ export namespace Data.Logs {
         fort_id?: string;
         items: Inventory.Item.ItemData[];
         eggs?: number;
+        pokemon_eggs: Data.PokemonData[];
     }
 
 }
@@ -1903,6 +2003,9 @@ export namespace Map.Fort {
         guard_pokemon_display: Data.PokemonDisplay;
         getGuardPokemonDisplay(): Data.PokemonDisplay;
         setGuardPokemonDisplay(value: any, noAssert?: boolean);
+        closed: boolean;
+        getClosed(): boolean;
+        setClosed(value: any, noAssert?: boolean);
     }
 
     interface FortDataData {
@@ -1924,6 +2027,7 @@ export namespace Map.Fort {
         rendering_type?: Fort.FortRenderingType;
         deploy_lockout_end_ms?: Long;
         guard_pokemon_display?: Data.PokemonDisplay;
+        closed?: boolean;
     }
 
 
@@ -2025,6 +2129,8 @@ export namespace Map.Fort {
         MIXER = 17,
         SCOOPER = 18,
         MUFFINTIN = 19,
+        SALAMANDER = 20,
+        PLANCHA = 21,
     }
 
 
@@ -2232,6 +2338,8 @@ export namespace Networking.Requests {
         SFIDA_CAPTURE = 806,
         LIST_AVATAR_CUSTOMIZATIONS = 807,
         SET_AVATAR_ITEM_AS_VIEWED = 808,
+        GET_INBOX = 809,
+        UPDATE_NOTIFICATION_STATUS = 810,
     }
 
 }
@@ -2364,10 +2472,14 @@ export namespace Networking.Requests.Messages {
         codename: string;
         getCodename(): string;
         setCodename(value: any, noAssert?: boolean);
+        force: boolean;
+        getForce(): boolean;
+        setForce(value: any, noAssert?: boolean);
     }
 
     interface ClaimCodenameMessageData {
         codename?: string;
+        force?: boolean;
     }
 
 
@@ -2678,6 +2790,15 @@ export namespace Networking.Requests.Messages {
         app_version: number;
         getAppVersion(): number;
         setAppVersion(value: any, noAssert?: boolean);
+        paginate: boolean;
+        getPaginate(): boolean;
+        setPaginate(value: any, noAssert?: boolean);
+        page_offset: number;
+        getPageOffset(): number;
+        setPageOffset(value: any, noAssert?: boolean);
+        page_timestamp: Long;
+        getPageTimestamp(): Long;
+        setPageTimestamp(value: any, noAssert?: boolean);
     }
 
     interface GetAssetDigestMessageData {
@@ -2686,6 +2807,9 @@ export namespace Networking.Requests.Messages {
         device_model?: string;
         locale?: string;
         app_version?: number;
+        paginate?: boolean;
+        page_offset?: number;
+        page_timestamp?: Long;
     }
 
 
@@ -2753,6 +2877,17 @@ export namespace Networking.Requests.Messages {
     }
 
     interface GetHatchedEggsMessageData {
+
+    }
+
+
+    export class GetInboxMessage extends ProtoBufMessage {
+        constructor(data: GetInboxMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetInboxMessage;
+
+    }
+
+    interface GetInboxMessageData {
 
     }
 
@@ -3109,6 +3244,27 @@ export namespace Networking.Requests.Messages {
         defending_pokemon_id?: Long;
         player_latitude?: number;
         player_longitude?: number;
+    }
+
+
+    export class UpdateNotificationMessage extends ProtoBufMessage {
+        constructor(data: UpdateNotificationMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UpdateNotificationMessage;
+        notification_ids: string[];
+        getNotificationIds(): string[];
+        setNotificationIds(value: any, noAssert?: boolean);
+        create_timestamp_ms: Long[];
+        getCreateTimestampMs(): Long[];
+        setCreateTimestampMs(value: any, noAssert?: boolean);
+        state: Enums.NotificationState;
+        getState(): Enums.NotificationState;
+        setState(value: any, noAssert?: boolean);
+    }
+
+    interface UpdateNotificationMessageData {
+        notification_ids: string[];
+        create_timestamp_ms: Long[];
+        state?: Enums.NotificationState;
     }
 
 
@@ -4671,11 +4827,19 @@ export namespace Networking.Responses {
         timestamp_ms: Long;
         getTimestampMs(): Long;
         setTimestampMs(value: any, noAssert?: boolean);
+        result: GetAssetDigestResponse.Result;
+        getResult(): GetAssetDigestResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+        page_offset: number;
+        getPageOffset(): number;
+        setPageOffset(value: any, noAssert?: boolean);
     }
 
     interface GetAssetDigestResponseData {
         digest: Data.AssetDigestEntry[];
         timestamp_ms?: Long;
+        result?: GetAssetDigestResponse.Result;
+        page_offset?: number;
     }
 
 
@@ -4780,6 +4944,23 @@ export namespace Networking.Responses {
         stardust_awarded: number[];
         egg_km_walked: number[];
         hatched_pokemon: Data.PokemonData[];
+    }
+
+
+    export class GetInboxResponse extends ProtoBufMessage {
+        constructor(data: GetInboxResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetInboxResponse;
+        result: GetInboxResponse.Result;
+        getResult(): GetInboxResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+        inbox: GetInboxResponse.ClientInbox;
+        getInbox(): GetInboxResponse.ClientInbox;
+        setInbox(value: any, noAssert?: boolean);
+    }
+
+    interface GetInboxResponseData {
+        result?: GetInboxResponse.Result;
+        inbox?: GetInboxResponse.ClientInbox;
     }
 
 
@@ -5204,6 +5385,27 @@ export namespace Networking.Responses {
     }
 
 
+    export class UpdateNotificationResponse extends ProtoBufMessage {
+        constructor(data: UpdateNotificationResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): UpdateNotificationResponse;
+        notification_ids: string[];
+        getNotificationIds(): string[];
+        setNotificationIds(value: any, noAssert?: boolean);
+        create_timestamp_ms: Long[];
+        getCreateTimestampMs(): Long[];
+        setCreateTimestampMs(value: any, noAssert?: boolean);
+        state: Enums.NotificationState;
+        getState(): Enums.NotificationState;
+        setState(value: any, noAssert?: boolean);
+    }
+
+    interface UpdateNotificationResponseData {
+        notification_ids: string[];
+        create_timestamp_ms: Long[];
+        state?: Enums.NotificationState;
+    }
+
+
     export class UpgradePokemonResponse extends ProtoBufMessage {
         constructor(data: UpgradePokemonResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): UpgradePokemonResponse;
@@ -5497,6 +5699,104 @@ export namespace Networking.Responses.DownloadItemTemplatesResponse {
 }
 
 
+export namespace Networking.Responses.GetInboxResponse {
+
+    export class ClientInbox extends ProtoBufMessage {
+        constructor(data: ClientInboxData);
+        static decode(buffer?: any, length?: number | string, enc?: string): ClientInbox;
+        notifications: ClientInbox.Notification[];
+        getNotifications(): ClientInbox.Notification[];
+        setNotifications(value: any, noAssert?: boolean);
+        builtin_variables: ClientInbox.TemplateVariable[];
+        getBuiltinVariables(): ClientInbox.TemplateVariable[];
+        setBuiltinVariables(value: any, noAssert?: boolean);
+    }
+
+    interface ClientInboxData {
+        notifications: ClientInbox.Notification[];
+        builtin_variables: ClientInbox.TemplateVariable[];
+    }
+
+
+    export enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        FAILURE = 2,
+    }
+
+}
+
+
+export namespace Networking.Responses.GetInboxResponse.ClientInbox {
+
+    export class Notification extends ProtoBufMessage {
+        constructor(data: NotificationData);
+        static decode(buffer?: any, length?: number | string, enc?: string): Notification;
+        notification_id: string;
+        getNotificationId(): string;
+        setNotificationId(value: any, noAssert?: boolean);
+        bundle: string;
+        getBundle(): string;
+        setBundle(value: any, noAssert?: boolean);
+        asset: string;
+        getAsset(): string;
+        setAsset(value: any, noAssert?: boolean);
+        icon: string;
+        getIcon(): string;
+        setIcon(value: any, noAssert?: boolean);
+        title_key: string;
+        getTitleKey(): string;
+        setTitleKey(value: any, noAssert?: boolean);
+        category: Notification.NotificationCategory;
+        getCategory(): Notification.NotificationCategory;
+        setCategory(value: any, noAssert?: boolean);
+        create_timestamp_ms: Long;
+        getCreateTimestampMs(): Long;
+        setCreateTimestampMs(value: any, noAssert?: boolean);
+        expire_timestamp_ms: Long;
+        getExpireTimestampMs(): Long;
+        setExpireTimestampMs(value: any, noAssert?: boolean);
+        variables: ClientInbox.TemplateVariable[];
+        getVariables(): ClientInbox.TemplateVariable[];
+        setVariables(value: any, noAssert?: boolean);
+        labels: Notification.Label[];
+        getLabels(): Notification.Label[];
+        setLabels(value: any, noAssert?: boolean);
+    }
+
+    interface NotificationData {
+        notification_id?: string;
+        bundle?: string;
+        asset?: string;
+        icon?: string;
+        title_key?: string;
+        category?: Notification.NotificationCategory;
+        create_timestamp_ms?: Long;
+        expire_timestamp_ms?: Long;
+        variables: ClientInbox.TemplateVariable[];
+        labels: Notification.Label[];
+    }
+
+
+    export class TemplateVariable extends ProtoBufMessage {
+        constructor(data: TemplateVariableData);
+        static decode(buffer?: any, length?: number | string, enc?: string): TemplateVariable;
+        name: string;
+        getName(): string;
+        setName(value: any, noAssert?: boolean);
+        value: string;
+        getValue(): string;
+        setValue(value: any, noAssert?: boolean);
+    }
+
+    interface TemplateVariableData {
+        name?: string;
+        value?: string;
+    }
+
+}
+
+
 export namespace Settings {
 
     export class DownloadSettingsAction extends ProtoBufMessage {
@@ -5567,6 +5867,9 @@ export namespace Settings {
         far_interaction_range_meters: number;
         getFarInteractionRangeMeters(): number;
         setFarInteractionRangeMeters(value: any, noAssert?: boolean);
+        disable_gyms: boolean;
+        getDisableGyms(): boolean;
+        setDisableGyms(value: any, noAssert?: boolean);
     }
 
     interface FortSettingsData {
@@ -5576,6 +5879,7 @@ export namespace Settings {
         deploy_stamina_multiplier?: number;
         deploy_attack_multiplier?: number;
         far_interaction_range_meters?: number;
+        disable_gyms?: boolean;
     }
 
 
@@ -5615,6 +5919,12 @@ export namespace Settings {
         news_settings: Settings.NewsSettings;
         getNewsSettings(): Settings.NewsSettings;
         setNewsSettings(value: any, noAssert?: boolean);
+        translation_settings: Settings.TranslationSettings;
+        getTranslationSettings(): Settings.TranslationSettings;
+        setTranslationSettings(value: any, noAssert?: boolean);
+        passcode_settings: Settings.PasscodeSettings;
+        getPasscodeSettings(): Settings.PasscodeSettings;
+        setPasscodeSettings(value: any, noAssert?: boolean);
     }
 
     interface GlobalSettingsData {
@@ -5629,6 +5939,8 @@ export namespace Settings {
         max_pokemon_types?: number;
         sfida_settings?: Settings.SfidaSettings;
         news_settings?: Settings.NewsSettings;
+        translation_settings?: Settings.TranslationSettings;
+        passcode_settings?: Settings.PasscodeSettings;
     }
 
 
@@ -5757,6 +6069,19 @@ export namespace Settings {
     }
 
 
+    export class PasscodeSettings extends ProtoBufMessage {
+        constructor(data: PasscodeSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PasscodeSettings;
+        show_passcode_in_store: boolean;
+        getShowPasscodeInStore(): boolean;
+        setShowPasscodeInStore(value: any, noAssert?: boolean);
+    }
+
+    interface PasscodeSettingsData {
+        show_passcode_in_store?: boolean;
+    }
+
+
     export class SfidaSettings extends ProtoBufMessage {
         constructor(data: SfidaSettingsData);
         static decode(buffer?: any, length?: number | string, enc?: string): SfidaSettings;
@@ -5767,6 +6092,19 @@ export namespace Settings {
 
     interface SfidaSettingsData {
         low_battery_threshold?: number;
+    }
+
+
+    export class TranslationSettings extends ProtoBufMessage {
+        constructor(data: TranslationSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): TranslationSettings;
+        translation_bundle_ids: string[];
+        getTranslationBundleIds(): string[];
+        setTranslationBundleIds(value: any, noAssert?: boolean);
+    }
+
+    interface TranslationSettingsData {
+        translation_bundle_ids: string[];
     }
 
 }
@@ -7202,6 +7540,14 @@ export namespace Enums {
     }
 
 
+    export enum NotificationState {
+        UNSET_STATE = 0,
+        LISTED = 1,
+        VIEWED = 2,
+        DELETED = 3,
+    }
+
+
     export enum Platform {
         UNSET = 0,
         IOS = 1,
@@ -8012,6 +8358,7 @@ export namespace Networking.Responses.AddFortModifierResponse {
         FORT_ALREADY_HAS_MODIFIER = 2,
         TOO_FAR_AWAY = 3,
         NO_ITEM_IN_INVENTORY = 4,
+        POI_INACCESSIBLE = 5,
     }
 
 }
@@ -8202,6 +8549,7 @@ export namespace Networking.Responses.FortDeployPokemonResponse {
         ERROR_POKEMON_IS_BUDDY = 9,
         ERROR_FORT_DEPLOY_LOCKOUT = 10,
         ERROR_PLAYER_HAS_NO_NICKNAME = 11,
+        ERROR_POI_INACCESSIBLE = 12,
     }
 
 }
@@ -8229,6 +8577,19 @@ export namespace Networking.Responses.FortSearchResponse {
         IN_COOLDOWN_PERIOD = 3,
         INVENTORY_FULL = 4,
         EXCEEDED_DAILY_LIMIT = 5,
+        POI_INACCESSIBLE = 6,
+    }
+
+}
+
+
+export namespace Networking.Responses.GetAssetDigestResponse {
+
+    export enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        PAGE = 2,
+        RETRY = 3,
     }
 
 }
@@ -8240,6 +8601,28 @@ export namespace Networking.Responses.GetGymDetailsResponse {
         UNSET = 0,
         SUCCESS = 1,
         ERROR_NOT_IN_RANGE = 2,
+    }
+
+}
+
+
+export namespace Networking.Responses.GetInboxResponse.ClientInbox.Notification {
+
+    export enum Label {
+        UNSET_LABEL = 0,
+        UNREAD = 1,
+        NEW = 2,
+        EXPIRING_SOON = 3,
+        IMMEDIATE = 4,
+    }
+
+
+    export enum NotificationCategory {
+        UNSET_CATEGORY = 0,
+        MARKETING = 1,
+        ANNOUNCEMENT = 2,
+        ADMIN_NOTE = 3,
+        GAME_EVENT = 4,
     }
 
 }
@@ -8462,6 +8845,7 @@ export namespace Networking.Responses.StartGymBattleResponse {
         ERROR_GYM_BATTLE_LOCKOUT = 11,
         ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 12,
         ERROR_NOT_IN_RANGE = 13,
+        ERROR_POI_INACCESSIBLE = 14,
     }
 
 }

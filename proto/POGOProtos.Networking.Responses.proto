@@ -27,6 +27,7 @@ message AddFortModifierResponse {
 		FORT_ALREADY_HAS_MODIFIER = 2;
 		TOO_FAR_AWAY = 3;
 		NO_ITEM_IN_INVENTORY = 4;
+		POI_INACCESSIBLE = 5;
 	}
 }
 message AttackGymResponse {
@@ -280,6 +281,7 @@ message FortDeployPokemonResponse {
 		ERROR_POKEMON_IS_BUDDY = 9;
 		ERROR_FORT_DEPLOY_LOCKOUT = 10;
 		ERROR_PLAYER_HAS_NO_NICKNAME = 11;
+		ERROR_POI_INACCESSIBLE = 12;
 	}
 }
 message FortDetailsResponse {
@@ -325,11 +327,21 @@ message FortSearchResponse {
 		IN_COOLDOWN_PERIOD = 3;
 		INVENTORY_FULL = 4;
 		EXCEEDED_DAILY_LIMIT = 5;
+		POI_INACCESSIBLE = 6;
 	}
 }
 message GetAssetDigestResponse {
 	repeated .POGOProtos.Data.AssetDigestEntry digest = 1;
 	uint64 timestamp_ms = 2;
+	Result result = 3;
+	int32 page_offset = 4;
+
+	enum Result {
+		UNSET = 0;
+		SUCCESS = 1;
+		PAGE = 2;
+		RETRY = 3;
+	}
 }
 message GetBuddyWalkedResponse {
 	bool success = 1;
@@ -361,6 +373,55 @@ message GetHatchedEggsResponse {
 	repeated int32 stardust_awarded = 5;
 	repeated float egg_km_walked = 6;
 	repeated .POGOProtos.Data.PokemonData hatched_pokemon = 7;
+}
+message GetInboxResponse {
+	Result result = 1;
+	ClientInbox inbox = 2;
+
+	message ClientInbox {
+		repeated Notification notifications = 1;
+		repeated TemplateVariable builtin_variables = 2;
+
+		message Notification {
+			string notification_id = 1;
+			string bundle = 2;
+			string asset = 3;
+			string icon = 4;
+			string title_key = 5;
+			NotificationCategory category = 6;
+			int64 create_timestamp_ms = 7;
+			int64 expire_timestamp_ms = 8;
+			repeated TemplateVariable variables = 9;
+			repeated Label labels = 11;
+
+			enum Label {
+				UNSET_LABEL = 0;
+				UNREAD = 1;
+				NEW = 2;
+				EXPIRING_SOON = 3;
+				IMMEDIATE = 4;
+			}
+
+			enum NotificationCategory {
+				UNSET_CATEGORY = 0;
+				MARKETING = 1;
+				ANNOUNCEMENT = 2;
+				ADMIN_NOTE = 3;
+				GAME_EVENT = 4;
+			}
+		}
+
+		message TemplateVariable {
+			string name = 1;
+			string value = 2;
+		}
+	}
+
+	enum Result {
+		UNSET = 0;
+		SUCCESS = 1;
+		FAILURE = 2;
+	}
 }
 message GetIncensePokemonResponse {
 	.POGOProtos.Networking.Responses.GetIncensePokemonResponse.Result result = 1;
@@ -592,7 +653,13 @@ message StartGymBattleResponse {
 		ERROR_GYM_BATTLE_LOCKOUT = 11;
 		ERROR_PLAYER_BELOW_MINIMUM_LEVEL = 12;
 		ERROR_NOT_IN_RANGE = 13;
+		ERROR_POI_INACCESSIBLE = 14;
 	}
+}
+message UpdateNotificationResponse {
+	repeated string notification_ids = 1;
+	repeated int64 create_timestamp_ms = 2;
+	.POGOProtos.Enums.NotificationState state = 3;
 }
 message UpgradePokemonResponse {
 	.POGOProtos.Networking.Responses.UpgradePokemonResponse.Result result = 1;
