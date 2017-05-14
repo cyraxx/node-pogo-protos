@@ -136,7 +136,9 @@ message GetHatchedEggsMessage {
 	// No message needed.
 }
 message GetInboxMessage {
-	// No message needed.
+	bool is_history = 1;
+	bool is_reverse = 2;
+	int64 not_before_ms = 3;
 }
 message GetIncensePokemonMessage {
 	double player_latitude = 1;
@@ -186,6 +188,20 @@ message MarkTutorialCompleteMessage {
 message NicknamePokemonMessage {
 	fixed64 pokemon_id = 1;
 	string nickname = 2;
+}
+message PushNotificationRegistryMessage {
+	.POGOProtos.Networking.Requests.Messages.PushNotificationRegistryMessage.ApnToken apn_token = 1;
+	.POGOProtos.Networking.Requests.Messages.PushNotificationRegistryMessage.GcmToken gcm_token = 2;
+
+	message ApnToken {
+		string registration_id = 1;
+		string bundle_identifier = 2;
+		int32 payload_byte_size = 3;
+	}
+
+	message GcmToken {
+		string registration_id = 1;
+	}
 }
 message RecycleInventoryItemMessage {
 	.POGOProtos.Inventory.Item.ItemId item_id = 1;

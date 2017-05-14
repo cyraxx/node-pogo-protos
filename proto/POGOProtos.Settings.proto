@@ -27,6 +27,7 @@ message FortSettings {
 	double deploy_attack_multiplier = 5;
 	double far_interaction_range_meters = 6;
 	bool disable_gyms = 7;
+	int32 max_same_pokemon_at_fort = 8;
 }
 message GlobalSettings {
 	.POGOProtos.Settings.FortSettings fort_settings = 2;
@@ -42,6 +43,7 @@ message GlobalSettings {
 	.POGOProtos.Settings.NewsSettings news_settings = 12;
 	.POGOProtos.Settings.TranslationSettings translation_settings = 13;
 	.POGOProtos.Settings.PasscodeSettings passcode_settings = 14;
+	.POGOProtos.Settings.NotificationSettings notification_settings = 15;
 }
 message GpsSettings {
 	float driving_warning_speed_meters_per_second = 1;
@@ -77,6 +79,10 @@ message NewsSettings {
 		string news_bundle_id = 1;
 		repeated string exclusive_countries = 2;
 	}
+}
+message NotificationSettings {
+	bool pull_notifications = 1;
+	bool show_notifications = 2;
 }
 message PasscodeSettings {
 	bool show_passcode_in_store = 1;

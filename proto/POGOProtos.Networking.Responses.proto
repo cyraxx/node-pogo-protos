@@ -222,6 +222,7 @@ message EncounterResponse {
 		ENCOUNTER_NOT_IN_RANGE = 5;
 		ENCOUNTER_ALREADY_HAPPENED = 6;
 		POKEMON_INVENTORY_FULL = 7;
+		ENCOUNTER_BLOCKED_BY_ANTICHEAT = 8;
 	}
 }
 message EncounterTutorialCompleteResponse {
@@ -384,36 +385,26 @@ message GetInboxResponse {
 
 		message Notification {
 			string notification_id = 1;
-			string bundle = 2;
-			string asset = 3;
-			string icon = 4;
-			string title_key = 5;
-			NotificationCategory category = 6;
-			int64 create_timestamp_ms = 7;
-			int64 expire_timestamp_ms = 8;
-			repeated TemplateVariable variables = 9;
-			repeated Label labels = 11;
+			string title_key = 2;
+			string category = 3;
+			int64 create_timestamp_ms = 4;
+			repeated TemplateVariable variables = 5;
+			repeated Label labels = 6;
 
 			enum Label {
 				UNSET_LABEL = 0;
 				UNREAD = 1;
 				NEW = 2;
-				EXPIRING_SOON = 3;
-				IMMEDIATE = 4;
-			}
-
-			enum NotificationCategory {
-				UNSET_CATEGORY = 0;
-				MARKETING = 1;
-				ANNOUNCEMENT = 2;
-				ADMIN_NOTE = 3;
-				GAME_EVENT = 4;
+				IMMEDIATE = 3;
 			}
 		}
 
 		message TemplateVariable {
 			string name = 1;
-			string value = 2;
+			string literal = 2;
+			string key = 3;
+			string lookup_table = 4;
+			bytes byte_value = 5;
 		}
 	}
 
@@ -518,6 +509,15 @@ message NicknamePokemonResponse {
 		ERROR_INVALID_NICKNAME = 2;
 		ERROR_POKEMON_NOT_FOUND = 3;
 		ERROR_POKEMON_IS_EGG = 4;
+	}
+}
+message PushNotificationRegistryResponse {
+	Result result = 1;
+
+	enum Result {
+		UNSET = 0;
+		SUCCESS = 1;
+		NO_CHANGE = 2;
 	}
 }
 message RecycleInventoryItemResponse {

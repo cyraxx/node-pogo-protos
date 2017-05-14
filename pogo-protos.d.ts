@@ -729,12 +729,16 @@ export namespace Data.Player {
         avatar: Player.PlayerAvatar;
         getAvatar(): Player.PlayerAvatar;
         setAvatar(value: any, noAssert?: boolean);
+        team_color: Enums.TeamColor;
+        getTeamColor(): Enums.TeamColor;
+        setTeamColor(value: any, noAssert?: boolean);
     }
 
     interface PlayerPublicProfileData {
         name?: string;
         level?: number;
         avatar?: Player.PlayerAvatar;
+        team_color?: Enums.TeamColor;
     }
 
 
@@ -2131,6 +2135,7 @@ export namespace Map.Fort {
         MUFFINTIN = 19,
         SALAMANDER = 20,
         PLANCHA = 21,
+        NIA_OPS = 22,
     }
 
 
@@ -2339,7 +2344,6 @@ export namespace Networking.Requests {
         LIST_AVATAR_CUSTOMIZATIONS = 807,
         SET_AVATAR_ITEM_AS_VIEWED = 808,
         GET_INBOX = 809,
-        UPDATE_NOTIFICATION_STATUS = 810,
     }
 
 }
@@ -2884,11 +2888,21 @@ export namespace Networking.Requests.Messages {
     export class GetInboxMessage extends ProtoBufMessage {
         constructor(data: GetInboxMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): GetInboxMessage;
-
+        is_history: boolean;
+        getIsHistory(): boolean;
+        setIsHistory(value: any, noAssert?: boolean);
+        is_reverse: boolean;
+        getIsReverse(): boolean;
+        setIsReverse(value: any, noAssert?: boolean);
+        not_before_ms: Long;
+        getNotBeforeMs(): Long;
+        setNotBeforeMs(value: any, noAssert?: boolean);
     }
 
     interface GetInboxMessageData {
-
+        is_history?: boolean;
+        is_reverse?: boolean;
+        not_before_ms?: Long;
     }
 
 
@@ -3071,6 +3085,23 @@ export namespace Networking.Requests.Messages {
     interface NicknamePokemonMessageData {
         pokemon_id?: Long;
         nickname?: string;
+    }
+
+
+    export class PushNotificationRegistryMessage extends ProtoBufMessage {
+        constructor(data: PushNotificationRegistryMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PushNotificationRegistryMessage;
+        apn_token: PushNotificationRegistryMessage.ApnToken;
+        getApnToken(): PushNotificationRegistryMessage.ApnToken;
+        setApnToken(value: any, noAssert?: boolean);
+        gcm_token: PushNotificationRegistryMessage.GcmToken;
+        getGcmToken(): PushNotificationRegistryMessage.GcmToken;
+        setGcmToken(value: any, noAssert?: boolean);
+    }
+
+    interface PushNotificationRegistryMessageData {
+        apn_token?: PushNotificationRegistryMessage.ApnToken;
+        gcm_token?: PushNotificationRegistryMessage.GcmToken;
     }
 
 
@@ -3460,6 +3491,44 @@ export namespace Networking.Requests.Messages.GetPlayerMessage {
         country?: string;
         language?: string;
         timezone?: string;
+    }
+
+}
+
+
+export namespace Networking.Requests.Messages.PushNotificationRegistryMessage {
+
+    export class ApnToken extends ProtoBufMessage {
+        constructor(data: ApnTokenData);
+        static decode(buffer?: any, length?: number | string, enc?: string): ApnToken;
+        registration_id: string;
+        getRegistrationId(): string;
+        setRegistrationId(value: any, noAssert?: boolean);
+        bundle_identifier: string;
+        getBundleIdentifier(): string;
+        setBundleIdentifier(value: any, noAssert?: boolean);
+        payload_byte_size: number;
+        getPayloadByteSize(): number;
+        setPayloadByteSize(value: any, noAssert?: boolean);
+    }
+
+    interface ApnTokenData {
+        registration_id?: string;
+        bundle_identifier?: string;
+        payload_byte_size?: number;
+    }
+
+
+    export class GcmToken extends ProtoBufMessage {
+        constructor(data: GcmTokenData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GcmToken;
+        registration_id: string;
+        getRegistrationId(): string;
+        setRegistrationId(value: any, noAssert?: boolean);
+    }
+
+    interface GcmTokenData {
+        registration_id?: string;
     }
 
 }
@@ -5186,6 +5255,19 @@ export namespace Networking.Responses {
     }
 
 
+    export class PushNotificationRegistryResponse extends ProtoBufMessage {
+        constructor(data: PushNotificationRegistryResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): PushNotificationRegistryResponse;
+        result: PushNotificationRegistryResponse.Result;
+        getResult(): PushNotificationRegistryResponse.Result;
+        setResult(value: any, noAssert?: boolean);
+    }
+
+    interface PushNotificationRegistryResponseData {
+        result?: PushNotificationRegistryResponse.Result;
+    }
+
+
     export class RecycleInventoryItemResponse extends ProtoBufMessage {
         constructor(data: RecycleInventoryItemResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): RecycleInventoryItemResponse;
@@ -5735,27 +5817,15 @@ export namespace Networking.Responses.GetInboxResponse.ClientInbox {
         notification_id: string;
         getNotificationId(): string;
         setNotificationId(value: any, noAssert?: boolean);
-        bundle: string;
-        getBundle(): string;
-        setBundle(value: any, noAssert?: boolean);
-        asset: string;
-        getAsset(): string;
-        setAsset(value: any, noAssert?: boolean);
-        icon: string;
-        getIcon(): string;
-        setIcon(value: any, noAssert?: boolean);
         title_key: string;
         getTitleKey(): string;
         setTitleKey(value: any, noAssert?: boolean);
-        category: Notification.NotificationCategory;
-        getCategory(): Notification.NotificationCategory;
+        category: string;
+        getCategory(): string;
         setCategory(value: any, noAssert?: boolean);
         create_timestamp_ms: Long;
         getCreateTimestampMs(): Long;
         setCreateTimestampMs(value: any, noAssert?: boolean);
-        expire_timestamp_ms: Long;
-        getExpireTimestampMs(): Long;
-        setExpireTimestampMs(value: any, noAssert?: boolean);
         variables: ClientInbox.TemplateVariable[];
         getVariables(): ClientInbox.TemplateVariable[];
         setVariables(value: any, noAssert?: boolean);
@@ -5766,13 +5836,9 @@ export namespace Networking.Responses.GetInboxResponse.ClientInbox {
 
     interface NotificationData {
         notification_id?: string;
-        bundle?: string;
-        asset?: string;
-        icon?: string;
         title_key?: string;
-        category?: Notification.NotificationCategory;
+        category?: string;
         create_timestamp_ms?: Long;
-        expire_timestamp_ms?: Long;
         variables: ClientInbox.TemplateVariable[];
         labels: Notification.Label[];
     }
@@ -5784,14 +5850,26 @@ export namespace Networking.Responses.GetInboxResponse.ClientInbox {
         name: string;
         getName(): string;
         setName(value: any, noAssert?: boolean);
-        value: string;
-        getValue(): string;
-        setValue(value: any, noAssert?: boolean);
+        literal: string;
+        getLiteral(): string;
+        setLiteral(value: any, noAssert?: boolean);
+        key: string;
+        getKey(): string;
+        setKey(value: any, noAssert?: boolean);
+        lookup_table: string;
+        getLookupTable(): string;
+        setLookupTable(value: any, noAssert?: boolean);
+        byte_value: ByteBuffer;
+        getByteValue(): ByteBuffer;
+        setByteValue(value: any, noAssert?: boolean);
     }
 
     interface TemplateVariableData {
         name?: string;
-        value?: string;
+        literal?: string;
+        key?: string;
+        lookup_table?: string;
+        byte_value?: ByteBuffer;
     }
 
 }
@@ -5870,6 +5948,9 @@ export namespace Settings {
         disable_gyms: boolean;
         getDisableGyms(): boolean;
         setDisableGyms(value: any, noAssert?: boolean);
+        max_same_pokemon_at_fort: number;
+        getMaxSamePokemonAtFort(): number;
+        setMaxSamePokemonAtFort(value: any, noAssert?: boolean);
     }
 
     interface FortSettingsData {
@@ -5880,6 +5961,7 @@ export namespace Settings {
         deploy_attack_multiplier?: number;
         far_interaction_range_meters?: number;
         disable_gyms?: boolean;
+        max_same_pokemon_at_fort?: number;
     }
 
 
@@ -5925,6 +6007,9 @@ export namespace Settings {
         passcode_settings: Settings.PasscodeSettings;
         getPasscodeSettings(): Settings.PasscodeSettings;
         setPasscodeSettings(value: any, noAssert?: boolean);
+        notification_settings: Settings.NotificationSettings;
+        getNotificationSettings(): Settings.NotificationSettings;
+        setNotificationSettings(value: any, noAssert?: boolean);
     }
 
     interface GlobalSettingsData {
@@ -5941,6 +6026,7 @@ export namespace Settings {
         news_settings?: Settings.NewsSettings;
         translation_settings?: Settings.TranslationSettings;
         passcode_settings?: Settings.PasscodeSettings;
+        notification_settings?: Settings.NotificationSettings;
     }
 
 
@@ -6066,6 +6152,23 @@ export namespace Settings {
 
     interface NewsSettingsData {
         news: NewsSettings.News[];
+    }
+
+
+    export class NotificationSettings extends ProtoBufMessage {
+        constructor(data: NotificationSettingsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): NotificationSettings;
+        pull_notifications: boolean;
+        getPullNotifications(): boolean;
+        setPullNotifications(value: any, noAssert?: boolean);
+        show_notifications: boolean;
+        getShowNotifications(): boolean;
+        setShowNotifications(value: any, noAssert?: boolean);
+    }
+
+    interface NotificationSettingsData {
+        pull_notifications?: boolean;
+        show_notifications?: boolean;
     }
 
 
@@ -7353,6 +7456,9 @@ export namespace Enums {
         ACTIVITY_CATCH_FIRST_CATCH_STREAK_BONUS = 24,
         ACTIVITY_SEARCH_FORT_FIRST_OF_THE_DAY = 25,
         ACTIVITY_SEARCH_FORT_STREAK_BONUS = 26,
+        ACTIVITY_DEFEAT_RAID_POKEMON = 27,
+        ACTIVITY_FEED_BERRY = 28,
+        ACTIVITY_SEARCH_GYM = 29,
     }
 
 
@@ -7542,9 +7648,7 @@ export namespace Enums {
 
     export enum NotificationState {
         UNSET_STATE = 0,
-        LISTED = 1,
-        VIEWED = 2,
-        DELETED = 3,
+        VIEWED = 1,
     }
 
 
@@ -8491,6 +8595,7 @@ export namespace Networking.Responses.EncounterResponse {
         ENCOUNTER_NOT_IN_RANGE = 5,
         ENCOUNTER_ALREADY_HAPPENED = 6,
         POKEMON_INVENTORY_FULL = 7,
+        ENCOUNTER_BLOCKED_BY_ANTICHEAT = 8,
     }
 
 }
@@ -8612,17 +8717,7 @@ export namespace Networking.Responses.GetInboxResponse.ClientInbox.Notification 
         UNSET_LABEL = 0,
         UNREAD = 1,
         NEW = 2,
-        EXPIRING_SOON = 3,
-        IMMEDIATE = 4,
-    }
-
-
-    export enum NotificationCategory {
-        UNSET_CATEGORY = 0,
-        MARKETING = 1,
-        ANNOUNCEMENT = 2,
-        ADMIN_NOTE = 3,
-        GAME_EVENT = 4,
+        IMMEDIATE = 3,
     }
 
 }
@@ -8702,6 +8797,17 @@ export namespace Networking.Responses.NicknamePokemonResponse {
         ERROR_INVALID_NICKNAME = 2,
         ERROR_POKEMON_NOT_FOUND = 3,
         ERROR_POKEMON_IS_EGG = 4,
+    }
+
+}
+
+
+export namespace Networking.Responses.PushNotificationRegistryResponse {
+
+    export enum Result {
+        UNSET = 0,
+        SUCCESS = 1,
+        NO_CHANGE = 2,
     }
 
 }
