@@ -1,5 +1,9 @@
-const path = require('path'),
-    protobuf = require('protobufjs');
+const path = require('path');
+const protobuf = require('protobufjs');
+
+
+
+
 
 const builder = protobuf.newBuilder();
 protobuf.loadProtoFile(path.join(__dirname, 'proto', 'POGOProtos.proto'), builder);
