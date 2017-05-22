@@ -1,1 +1,1 @@
-module.exports = require('./compiled.js');
+module.exports = require('./compiled.js').POGOProtos;
