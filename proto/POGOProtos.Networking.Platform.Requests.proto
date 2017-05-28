@@ -7,6 +7,8 @@ message BuyItemAndroidRequest {
 message BuyItemPokeCoinsRequest {
 	string item_id = 1;
 }
+message GetStoreItemsRequest {
+}
 message SendEncryptedSignatureRequest {
 	bytes encrypted_signature = 1;
 }

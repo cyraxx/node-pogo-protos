@@ -237,6 +237,9 @@ message SetPlayerTeamMessage {
 message SfidaActionLogMessage {
 	// No message needed.
 }
+message SfidaRegistrationMessage {
+	string sfida_id = 1;
+}
 message StartGymBattleMessage {
 	string gym_id = 1;
 	repeated fixed64 attacking_pokemon_ids = 2;

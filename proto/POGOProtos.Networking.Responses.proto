@@ -629,6 +629,9 @@ message SfidaActionLogResponse {
 		SUCCESS = 1;
 	}
 }
+message SfidaRegistrationResponse {
+	bytes access_token = 1;
+}
 message StartGymBattleResponse {
 	.POGOProtos.Networking.Responses.StartGymBattleResponse.Result result = 1;
 	int64 battle_start_timestamp_ms = 2;

@@ -3249,6 +3249,19 @@ export namespace Networking.Requests.Messages {
     }
 
 
+    export class SfidaRegistrationMessage extends ProtoBufMessage {
+        constructor(data: SfidaRegistrationMessageData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SfidaRegistrationMessage;
+        sfida_id: string;
+        getSfidaId(): string;
+        setSfidaId(value: any, noAssert?: boolean);
+    }
+
+    interface SfidaRegistrationMessageData {
+        sfida_id?: string;
+    }
+
+
     export class StartGymBattleMessage extends ProtoBufMessage {
         constructor(data: StartGymBattleMessageData);
         static decode(buffer?: any, length?: number | string, enc?: string): StartGymBattleMessage;
@@ -3562,6 +3575,17 @@ export namespace Networking.Platform.Requests {
     }
 
 
+    export class GetStoreItemsRequest extends ProtoBufMessage {
+        constructor(data: GetStoreItemsRequestData);
+        static decode(buffer?: any, length?: number | string, enc?: string): GetStoreItemsRequest;
+
+    }
+
+    interface GetStoreItemsRequestData {
+
+    }
+
+
     export class SendEncryptedSignatureRequest extends ProtoBufMessage {
         constructor(data: SendEncryptedSignatureRequestData);
         static decode(buffer?: any, length?: number | string, enc?: string): SendEncryptedSignatureRequest;
@@ -3634,16 +3658,16 @@ export namespace Networking.Platform.Responses {
         player_currencies: Data.Player.Currency[];
         getPlayerCurrencies(): Data.Player.Currency[];
         setPlayerCurrencies(value: any, noAssert?: boolean);
-        unknown4: string;
-        getUnknown4(): string;
-        setUnknown4(value: any, noAssert?: boolean);
+        hash: string;
+        getHash(): string;
+        setHash(value: any, noAssert?: boolean);
     }
 
     interface GetStoreItemsResponseData {
         status?: GetStoreItemsResponse.Status;
         items: GetStoreItemsResponse.StoreItem[];
         player_currencies: Data.Player.Currency[];
-        unknown4?: string;
+        hash?: string;
     }
 
 
@@ -3692,11 +3716,11 @@ export namespace Networking.Platform.Responses.GetStoreItemsResponse {
         yields_currency: Data.Player.Currency;
         getYieldsCurrency(): Data.Player.Currency;
         setYieldsCurrency(value: any, noAssert?: boolean);
-        yields_item: Inventory.Item.ItemData;
-        getYieldsItem(): Inventory.Item.ItemData;
+        yields_item: GetStoreItemsResponse.StoreItemInfo;
+        getYieldsItem(): GetStoreItemsResponse.StoreItemInfo;
         setYieldsItem(value: any, noAssert?: boolean);
-        tags: string;
-        getTags(): string;
+        tags: GetStoreItemsResponse.StoreTags[];
+        getTags(): GetStoreItemsResponse.StoreTags[];
         setTags(value: any, noAssert?: boolean);
         unknown7: number;
         getUnknown7(): number;
@@ -3708,9 +3732,43 @@ export namespace Networking.Platform.Responses.GetStoreItemsResponse {
         is_iap?: boolean;
         currency_to_buy?: Data.Player.Currency;
         yields_currency?: Data.Player.Currency;
-        yields_item?: Inventory.Item.ItemData;
-        tags: string;
+        yields_item?: GetStoreItemsResponse.StoreItemInfo;
+        tags: GetStoreItemsResponse.StoreTags[];
         unknown7?: number;
+    }
+
+
+    export class StoreTags extends ProtoBufMessage {
+        constructor(data: StoreTagsData);
+        static decode(buffer?: any, length?: number | string, enc?: string): StoreTags;
+        tag: string;
+        getTag(): string;
+        setTag(value: any, noAssert?: boolean);
+        value: string;
+        getValue(): string;
+        setValue(value: any, noAssert?: boolean);
+    }
+
+    interface StoreTagsData {
+        tag?: string;
+        value?: string;
+    }
+
+
+    export class StoreItemInfo extends ProtoBufMessage {
+        constructor(data: StoreItemInfoData);
+        static decode(buffer?: any, length?: number | string, enc?: string): StoreItemInfo;
+        item_id: string;
+        getItemId(): string;
+        setItemId(value: any, noAssert?: boolean);
+        count: number;
+        getCount(): number;
+        setCount(value: any, noAssert?: boolean);
+    }
+
+    interface StoreItemInfoData {
+        item_id?: string;
+        count?: number;
     }
 
 
@@ -5430,6 +5488,19 @@ export namespace Networking.Responses {
     }
 
 
+    export class SfidaRegistrationResponse extends ProtoBufMessage {
+        constructor(data: SfidaRegistrationResponseData);
+        static decode(buffer?: any, length?: number | string, enc?: string): SfidaRegistrationResponse;
+        access_token: ByteBuffer;
+        getAccessToken(): ByteBuffer;
+        setAccessToken(value: any, noAssert?: boolean);
+    }
+
+    interface SfidaRegistrationResponseData {
+        access_token?: ByteBuffer;
+    }
+
+
     export class StartGymBattleResponse extends ProtoBufMessage {
         constructor(data: StartGymBattleResponseData);
         static decode(buffer?: any, length?: number | string, enc?: string): StartGymBattleResponse;
@@ -6341,9 +6412,9 @@ export namespace Settings.Master {
         ease_in_speed: number[];
         getEaseInSpeed(): number[];
         setEaseInSpeed(value: any, noAssert?: boolean);
-        east_out_speed: number[];
-        getEastOutSpeed(): number[];
-        setEastOutSpeed(value: any, noAssert?: boolean);
+        ease_out_speed: number[];
+        getEaseOutSpeed(): number[];
+        setEaseOutSpeed(value: any, noAssert?: boolean);
         duration_seconds: number[];
         getDurationSeconds(): number[];
         setDurationSeconds(value: any, noAssert?: boolean);
@@ -6384,7 +6455,7 @@ export namespace Settings.Master {
         interpolation: Enums.CameraInterpolation[];
         target_type: Enums.CameraTarget[];
         ease_in_speed: number[];
-        east_out_speed: number[];
+        ease_out_speed: number[];
         duration_seconds: number[];
         wait_seconds: number[];
         transition_seconds: number[];
