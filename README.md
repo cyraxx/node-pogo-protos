@@ -10,21 +10,6 @@ fixes the proto3 packed fields bug in protobuf.js for you.
 ![dependencies](https://david-dm.org/cyraxx/node-pogo-protos.svg)
 ![license](https://img.shields.io/npm/l/node-pogo-protos.svg)
 
-## How to use
-```javascript
-const POGOProtos = require('node-pogo-protos');
-
-var myMessage = new POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage({
-  item_id: POGOProtos.Inventory.Item.ItemId.ITEM_POTION,
-  count: 50
-});
-
-var encoded = myMessage.encode();
-
-var decodedAgain = POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.decode(encoded);
-console.log(decodedAgain.count); // will print 50
-```
-
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
 
 ## Usage with TypeScript
