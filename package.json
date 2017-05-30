@@ -26,5 +26,9 @@
   },
   "typings": "./pogo-protos.d.ts",
   "devDependencies": {
+  },
+  "scripts": {
+    "compile": "pbjs --keep-case -t static-module -o compiled.js ./proto/POGOProtos.proto",
+    "ts": "pbts -o compiled.d.ts compiled.js"
   }
 }
