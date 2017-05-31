@@ -14,12 +14,12 @@ fixes the proto3 packed fields bug in protobuf.js for you.
 ```javascript
 const POGOProtos = require('node-pogo-protos');
 
-var myMessage = new POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage({
+var myMessage = POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.fromObject({
   item_id: POGOProtos.Inventory.Item.ItemId.ITEM_POTION,
   count: 50
 });
 
-var encoded = myMessage.encode();
+var encoded = POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.encode(myMessage).finish();
 
 var decodedAgain = POGOProtos.Networking.Requests.Messages.RecycleInventoryItemMessage.decode(encoded);
 console.log(decodedAgain.count); // will print 50
@@ -28,25 +28,4 @@ console.log(decodedAgain.count); // will print 50
 For more details see the [protobuf.js documentation](https://github.com/dcodeIO/protobuf.js/wiki).
 
 ## Usage with TypeScript
-TypeScript definitions are included. To use them, make sure that:
-* Typings is installed: `npm install -g typings` (create an alias for `typings` if installed locally)
-* External type declarations have been added: `typings install dt~long dt~bytebuffer env~node --global --save`
-
-Add declarations to `.tsconfig.json`:
-```javascript
-{
-  /* ... */
-  "files": [
-    "typings/index.d.ts",
-    /* ... */
-  ],
-  /* ... */
-}
-```
-
-And use `import` instead of `require`:
-```javascript
-import * as POGOProtos from 'node-pogo-protos';
-```
-
-TypeScript 2.0 module resolution via `@types` is not currently supported, however the above will work for both TypeScript ^1.8 and ^2.0.
+TypeScript definitions are included. Modern IDE should use them automatically.
