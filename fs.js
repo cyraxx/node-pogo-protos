@@ -1,7 +1,7 @@
 const protobufjs = require('protobufjs');
 const path = require('path');
 
-module.exports.load = function() {
-    return protobufjs.load(path.join(__dirname, 'proto', 'POGOProtos.proto'))
-                     .then(proto => proto.POGOProtos);
-}
+let root = new protobufjs.Root();
+const protos = root.loadSync(path.join(__dirname, 'proto', 'POGOProtos.proto'), { keepCase: true });
+
+module.exports = protos.POGOProtos;
