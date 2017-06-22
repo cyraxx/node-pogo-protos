@@ -1,0 +1,18 @@
+syntax = "proto3";
+package POGOProtos.Networking.Responses;
+
+import "POGOProtos/Data/AssetDigestEntry.proto";
+
+message GetAssetDigestResponse {
+	repeated .POGOProtos.Data.AssetDigestEntry digest = 1;
+	uint64 timestamp_ms = 2;
+	Result result = 3;
+	int32 page_offset = 4;
+
+	enum Result {
+		UNSET = 0;
+		SUCCESS = 1;
+		PAGE = 2;
+		RETRY = 3;
+	}
+}

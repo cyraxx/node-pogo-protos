@@ -1,0 +1,42 @@
+syntax = "proto3";
+package POGOProtos.Networking.Responses;
+
+message GetInboxResponse {
+	Result result = 1;
+	ClientInbox inbox = 2;
+
+	message ClientInbox {
+		repeated Notification notifications = 1;
+		repeated TemplateVariable builtin_variables = 2;
+
+		message Notification {
+			string notification_id = 1;
+			string title_key = 2;
+			string category = 3;
+			int64 create_timestamp_ms = 4;
+			repeated TemplateVariable variables = 5;
+			repeated Label labels = 6;
+
+			enum Label {
+				UNSET_LABEL = 0;
+				UNREAD = 1;
+				NEW = 2;
+				IMMEDIATE = 3;
+			}
+		}
+
+		message TemplateVariable {
+			string name = 1;
+			string literal = 2;
+			string key = 3;
+			string lookup_table = 4;
+			bytes byte_value = 5;
+		}
+	}
+
+	enum Result {
+		UNSET = 0;
+		SUCCESS = 1;
+		FAILURE = 2;
+	}
+}

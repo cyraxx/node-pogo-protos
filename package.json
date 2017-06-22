@@ -26,6 +26,7 @@
   },
   "typings": "./pogo-protos.d.ts",
   "devDependencies": {
+    "mz": "^2.6.0"
   },
   "scripts": {
     "compile": "pbjs --keep-case -t static-module -o compiled.js ./proto/POGOProtos.proto",
