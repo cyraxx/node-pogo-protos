@@ -178,6 +178,7 @@ import public "Networking/Requests/Messages/ListAvatarCustomizationsMessage.prot
 import public "Networking/Requests/Messages/ListGymBadgesMessage.proto";
 import public "Networking/Requests/Messages/MarkTutorialCompleteMessage.proto";
 import public "Networking/Requests/Messages/NicknamePokemonMessage.proto";
+import public "Networking/Requests/Messages/PlatformClientActionsMessage.proto";
 import public "Networking/Requests/Messages/PushNotificationRegistryMessage.proto";
 import public "Networking/Requests/Messages/RecycleInventoryItemMessage.proto";
 import public "Networking/Requests/Messages/RegisterBackgroundDeviceMessage.proto";
@@ -245,6 +246,7 @@ import public "Networking/Responses/ListAvatarCustomizationsResponse.proto";
 import public "Networking/Responses/ListGymBadgesResponse.proto";
 import public "Networking/Responses/MarkTutorialCompleteResponse.proto";
 import public "Networking/Responses/NicknamePokemonResponse.proto";
+import public "Networking/Responses/PlatformClientActionsResponse.proto";
 import public "Networking/Responses/PushNotificationRegistryResponse.proto";
 import public "Networking/Responses/RecycleInventoryItemResponse.proto";
 import public "Networking/Responses/RegisterBackgroundDeviceResponse.proto";
