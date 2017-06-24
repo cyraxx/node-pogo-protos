@@ -4,16 +4,14 @@ package POGOProtos.Networking.Requests.Messages;
 message RegisterPushNotificationMessage {
 	ApnToken apn_token = 1;
 	GcmToken gcm_token = 2;
-	
-	message ApnToken
-	{
+
+	message ApnToken {
 		string registration_id = 1;
 		string bundle_identifier = 2;
 		int32 payload_byte_size = 3;
 	}
 
-	message GcmToken
-	{
+	message GcmToken {
 		string registration_id = 1;
 	}
 }
@@ -22,6 +20,11 @@ message UpdateNotificationStatusMessage {
 	repeated string notification_ids = 1;
 	repeated int64 create_timestamp_ms = 2;
 	NotificationState state = 3;
+
+	enum NotificationState {
+		UNSET_STATE = 0;
+		VIEWED = 1;
+	}
 }
 
 message OptOutPushNotificationCategoryMessage {
