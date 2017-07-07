@@ -10,6 +10,8 @@ fixes the proto3 packed fields bug in protobuf.js for you.
 ![dependencies](https://david-dm.org/cyraxx/node-pogo-protos.svg)
 ![license](https://img.shields.io/npm/l/node-pogo-protos.svg)
 
+## :warning: THIS REPOSITORY IS NO LONGER UNDER ACTIVE MAINTENANCE. FOR FURTHER DEVELOPMENT PLEASE SEE THE [POGOSANDBOX FORK](https://github.com/pogosandbox/node-pogo-protos). :warning:
+
 ## How to use
 ```javascript
 const POGOProtos = require('node-pogo-protos');
